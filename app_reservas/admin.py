@@ -1,3 +1,9 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Area, Aula, Cuerpo, Nivel
+
+
+admin.site.register(Area)
+admin.site.register(Aula)
+admin.site.register(Cuerpo)
+admin.site.register(Nivel)
