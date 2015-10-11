@@ -11,7 +11,7 @@ class Nivel(models.Model):
 
     # Representación del objeto
     def __str__(self):
-        return 'Nivel %s - Cuerpo %s' % (self.numero, self.cuerpo.numero)
+        return 'Nivel %s - %s' % (self.numero, self.cuerpo)
 
     # Información de la clase
     class Meta:

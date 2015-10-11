@@ -17,7 +17,7 @@ class Aula(models.Model):
 
     # Representación del objeto
     def __str__(self):
-        return 'Aula %s - Nivel %s - Cuerpo %s' % (self.numero, self.nivel.numero, self.nivel.cuerpo.numero)
+        return 'Aula %s - %s' % (self.numero, self.nivel)
 
     # Información de la clase
     class Meta:
