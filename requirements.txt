@@ -1,2 +1,4 @@
 Django==1.8.5
+django-bower==5.0.4
 gunicorn==19.3.0
+six==1.10.0
