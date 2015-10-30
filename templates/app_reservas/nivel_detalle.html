@@ -1,0 +1,84 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ nivel }}</title>
+
+    <!--Material Design Lite-->
+    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.indigo-pink.min.css">
+    <script src="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!--Timetable-->
+    <link rel="stylesheet" href='{% static 'timetable.js/dist/styles/timetablejs.css' %}'>
+    <script type="text/javascript" src='{% static 'timetable.js/dist/scripts/timetable.min.js' %}'></script>
+</head>
+<body>
+
+
+<!-- No header, and the drawer stays open on larger screens (fixed drawer). -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
+    <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">Title</span>
+        <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="">Link</a>
+            <a class="mdl-navigation__link" href="">Link</a>
+            <a class="mdl-navigation__link" href="">Link</a>
+            <a class="mdl-navigation__link" href="">Link</a>
+        </nav>
+    </div>
+    <main class="mdl-layout__content">
+        <div class="page-content">
+            <h1 style="text-align: center;">Nivel {{ nivel.numero }}</h1>
+            <h3 style="text-align: center;">Cuerpo {{ nivel.cuerpo.numero }}</h3>
+
+            <strong>Aulas</strong>:
+            <ul>
+                {% for aula in aulas.all %}
+                    <li>{{ aula }}</li>
+                {% endfor %}
+            </ul>
+
+            <br />
+            <br />
+
+            <div class="timetable"></div>
+        </div>
+    </main>
+</div>
+
+<script>
+    // Renderiza la tabla de horarios.
+    var timetable = new Timetable();
+
+    // Configura el rango horario a mostrar.
+    timetable.setScope(8, 0);
+
+    // Añade las localizaciones.
+    timetable.addLocations([
+        {% for aula in aulas.all %}
+            {% if not forloop.first %}, {% endif %}
+            "Aula {{ aula.numero }}",
+        {% endfor %}
+    ]);
+
+    // Añade los eventos existentes de cada localización.
+    {% for aula in aulas.all %}
+        {% for evento in aula.get_eventos.all %}
+            timetable.addEvent(
+                    '{{ evento.nombre }}',
+                    'Aula {{ aula.numero }}',
+                    new Date({{ evento.inicio_anio }},{{ evento.inicio_mes }},{{ evento.inicio_dia }},{{ evento.inicio_hora }},{{ evento.inicio_minuto }}),
+                    new Date({{ evento.fin_anio }},{{ evento.fin_mes }},{{ evento.fin_dia }},{{ evento.fin_hora }},{{ evento.fin_minuto }})
+            );
+        {% endfor %}
+    {% endfor %}
+
+    // Renderiza la tabla de horarios.
+    var renderer = new Timetable.Renderer(timetable);
+    renderer.draw('.timetable');
+</script>
+
+</body>
+</html>
