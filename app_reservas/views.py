@@ -4,10 +4,19 @@ from .models import Aula, Cuerpo, Nivel
 
 
 def aula_detalle(request, num_cuerpo, num_nivel, num_aula):
+    # Obtiene el cuerpo.
     cuerpo = get_object_or_404(Cuerpo, numero=num_cuerpo)
+    # Obtiene el nivel.
     nivel = get_object_or_404(Nivel, cuerpo=cuerpo, numero=num_nivel)
+    # Obtiene el aula.
     aula = get_object_or_404(Aula, nivel=nivel, numero=num_aula)
-    return render(request, 'app_reservas/aula_detalle.html', {'aula': aula})
+    return render(
+        request,
+        'app_reservas/aula_detalle.html',
+        {
+            'aula': aula,
+        }
+    )
 
 
 def nivel_detalle(request, num_cuerpo, num_nivel):
@@ -26,4 +35,7 @@ def nivel_detalle(request, num_cuerpo, num_nivel):
 
 
 def index(request):
-    return render(request, 'app_reservas/index.html')
+    return render(
+        request,
+        'app_reservas/index.html'
+    )
