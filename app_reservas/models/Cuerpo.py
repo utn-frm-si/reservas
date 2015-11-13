@@ -11,6 +11,12 @@ class Cuerpo(models.Model):
     def __str__(self):
         return 'Cuerpo %s' % self.numero
 
+    def get_nombre_corto(self):
+        return 'Cuerpo %s' % self.numero
+
+    def get_niveles(self):
+        return self.nivel_set.order_by('numero')
+
     # Información de la clase
     class Meta:
         app_label = 'app_reservas'
