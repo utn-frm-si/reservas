@@ -1,4 +1,7 @@
-# Directorio de componentes instalados por Django-Bower
+# Archivo de configuración privada del proyecto.
+/reservas/private_settings.py
+
+# Directorio de componentes instalados por Django-Bower.
 /components
 
 
