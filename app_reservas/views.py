@@ -29,7 +29,18 @@ def nivel_detalle(request, num_cuerpo, num_nivel):
         'app_reservas/nivel_detalle.html',
         {
             'nivel': nivel,
-            'aulas': nivel.aula_set,
+        }
+    )
+
+
+def cuerpo_detalle(request, num_cuerpo):
+    # Obtiene el cuerpo.
+    cuerpo = get_object_or_404(Cuerpo, numero=num_cuerpo)
+    return render(
+        request,
+        'app_reservas/cuerpo_detalle.html',
+        {
+            'cuerpo': cuerpo,
         }
     )
 
@@ -37,5 +48,11 @@ def nivel_detalle(request, num_cuerpo, num_nivel):
 def index(request):
     return render(
         request,
-        'app_reservas/index.html'
+        'app_reservas/base.html'
+    )
+
+def solicitud_aula(request):
+    return render(
+        request,
+        'app_reservas/solicitud_aula.html'
     )
