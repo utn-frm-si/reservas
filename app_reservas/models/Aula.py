@@ -2,6 +2,8 @@
 
 from django.db import models
 
+from app_reservas.adapters.google_calendar import obtener_eventos
+
 
 class Aula(models.Model):
     # Atributos
@@ -21,6 +23,9 @@ class Aula(models.Model):
 
     def get_nombre_corto(self):
         return 'Aula %s' % self.numero
+
+    def get_eventos(self):
+        return obtener_eventos(self.calendar_codigo)
 
     # Información de la clase
     class Meta:
