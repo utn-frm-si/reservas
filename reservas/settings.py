@@ -119,3 +119,5 @@ BOWER_INSTALLED_APPS = (
     'fullcalendar-scheduler',
     'jquery',
 )
+
+from .private_settings import *
