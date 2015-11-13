@@ -19,6 +19,9 @@ class Aula(models.Model):
     def __str__(self):
         return 'Aula %s - %s' % (self.numero, self.nivel)
 
+    def get_nombre_corto(self):
+        return 'Aula %s' % self.numero
+
     # Información de la clase
     class Meta:
         app_label = 'app_reservas'
