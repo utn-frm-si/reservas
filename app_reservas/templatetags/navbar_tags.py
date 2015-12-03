@@ -9,5 +9,6 @@ register = template.Library()
 def obtener_informacion_navbar():
     context = {
         'lista_cuerpos': Cuerpo.objects.all(),
+        'lista_areas': Area.objects.all()
     }
     return context
