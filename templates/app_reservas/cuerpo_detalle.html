@@ -23,8 +23,86 @@
 <br />
 <br />
 
-<div id="calendar"></div>
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        {% for nivel in cuerpo.get_niveles %}
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="heading_nivel_{{ nivel.id }}">
+                    <h4 class="panel-title">
+                        <a role="button"
+                           data-toggle="collapse"
+                           data-parent="#accordion"
+                           href="#nivel_{{ nivel.id }}" aria-expanded="true" aria-controls="nivel_{{ nivel.id }}">
+                            {{ nivel.get_nombre_corto }}
+                        </a>
+                        <a role="button"
+                           class="btn btn-xs btn-info pull-right"
+                           href="{% url 'nivel_detalle' cuerpo.numero nivel.numero %}">
+                            <span class="glyphicon glyphicon-eye-open"
+                                  aria-hidden="true">
+                            </span>
+                        </a>
+                    </h4>
+                </div>
+                <div id="nivel_{{ nivel.id }}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading_nivel_{{ nivel.id }}">
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-condensed table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">
+                                            Aula
+                                        </th>
+                                        <th class="text-center">
+                                            Capacidad
+                                        </th>
+                                        <th class="text-center">
+                                            Acciones
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for aula in nivel.get_aulas %}
+                                        <tr>
+                                            <td>
+                                                {{ aula.get_nombre_corto }}
+                                            </td>
+                                            <td class="text-center">
+                                                {{ aula.capacidad }}
+                                            </td>
+                                            <td class="text-center">
+                                                <a role="button"
+                                                   class="btn btn-xs btn-info"
+                                                   data-toggle="tooltip"
+                                                   data-placement="bottom"
+                                                   title="Ver"
+                                                   href="{% url 'aula_detalle' cuerpo.numero nivel.numero aula.numero %}">
+                                                    <span class="glyphicon glyphicon-eye-open"
+                                                          aria-hidden="true">
+                                                    </span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 
+    <br />
+    <br />
+
+    <div id="calendar"></div>
+
+
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
+    </script>
 
 <script>
     var current_date = new Date();
