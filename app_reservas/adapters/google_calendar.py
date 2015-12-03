@@ -1,41 +1,64 @@
 from apiclient import discovery
-from datetime import date, datetime, timedelta
+from datetime import datetime
 from dateutil import parser
 
 from reservas.settings import GOOGLE_CALENDAR_TOKEN
 
 
-def obtener_eventos(calendar_id):
-    service = discovery.build('calendar', 'v3', developerKey=GOOGLE_CALENDAR_TOKEN)
+def crear_servicio():
+    return discovery.build('calendar', 'v3', developerKey=GOOGLE_CALENDAR_TOKEN)
 
+
+def get_fecha_actual():
     now = datetime.utcnow().isoformat() + 'Z'
-    yesterday = date.today() - timedelta(days=1)
-    yesterday = datetime.combine(yesterday, datetime.min.time()).isoformat() + "Z"
+    return now
+
+
+def generar_lista_eventos(eventos):
+    lista_eventos = []
+
+    for evento in eventos:
+        titulo = evento['summary']
+        inicio = evento['start'].get('dateTime', evento['start'].get('date'))
+        fin = evento['end'].get('dateTime', evento['end'].get('date'))
+        inicio = parser.parse(inicio)
+        fin = parser.parse(fin)
+
+        evento = {
+            'titulo': titulo,
+            'inicio': inicio,
+            'fin': fin,
+            'inicio_str': inicio.strftime("%Y-%m-%dT%H:%M:%S"),
+            'fin_str': fin.strftime("%Y-%m-%dT%H:%M:%S"),
+        }
+        lista_eventos.append(evento)
+
+    return lista_eventos
+
+
+def obtener_eventos(calendar_id):
+    service = crear_servicio()
 
     events_result = service.events().list(
         calendarId=calendar_id,
-        timeMin=now,
+        maxResults=2500,
         singleEvents=True,
         orderBy='startTime'
     ).execute()
-    events = events_result.get('items', [])
 
-    lista_eventos = []
+    eventos = events_result.get('items', [])
+    return generar_lista_eventos(eventos)
 
-    for event in events:
-        titulo = event['summary']
-        inicio = event['start'].get('dateTime', event['start'].get('date'))
-        fin = event['end'].get('dateTime', event['end'].get('date'))
-        inicio = parser.parse(inicio)
-        fin = parser.parse(fin)
-        if inicio.day == datetime.now().day:
-            evento = {
-                'titulo': titulo,
-                'inicio': inicio,
-                'fin': fin,
-                'inicio_str': inicio.strftime("%Y-%m-%dT%H:%M:%S"),
-                'fin_str': fin.strftime("%Y-%m-%dT%H:%M:%S"),
-            }
-            lista_eventos.append(evento)
 
-    return lista_eventos
+def obtener_eventos_dia(calendar_id):
+    service = crear_servicio()
+
+    events_result = service.events().list(
+        calendarId=calendar_id,
+        timeMin=get_fecha_actual(),
+        singleEvents=True,
+        orderBy='startTime'
+    ).execute()
+
+    eventos = events_result.get('items', [])
+    return generar_lista_eventos(eventos)
