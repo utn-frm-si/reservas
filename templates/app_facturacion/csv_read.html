@@ -1,0 +1,75 @@
+{% extends 'app_facturacion/base.html' %}
+{% load static %}
+
+{% block static_css %}
+{% endblock %}
+
+{% block static_js %}
+{% endblock %}
+
+{% block title %}
+    CSV Read
+{% endblock %}
+
+{% block contenido %}
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        {% for linea, informacion_linea in resumen.items %}
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="heading{{ forloop.counter }}">
+                    <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ forloop.counter }}"
+                           aria-expanded="false" aria-controls="collapse{{ forloop.counter }}">
+                            {{ linea }}: {{ informacion_linea.usuario }} ({{ informacion_linea.monto_total }})
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse{{ forloop.counter }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{ forloop.counter }}">
+                    <div class="panel-body">
+                        <table class='table table-condensed table-bordered table-striped'>
+                    <thead>
+                        <tr>
+                            <th>
+                                Descripción
+                            </th>
+                            <th>
+                                Cantidad
+                            </th>
+                            <th>
+                                Monto neto
+                            </th>
+                            <th>
+                                Monto de impuestos
+                            </th>
+                            <th>
+                                Monto total
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for concepto in informacion_linea.conceptos %}
+                            <tr>
+                            <td>
+                                {{ concepto.descripcion }}
+                            </td>
+                            <td>
+                                {{ concepto.cantidad }}
+                            </td>
+                            <td>
+                                {{ concepto.monto_neto }}
+                            </td>
+                            <td>
+                                {{ concepto.monto_impuestos }}
+                            </td>
+                            <td>
+                                {{ concepto.monto_total }}
+                            </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

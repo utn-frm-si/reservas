@@ -18,6 +18,10 @@ from django.contrib import admin
 
 urlpatterns = [
     url(
+        r'^facturacion/',
+        include('app_facturacion.urls')
+    ),
+    url(
         r'^reservas/',
         include('app_reservas.urls')
     ),
