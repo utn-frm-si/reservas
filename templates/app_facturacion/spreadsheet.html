@@ -1,0 +1,35 @@
+{% extends 'app_facturacion/base.html' %}
+{% load static %}
+
+{% block static_css %}
+    <link rel="stylesheet" media="screen" href='{% static 'handsontable/dist/handsontable.full.css' %}'>
+{% endblock %}
+
+{% block static_js %}
+    <script src='{% static 'handsontable/dist/handsontable.full.js' %}'></script>
+{% endblock %}
+
+{% block title %}
+    Spreadsheet
+{% endblock %}
+
+{% block contenido %}
+
+<div id="example"></div>
+
+<script>
+  var data = [
+    ["", "Kia", "Nissan", "Toyota", "Honda"],
+    ["2008", 10, 11, 12, 13],
+    ["2009", 20, 11, 14, 13],
+    ["2010", 30, 15, 12, 13]
+  ];
+
+var container = document.getElementById('example');
+var hot = new Handsontable(container,
+ {
+   data: data
+  });
+</script>
+
+{% endblock %}

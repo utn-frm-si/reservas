@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'djangobower',
+    'app_facturacion',
     'app_reservas',
 )
 
@@ -117,6 +118,7 @@ BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'components')
 BOWER_INSTALLED_APPS = (
     'bootswatch-dist#flatly',
     'fullcalendar-scheduler',
+    'handsontable',
     'jquery',
 )
 

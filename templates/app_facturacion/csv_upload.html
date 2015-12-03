@@ -1,0 +1,37 @@
+{% extends 'app_facturacion/base.html' %}
+{% load static %}
+
+{% block static_css %}
+{% endblock %}
+
+{% block static_js %}
+{% endblock %}
+
+{% block title %}
+    CSV Upload
+{% endblock %}
+
+{% block contenido %}
+    <form class="form-horizontal" action="" method=post enctype=multipart/form-data>
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="archivo_csv" class="col-sm-2 control-label">Archivo CSV</label>
+
+            <div class="col-sm-10">
+                <input type="file" id="archivo_csv" name="file" placeholder="Archivo CSV">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="tarifa_llamadas" class="col-sm-2 control-label">Tarifa de llamadas</label>
+
+            <div class="col-sm-10">
+                <input type="number" class="form-control" id="tarifa_llamadas" placeholder="Tarifa de llamadas" step="any" min="0">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Subir</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
