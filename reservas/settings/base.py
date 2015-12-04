@@ -1,3 +1,5 @@
+# coding=utf-8
+
 """
 Django settings for reservas project.
 
@@ -122,4 +124,6 @@ BOWER_INSTALLED_APPS = (
     'jquery',
 )
 
-from .private_settings import *
+# Token de Google Calendar, utilizado para consultar la información de eventos
+# de los calendarios de Google Calendar.
+GOOGLE_CALENDAR_TOKEN = os.environ.get('GOOGLE_CALENDAR_TOKEN', '')
