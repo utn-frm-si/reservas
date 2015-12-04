@@ -1,12 +1,11 @@
 # coding=utf-8
 
 from django.db import models
-from regex_field import RegexField
 
 
 class TipoConceptoRegex(models.Model):
     # Atributos
-    regex = RegexField(max_length=128)
+    regex = models.CharField(max_length=128)
     # Relaciones
     tipo_concepto = models.ForeignKey('TipoConcepto')
 
