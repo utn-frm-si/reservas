@@ -2,7 +2,7 @@ from apiclient import discovery
 from datetime import datetime
 from dateutil import parser
 
-from reservas.settings import GOOGLE_CALENDAR_TOKEN
+from reservas.settings.base import GOOGLE_CALENDAR_TOKEN
 
 
 def crear_servicio():

@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
-import regex_field.fields
 
 
 class Migration(migrations.Migration):
@@ -64,7 +63,7 @@ class Migration(migrations.Migration):
             name='TipoConceptoRegex',
             fields=[
                 ('id', models.AutoField(serialize=False, verbose_name='ID', primary_key=True, auto_created=True)),
-                ('regex', regex_field.fields.RegexField(max_length=128)),
+                ('regex', models.CharField(max_length=128)),
                 ('tipo_concepto', models.ForeignKey(to='app_facturacion.TipoConcepto')),
             ],
             options={
