@@ -19,10 +19,15 @@ class Aula(models.Model):
 
     # Representación del objeto
     def __str__(self):
-        return 'Aula %s - %s' % (self.numero, self.nivel)
+        return '%s - %s' % (self.get_nombre_corto(), self.nivel)
 
     def get_nombre_corto(self):
-        return 'Aula %s' % self.numero
+        nombre_corto = ''
+        if self.nombre is None or self.nombre == '':
+            nombre_corto = 'Aula %s' % self.numero
+        else:
+            nombre_corto = self.nombre
+        return nombre_corto
 
     def get_eventos(self):
         return obtener_eventos(self.calendar_codigo)
