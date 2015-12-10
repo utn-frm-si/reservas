@@ -1,3 +1,5 @@
+# coding=utf-8
+
 from apiclient import discovery
 from datetime import datetime
 from dateutil import parser
@@ -18,7 +20,10 @@ def generar_lista_eventos(eventos):
     lista_eventos = []
 
     for evento in eventos:
-        titulo = evento['summary']
+        if 'summary' in evento:
+            titulo = evento['summary']
+        else:
+            titulo = u'Evento sin título'
         inicio = evento['start'].get('dateTime', evento['start'].get('date'))
         fin = evento['end'].get('dateTime', evento['end'].get('date'))
         inicio = parser.parse(inicio)
