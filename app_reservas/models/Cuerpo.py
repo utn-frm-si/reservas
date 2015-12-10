@@ -9,7 +9,7 @@ class Cuerpo(models.Model):
 
     # Representación del objeto
     def __str__(self):
-        return 'Cuerpo %s' % self.numero
+        return '%s' % self.get_nombre_corto()
 
     def get_nombre_corto(self):
         return 'Cuerpo %s' % self.numero
@@ -20,3 +20,5 @@ class Cuerpo(models.Model):
     # Información de la clase
     class Meta:
         app_label = 'app_reservas'
+        verbose_name = 'Cuerpo'
+        verbose_name_plural = 'Cuerpos'
