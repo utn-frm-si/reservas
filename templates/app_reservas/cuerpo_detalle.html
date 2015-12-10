@@ -56,11 +56,15 @@
                                             Capacidad
                                         </th>
                                         <th class="text-center">
+                                            Áreas a cargo
+                                        </th>
+                                        <th class="text-center">
                                             Acciones
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {% if nivel.get_aulas %}
                                     {% for aula in nivel.get_aulas %}
                                         <tr>
                                             <td>
@@ -68,6 +72,14 @@
                                             </td>
                                             <td class="text-center">
                                                 {{ aula.capacidad }}
+                                            </td>
+                                            <td class="text-center">
+                                                {% for area in aula.areas.all %}
+                                                    {{ area }}
+                                                    {% if not forloop.last %}
+                                                        ,
+                                                    {% endif %}
+                                                {% endfor %}
                                             </td>
                                             <td class="text-center">
                                                 <a role="button"
@@ -83,6 +95,12 @@
                                             </td>
                                         </tr>
                                     {% endfor %}
+                                    {% else %}
+                                        <td class="text-center alert-warning" colspan="4">
+                                            Este nivel no tiene aulas asociadas.
+                                        </td>
+                                    {% endif %}
+
                                 </tbody>
                             </table>
                         </div>
@@ -151,5 +169,4 @@
         minTime: last_hour,
     });
 </script>
-
 {% endblock %}
