@@ -48,7 +48,7 @@ def cuerpo_detalle(request, num_cuerpo):
 def index(request):
     return render(
         request,
-        'app_reservas/base.html'
+        'app_reservas/index.html'
     )
 
 def solicitud_aula(request):
