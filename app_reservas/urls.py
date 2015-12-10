@@ -24,6 +24,11 @@ urlpatterns = [
         name='aula_detalle'
     ),
     url(
+        r'^area/(?P<slug_area>[A-Za-z0-9]+)/$',
+        views.area_detalle,
+        name='area_detalle'
+    ),
+    url(
         r'^solicitud/aula/$',
         views.solicitud_aula,
         name='solicitud_aula'

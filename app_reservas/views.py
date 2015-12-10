@@ -1,6 +1,20 @@
+# coding=utf-8
+
 from django.shortcuts import get_object_or_404, render
 
-from .models import Aula, Cuerpo, Nivel
+from .models import Area, Aula, Cuerpo, Nivel
+
+
+def area_detalle(request, slug_area):
+    # Obtiene el área por su nombre.
+    area = get_object_or_404(Area, slug=slug_area)
+    return render(
+        request,
+        'app_reservas/area_detalle.html',
+        {
+            'area': area,
+        }
+    )
 
 
 def aula_detalle(request, num_cuerpo, num_nivel, num_aula):

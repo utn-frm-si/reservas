@@ -6,6 +6,7 @@ from django.db import models
 class Area(models.Model):
     # Atributos
     nombre = models.CharField(max_length=50)
+    slug = models.SlugField(max_length=50)
 
     # Representación del objeto
     def __str__(self):
