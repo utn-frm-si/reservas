@@ -11,7 +11,7 @@ class Nivel(models.Model):
 
     # Representación del objeto
     def __str__(self):
-        return 'Nivel %s - %s' % (self.numero, self.cuerpo)
+        return '%s - %s' % (self.get_nombre_corto(), self.cuerpo)
 
     def get_nombre_corto(self):
         return 'Nivel %s' % self.numero
@@ -22,3 +22,5 @@ class Nivel(models.Model):
     # Información de la clase
     class Meta:
         app_label = 'app_reservas'
+        verbose_name = 'Nivel'
+        verbose_name_plural = 'Niveles'

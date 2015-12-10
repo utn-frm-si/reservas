@@ -35,3 +35,5 @@ class Aula(models.Model):
     # Información de la clase
     class Meta:
         app_label = 'app_reservas'
+        verbose_name = 'Aula'
+        verbose_name_plural = 'Aulas'
