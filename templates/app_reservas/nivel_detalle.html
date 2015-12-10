@@ -26,12 +26,6 @@
 
 <div id="calendar"></div>
 
-<br />
-<br />
-
-<div class="timetable"></div>
-
-
 <script>
     var current_date = new Date();
     var last_hour = (current_date.getHours() - 1) + ":00:00";
@@ -63,5 +57,4 @@
         minTime: last_hour,
     });
 </script>
-
 {% endblock %}

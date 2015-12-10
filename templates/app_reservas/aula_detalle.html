@@ -27,30 +27,19 @@
 <div id="calendar"></div>
 
 <script>
-    var current_date = new Date();
-    var last_hour = (current_date.getHours() - 1) + ":00:00";
-
     $('#calendar').fullCalendar({
-        defaultView: 'timelineDay',
+        defaultView: 'agendaWeek',
         schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
         lang: 'es',
-        resources: [
-            {
-                id: '{{ aula.id }}',
-                title: '{{ aula.get_nombre_corto }}',
-            },
-        ],
         events: [
             {% for evento in aula.get_eventos %}
                 {
                     title: '{{ evento.titulo }}',
                     start: '{{ evento.inicio_str }}',
                     end: '{{ evento.fin_str }}',
-                    resourceId: '{{ aula.id }}',
                 },
             {% endfor %}
         ],
-        minTime: last_hour,
     });
 </script>
 {% endblock %}
