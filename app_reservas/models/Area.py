@@ -12,6 +12,9 @@ class Area(models.Model):
     def __str__(self):
         return self.nombre
 
+    def get_aulas(self):
+        return self.aula_set.order_by('numero')
+
     # Información de la clase
     class Meta:
         app_label = 'app_reservas'

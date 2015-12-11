@@ -20,12 +20,80 @@
 
 <h1 style="text-align: center;">{{ area }}</h1>
 
+    <br />
+    <br />
+
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="heading_listado_aulas">
+                <h4 class="panel-title">
+                    <a role="button"
+                       data-toggle="collapse"
+                       data-parent="#accordion"
+                       href="#listado_aulas" aria-expanded="true" aria-controls="listado_aulas">
+                        Listado de aulas
+                    </a>
+                </h4>
+            </div>
+            <div id="listado_aulas" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading_listado_aulas">
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-condensed table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th class="text-center">
+                                    Aula
+                                </th>
+                                <th class="text-center">
+                                    Capacidad
+                                </th>
+                                <th class="text-center">
+                                    Acciones
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% if area.get_aulas %}
+                                {% for aula in area.get_aulas %}
+                                    <tr>
+                                        <td>
+                                            {{ aula }}
+                                        </td>
+                                        <td class="text-center">
+                                            {{ aula.capacidad }}
+                                        </td>
+                                        <td class="text-center">
+                                            <a role="button"
+                                               class="btn btn-xs btn-info"
+                                               data-toggle="tooltip"
+                                               data-placement="bottom"
+                                               title="Ver"
+                                               href="{% url 'aula_detalle' aula.nivel.cuerpo.numero aula.nivel.numero aula.numero %}">
+                                                <span class="glyphicon glyphicon-eye-open"
+                                                      aria-hidden="true">
+                                                </span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
+                                <td class="text-center alert-warning" colspan="4">
+                                    Este área no tiene aulas asociadas.
+                                </td>
+                            {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 <br />
 <br />
 
 <div id="calendar"></div>
 
-{% comment %}
 <script>
     var current_date = new Date();
     var last_hour = (current_date.getHours() - 1) + ":00:00";
@@ -35,23 +103,26 @@
         schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
         lang: 'es',
         resources: [
-            {
-                id: '{{ aula.id }}',
-                title: '{{ aula.get_nombre_corto }}',
-            },
+            {% for aula in area.get_aulas %}
+                {
+                    id: '{{ aula.id }}',
+                    title: '{{ aula }}',
+                },
+            {% endfor %}
         ],
         events: [
-            {% for evento in aula.get_eventos %}
-                {
-                    title: '{{ evento.titulo }}',
-                    start: '{{ evento.inicio_str }}',
-                    end: '{{ evento.fin_str }}',
-                    resourceId: '{{ aula.id }}',
-                },
+            {% for aula in area.get_aulas %}
+                {% for evento in aula.get_eventos %}
+                    {
+                        title: '{{ evento.titulo }}',
+                        start: '{{ evento.inicio_str }}',
+                        end: '{{ evento.fin_str }}',
+                        resourceId: '{{ aula.id }}',
+                    },
+                {% endfor %}
             {% endfor %}
         ],
         minTime: last_hour,
     });
 </script>
-{% endcomment %}
 {% endblock %}
