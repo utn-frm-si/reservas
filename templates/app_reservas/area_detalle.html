@@ -73,6 +73,18 @@
                                                       aria-hidden="true">
                                                 </span>
                                             </a>
+                                            {% if aula.archivo_ubicacion %}
+                                                <a role="button"
+                                                   class="btn btn-xs btn-success"
+                                                   data-toggle="tooltip"
+                                                   data-placement="bottom"
+                                                   title="Ubicación"
+                                                   href="/{{ aula.archivo_ubicacion.url }}">
+                                                    <span class="glyphicon glyphicon-map-marker"
+                                                          aria-hidden="true">
+                                                    </span>
+                                                </a>
+                                            {% endif %}
                                         </td>
                                     </tr>
                                 {% endfor %}
@@ -93,6 +105,12 @@
 <br />
 
 <div id="calendar"></div>
+
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
+    </script>
 
 <script>
     var current_date = new Date();
