@@ -19,7 +19,7 @@ urlpatterns = [
         name='nivel_detalle'
     ),
     url(
-        r'^cuerpo_(?P<num_cuerpo>[0-9]+)/nivel_(?P<num_nivel>[0-9]+)/aula_(?P<num_aula>[0-9]+)/$',
+        r'^aula/(?P<aula_id>[0-9]+)/$',
         views.aula_detalle,
         name='aula_detalle'
     ),

@@ -2,8 +2,6 @@
 
 from django.db import models
 
-from app_reservas.adapters.google_calendar import obtener_eventos
-
 
 class Recurso(models.Model):
     # Atributos
