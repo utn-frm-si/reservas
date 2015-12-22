@@ -3,15 +3,14 @@
 from django.db import models
 
 from app_reservas.adapters.google_calendar import obtener_eventos
+from .Recurso import Recurso
 
 
-class Aula(models.Model):
+class Aula(Recurso):
     # Atributos
     numero = models.PositiveSmallIntegerField()
     nombre = models.CharField(max_length=50, blank=True)
     capacidad = models.PositiveSmallIntegerField()
-    calendar_codigo = models.CharField(max_length=100)
-    calendar_color = models.CharField(max_length=10)
     archivo_ubicacion = models.FileField(upload_to='ubicacion_aulas', blank=True)
     # Relaciones
     areas = models.ManyToManyField('Area')
@@ -50,7 +49,7 @@ class Aula(models.Model):
         return eventos_json
 
     # Información de la clase
-    class Meta:
+    class Meta(Recurso.Meta):
         app_label = 'app_reservas'
         verbose_name = 'Aula'
         verbose_name_plural = 'Aulas'
