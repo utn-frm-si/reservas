@@ -1,6 +1,6 @@
 from django import template
 
-from app_reservas.models import Area, Aula, Cuerpo, Nivel
+from app_reservas.models import Area, Cuerpo
 
 register = template.Library()
 

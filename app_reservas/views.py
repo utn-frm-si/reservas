@@ -17,13 +17,9 @@ def area_detalle(request, slug_area):
     )
 
 
-def aula_detalle(request, num_cuerpo, num_nivel, num_aula):
-    # Obtiene el cuerpo.
-    cuerpo = get_object_or_404(Cuerpo, numero=num_cuerpo)
-    # Obtiene el nivel.
-    nivel = get_object_or_404(Nivel, cuerpo=cuerpo, numero=num_nivel)
+def aula_detalle(request, aula_id):
     # Obtiene el aula.
-    aula = get_object_or_404(Aula, nivel=nivel, numero=num_aula)
+    aula = get_object_or_404(Aula, id=aula_id)
     return render(
         request,
         'app_reservas/aula_detalle.html',
@@ -64,6 +60,7 @@ def index(request):
         request,
         'app_reservas/index.html'
     )
+
 
 def solicitud_aula(request):
     return render(
