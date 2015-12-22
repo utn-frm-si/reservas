@@ -31,14 +31,8 @@
         defaultView: 'agendaWeek',
         schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
         lang: 'es',
-        events: [
-            {% for evento in aula.get_eventos %}
-                {
-                    title: '{{ evento.titulo }}',
-                    start: '{{ evento.inicio_str }}',
-                    end: '{{ evento.fin_str }}',
-                },
-            {% endfor %}
+        eventSources: [
+            '/media/app_reservas/eventos_aulas/{{ aula.id }}.json'
         ],
     });
 </script>

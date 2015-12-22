@@ -110,16 +110,9 @@
                 },
             {% endfor %}
         ],
-        events: [
+        eventSources: [
             {% for aula in area.get_aulas %}
-                {% for evento in aula.get_eventos %}
-                    {
-                        title: '{{ evento.titulo }}',
-                        start: '{{ evento.inicio_str }}',
-                        end: '{{ evento.fin_str }}',
-                        resourceId: '{{ aula.id }}',
-                    },
-                {% endfor %}
+                '/media/app_reservas/eventos_aulas/{{ aula.id }}.json',
             {% endfor %}
         ],
         minTime: last_hour,
