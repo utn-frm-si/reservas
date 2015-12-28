@@ -1,0 +1,12 @@
+db:
+  image: postgres
+web:
+  build: .
+  command: /bin/bash run-django.sh
+  env_file: ./environment.txt
+  volumes:
+    - .:/code
+  ports:
+    - "8000:8000"
+  links:
+    - db
