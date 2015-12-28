@@ -1,6 +1,8 @@
 # Directorio de componentes instalados por Django-Bower.
 /components
 
+# Variables de entorno utilizadas por Docker.
+environment.txt
 
 ##########
 # Python #
