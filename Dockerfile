@@ -19,3 +19,6 @@ RUN apt-get install -y nodejs
 
 # Instala Bower.
 RUN npm install -g bower
+
+# Instala las herramientas de cliente de PostgreSQL.
+RUN apt-get install -y postgresql-client
