@@ -1,5 +1,14 @@
+dbdata:
+  image: postgres
+  volumes:
+    - /var/lib/postgresql
+  command: /bin/true
+
 db:
   image: postgres
+  volumes_from:
+    - dbdata
+
 web:
   build: .
   command: /bin/bash run-django.sh
