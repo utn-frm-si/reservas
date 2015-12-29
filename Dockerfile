@@ -7,11 +7,12 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN mkdir /code
 WORKDIR /code
 
+# Instala las dependencias del proyecto, mediante pip.
+ADD requirements.txt /code/
+RUN pip install -r requirements.txt
+
 # Añade el contenido del repositorio al directorio '/code'.
 ADD . /code/
-
-# Instala las dependencias del proyecto, mediante pip.
-RUN pip install -r requirements.txt
 
 # Instala NodeJS.
 RUN curl -sL https://deb.nodesource.com/setup_4.x | bash -
