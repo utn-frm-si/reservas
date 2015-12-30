@@ -21,6 +21,7 @@ celery:
     service: web_common
   restart: always
   command: /bin/bash run-celery.sh
+  env_file: ./environment.txt
   environment:
     - C_FORCE_ROOT=true
     - DATABASE_HOST=postgresql
