@@ -11,13 +11,31 @@ db:
   volumes_from:
     - dbdata
 
+rabbit:
+  image: rabbitmq
+  restart: always
+
+celery:
+  extends:
+    file: docker-compose.common.yml
+    service: web_common
+  restart: always
+  command: /bin/bash run-celery.sh
+  environment:
+    - C_FORCE_ROOT=true
+    - DATABASE_HOST=postgresql
+    - BROKER_URL=amqp://guest:guest@rabbit//
+  links:
+    - db
+    - rabbit
+
 web:
-  build: .
+  extends:
+    file: docker-compose.common.yml
+    service: web_common
   restart: always
   command: /bin/bash run-django.sh
   env_file: ./environment.txt
-  volumes:
-    - .:/code
   ports:
     - "8000:8000"
   links:

@@ -18,7 +18,7 @@ app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
 
 app.conf.CELERYBEAT_SCHEDULE = {
     'obtener_eventos_recursos': {
-        'task': 'obtencion_eventos_recursos',
+        'task': 'obtener_eventos_recursos',
         'schedule': timedelta(hours=1)
     },
 }
