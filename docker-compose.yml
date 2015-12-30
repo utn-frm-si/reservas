@@ -1,16 +1,19 @@
 dbdata:
   image: postgres
+  restart: always
   volumes:
     - /var/lib/postgresql
   command: /bin/true
 
 db:
   image: postgres
+  restart: always
   volumes_from:
     - dbdata
 
 web:
   build: .
+  restart: always
   command: /bin/bash run-django.sh
   env_file: ./environment.txt
   volumes:
