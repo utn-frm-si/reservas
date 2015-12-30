@@ -1,0 +1,4 @@
+web_common:
+  build: .
+  volumes:
+    - .:/code
