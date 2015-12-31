@@ -32,7 +32,7 @@
         schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
         lang: 'es',
         eventSources: [
-            '/media/app_reservas/eventos_aulas/{{ aula.id }}.json'
+            '{% url "aula_eventos_json" aula.id %}'
         ],
     });
 </script>

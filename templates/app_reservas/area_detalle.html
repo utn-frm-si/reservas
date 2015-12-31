@@ -130,7 +130,7 @@
         ],
         eventSources: [
             {% for aula in area.get_aulas %}
-                '/media/app_reservas/eventos_aulas/{{ aula.id }}.json',
+                '{% url "aula_eventos_json" aula.id %}',
             {% endfor %}
         ],
         minTime: last_hour,
