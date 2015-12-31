@@ -29,6 +29,11 @@ urlpatterns = [
         name='area_detalle'
     ),
     url(
+        r'^aula/(?P<aula_id>[0-9]+)/eventos/$',
+        views.aula_eventos_json,
+        name='aula_eventos_json'
+    ),
+    url(
         r'^solicitud/aula/$',
         views.solicitud_aula,
         name='solicitud_aula'

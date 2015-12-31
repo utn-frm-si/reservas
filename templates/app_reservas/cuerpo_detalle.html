@@ -167,7 +167,7 @@
         eventSources: [
             {% for nivel in cuerpo.get_niveles %}
                 {% for aula in nivel.get_aulas %}
-                    '/media/app_reservas/eventos_aulas/{{ aula.id }}.json',
+                    '{% url "aula_eventos_json" aula.id %}',
                 {% endfor %}
             {% endfor %}
         ],
