@@ -1,32 +1,32 @@
 import os
 from celery import group, shared_task
 
-from .models import Aula
+from .models import Recurso
 
 
 @shared_task(name='obtener_eventos_recursos')
 def obtener_eventos_recursos():
     # Indica la ruta donde se almacenarán los archivos.
-    ruta_archivos = 'media/app_reservas/eventos_aulas/'
+    ruta_archivos = 'media/app_reservas/eventos_recursos/'
 
     # Crea el directorio, en caso de que no exista.
     os.makedirs(ruta_archivos, exist_ok=True)
 
-    # Obtiene todas las aulas del sistema.
-    aulas = Aula.objects.all()
+    # Obtiene todos los recursos existentes.
+    recursos = Recurso.objects.all()
 
-    subtareas = group(obtener_eventos_recurso_especifico.s(aula, ruta_archivos) for aula in aulas)
+    subtareas = group(obtener_eventos_recurso_especifico.s(recurso, ruta_archivos) for recurso in recursos)
     subtareas()
 
 
 @shared_task(name='obtener_eventos_recurso_especifico')
-def obtener_eventos_recurso_especifico(aula, ruta_archivos):
-    if isinstance(aula, Aula):
+def obtener_eventos_recurso_especifico(recurso, ruta_archivos):
+    if isinstance(recurso, Recurso):
         # Arma el nombre del archivo.
-        nombre_archivo = str(aula.id) + '.json'
+        nombre_archivo = str(recurso.id) + '.json'
         nombre_archivo_completo = ruta_archivos + nombre_archivo
 
-        # Crea o sobrescribe el archivo del aula actual.
+        # Crea o sobrescribe el archivo del recurso actual.
         with open(nombre_archivo_completo, 'w') as archivo:
-            # Escribe en el archivo los eventos del aula, en formato JSON.
-            archivo.write(aula.get_eventos_json())
+            # Escribe en el archivo los eventos del recurso, en formato JSON.
+            archivo.write(recurso.get_eventos_json())
