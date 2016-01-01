@@ -7,7 +7,7 @@ from dateutil.parser import parse
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 
-from .models import Area, Aula, Cuerpo, LaboratorioInformatico, Nivel
+from .models import Area, Aula, Cuerpo, LaboratorioInformatico, Nivel, Recurso
 
 
 def area_detalle(request, slug_area):
@@ -72,21 +72,21 @@ def cuerpo_detalle(request, num_cuerpo):
     )
 
 
-def aula_eventos_json(request, aula_id):
-    # Indica la ruta donde se almacenan los archivos JSON de eventos de aulas.
-    ruta_archivos = 'media/app_reservas/eventos_aulas/'
+def recurso_eventos_json(request, recurso_id):
+    # Indica la ruta donde se almacenan los archivos JSON de eventos de recursos.
+    ruta_archivos = 'media/app_reservas/eventos_recursos/'
 
-    # Obtiene el aula especificada.
-    aula = get_object_or_404(Aula, id=aula_id)
+    # Obtiene el recurso especificado.
+    recurso = get_object_or_404(Recurso, id=recurso_id)
 
     # Arma el nombre del archivo.
-    nombre_archivo = str(aula.id) + '.json'
+    nombre_archivo = str(recurso.id) + '.json'
     nombre_archivo_completo = ruta_archivos + nombre_archivo
 
     # Inicializa la lista de eventos a retornar.
     eventos = []
 
-    # Lee el archivo de eventos del aula actual.
+    # Lee el archivo de eventos del recurso actual.
     with open(nombre_archivo_completo, 'r') as archivo:
         # Parsea el contenido del archivo JSON.
         data = json.load(archivo)
