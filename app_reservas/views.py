@@ -7,7 +7,7 @@ from dateutil.parser import parse
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 
-from .models import Area, Aula, Cuerpo, Nivel
+from .models import Area, Aula, Cuerpo, LaboratorioInformatico, Nivel
 
 
 def area_detalle(request, slug_area):
@@ -30,6 +30,18 @@ def aula_detalle(request, aula_id):
         'app_reservas/aula_detalle.html',
         {
             'aula': aula,
+        }
+    )
+
+
+def laboratorio_informatico_detalle(request, alias_laboratorio):
+    # Obtiene el laboratorio informático por su alias.
+    laboratorio = get_object_or_404(LaboratorioInformatico, alias=alias_laboratorio)
+    return render(
+        request,
+        'app_reservas/laboratorio_informatico_detalle.html',
+        {
+            'laboratorio': laboratorio,
         }
     )
 
