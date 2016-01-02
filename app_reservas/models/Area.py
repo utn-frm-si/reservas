@@ -13,7 +13,7 @@ class Area(models.Model):
         return self.nombre
 
     def get_aulas(self):
-        return self.aula_set.order_by('numero')
+        return self.aula_set.order_by('numero', 'nombre')
 
     # Información de la clase
     class Meta:
