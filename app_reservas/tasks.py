@@ -20,7 +20,7 @@ def obtener_eventos_recursos():
 
 
 @shared_task(name='obtener_eventos_recurso_especifico')
-def obtener_eventos_recurso_especifico(recurso, ruta_archivos):
+def obtener_eventos_recurso_especifico(recurso, ruta_archivos='media/app_reservas/eventos_recursos/'):
     if isinstance(recurso, Recurso):
         # Arma el nombre del archivo.
         nombre_archivo = str(recurso.id) + '.json'

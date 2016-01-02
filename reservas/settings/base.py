@@ -40,7 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'djangobower',
     'app_facturacion',
-    'app_reservas',
+    'app_reservas.apps.ReservasConfig',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -132,3 +132,5 @@ BOWER_INSTALLED_APPS = (
 # Token de Google Calendar, utilizado para consultar la información de eventos
 # de los calendarios de Google Calendar.
 GOOGLE_CALENDAR_TOKEN = os.environ.get('GOOGLE_CALENDAR_TOKEN', '')
+
+BROKER_URL = os.environ.get('BROKER_URL', 'amqp://guest:guest@rabbit//')
