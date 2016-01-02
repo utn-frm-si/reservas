@@ -44,14 +44,22 @@ def generar_lista_eventos(eventos):
 def obtener_eventos(calendar_id):
     service = crear_servicio()
 
-    events_result = service.events().list(
-        calendarId=calendar_id,
-        maxResults=2500,
-        singleEvents=True,
-        orderBy='startTime'
-    ).execute()
+    eventos = []
+    page_token = None
+    while True:
+        events_result = service.events().list(
+            calendarId=calendar_id,
+            maxResults=2500,
+            singleEvents=True,
+            pageToken=page_token,
+            orderBy='startTime'
+        ).execute()
 
-    eventos = events_result.get('items', [])
+        eventos.extend(events_result.get('items', []))
+        page_token = events_result.get('nextPageToken')
+        if not page_token:
+            break
+
     return generar_lista_eventos(eventos)
 
 
