@@ -60,7 +60,11 @@
                                             {{ laboratorio.get_nombre_corto }}
                                         </td>
                                         <td class="text-center">
-                                            {{ laboratorio.capacidad }}
+                                            {% if laboratorio.capacidad > 0 %}
+                                                {{ laboratorio.capacidad }}
+                                            {% else %}
+                                                &#8212;
+                                            {% endif %}
                                         </td>
                                         <td class="text-center">
                                             <a role="button"
