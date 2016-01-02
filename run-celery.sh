@@ -21,4 +21,4 @@ function rabbitmq_wait {
 pg_wait
 rabbitmq_wait
 
-celery worker -A reservas -B -l info -b "${BROKER_URL}"
+celery worker -A reservas -B -l info
