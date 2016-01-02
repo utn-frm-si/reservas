@@ -14,7 +14,7 @@ urlpatterns = [
         name='cuerpo_detalle'
     ),
     url(
-        r'^cuerpo_(?P<num_cuerpo>[0-9]+)/nivel_(?P<num_nivel>[0-9]+)/$',
+        r'^cuerpo_(?P<num_cuerpo>[0-9]+)/nivel_(?P<num_nivel>-?[0-9]+)/$',
         views.nivel_detalle,
         name='nivel_detalle'
     ),
