@@ -41,8 +41,23 @@ def generar_lista_eventos(eventos):
     return lista_eventos
 
 
-def obtener_eventos(calendar_id):
+def obtener_eventos(calendar_id, limite_anio_siguiente=True):
     service = crear_servicio()
+
+    primer_dia_anio_actual = None
+    primer_dia_anio_subsiguiente = None
+    if limite_anio_siguiente:
+        # Obtiene únicamente los eventos del año actual y el siguiente.
+        primer_dia_anio_actual = datetime(
+            datetime.today().year,
+            1,
+            1,
+        ).isoformat('T') + 'Z'
+        primer_dia_anio_subsiguiente = datetime(
+            datetime.today().year + 2,
+            1,
+            1,
+        ).isoformat('T') + 'Z'
 
     eventos = []
     page_token = None
@@ -51,6 +66,8 @@ def obtener_eventos(calendar_id):
             calendarId=calendar_id,
             maxResults=2500,
             singleEvents=True,
+            timeMin=primer_dia_anio_actual,
+            timeMax=primer_dia_anio_subsiguiente,
             pageToken=page_token,
             orderBy='startTime'
         ).execute()
