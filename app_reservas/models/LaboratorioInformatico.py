@@ -18,7 +18,7 @@ class LaboratorioInformatico(Recurso):
         return 'Laboratorio informático: %s' % self.nombre
 
     def get_nombre_corto(self):
-        return self.alias
+        return '%s (%s)' % (self.nombre, self.alias)
 
     # Información de la clase
     class Meta:
