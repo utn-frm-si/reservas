@@ -138,3 +138,9 @@ def solicitud_aula(request):
         request,
         'app_reservas/solicitud_aula.html'
     )
+
+def solicitud_laboratorio_informatico(request):
+    return render(
+        request,
+        'app_reservas/solicitud_laboratorio_informatico.html'
+    )
