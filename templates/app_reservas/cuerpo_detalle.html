@@ -71,13 +71,17 @@
                                                 {{ aula.get_nombre_corto }}
                                             </td>
                                             <td class="text-center">
-                                                {{ aula.capacidad }}
+                                                {% if aula.capacidad > 0 %}
+                                                    {{ aula.capacidad }}
+                                                {% else %}
+                                                    &#8212;
+                                                {% endif %}
                                             </td>
                                             <td class="text-center">
                                                 {% for area in aula.areas.all %}
                                                     {{ area }}
                                                     {% if not forloop.last %}
-                                                        ,
+                                                        &#8212;
                                                     {% endif %}
                                                 {% endfor %}
                                             </td>
@@ -140,7 +144,11 @@
                                                 {{ laboratorio.get_nombre_corto }}
                                             </td>
                                             <td class="text-center">
-                                                {{ laboratorio.capacidad }}
+                                                {% if laboratorio.capacidad > 0 %}
+                                                    {{ laboratorio.capacidad }}
+                                                {% else %}
+                                                    &#8212;
+                                                {% endif %}
                                             </td>
                                             <td class="text-center">
                                                 <a role="button"

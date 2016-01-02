@@ -60,7 +60,11 @@
                                             {{ aula }}
                                         </td>
                                         <td class="text-center">
-                                            {{ aula.capacidad }}
+                                            {% if aula.capacidad > 0 %}
+                                                {{ aula.capacidad }}
+                                            {% else %}
+                                                &#8212;
+                                            {% endif %}
                                         </td>
                                         <td class="text-center">
                                             <a role="button"
