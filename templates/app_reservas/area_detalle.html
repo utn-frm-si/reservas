@@ -131,7 +131,7 @@
         ],
         eventSources: [
             {% for aula in area.get_aulas %}
-                '{% url "aula_eventos_json" aula.id %}',
+                '{% url "recurso_eventos_json" aula.id %}',
             {% endfor %}
         ],
         minTime: '07:00:00',
