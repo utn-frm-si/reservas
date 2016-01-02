@@ -57,7 +57,7 @@
                                 {% for laboratorio in laboratorios %}
                                     <tr>
                                         <td>
-                                            {{ laboratorio }}
+                                            {{ laboratorio.get_nombre_corto }}
                                         </td>
                                         <td class="text-center">
                                             {{ laboratorio.capacidad }}
