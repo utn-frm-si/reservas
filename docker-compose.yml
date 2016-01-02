@@ -37,7 +37,10 @@ web:
   restart: always
   command: /bin/bash run-django.sh
   env_file: ./environment.txt
+  environment:
+    - BROKER_URL=amqp://guest:guest@rabbit//
   ports:
     - "8000:8000"
   links:
     - db
+    - rabbit
