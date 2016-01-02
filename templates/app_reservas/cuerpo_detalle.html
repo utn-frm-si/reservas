@@ -116,6 +116,50 @@
                                 </tbody>
                             </table>
                         </div>
+
+                        {% if nivel.get_laboratorios_informaticos %}
+                        <div class="table-responsive">
+                            <table class="table table-condensed table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">
+                                            Laboratorio informático
+                                        </th>
+                                        <th class="text-center">
+                                            Capacidad
+                                        </th>
+                                        <th class="text-center">
+                                            Acciones
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for laboratorio in nivel.get_laboratorios_informaticos %}
+                                        <tr>
+                                            <td>
+                                                {{ laboratorio.get_nombre_corto }}
+                                            </td>
+                                            <td class="text-center">
+                                                {{ laboratorio.capacidad }}
+                                            </td>
+                                            <td class="text-center">
+                                                <a role="button"
+                                                   class="btn btn-xs btn-info"
+                                                   data-toggle="tooltip"
+                                                   data-placement="bottom"
+                                                   title="Ver"
+                                                   href="{% url 'laboratorio_informatico_detalle' laboratorio.alias %}">
+                                                    <span class="glyphicon glyphicon-eye-open"
+                                                          aria-hidden="true">
+                                                    </span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -162,12 +206,22 @@
                         title: '{{ aula.get_nombre_corto }}',
                     },
                 {% endfor %}
+                {% for laboratorio in nivel.get_laboratorios_informaticos %}
+                    {
+                        id: '{{ laboratorio.id }}',
+                        nivel: '{{ nivel.get_nombre_corto }}',
+                        title: '{{ laboratorio.get_nombre_corto }}',
+                    },
+                {% endfor %}
             {% endfor %}
         ],
         eventSources: [
             {% for nivel in cuerpo.get_niveles %}
                 {% for aula in nivel.get_aulas %}
                     '{% url "recurso_eventos_json" aula.id %}',
+                {% endfor %}
+                {% for laboratorio in nivel.get_laboratorios_informaticos %}
+                    '{% url "recurso_eventos_json" laboratorio.id %}',
                 {% endfor %}
             {% endfor %}
         ],
