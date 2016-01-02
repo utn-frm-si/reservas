@@ -46,6 +46,18 @@ def laboratorio_informatico_detalle(request, alias_laboratorio):
     )
 
 
+def laboratorio_informatico_listado(request):
+    # Obtiene todos los laboratorios informáticos, ordenados por alias.
+    laboratorios = LaboratorioInformatico.objects.order_by('alias')
+    return render(
+        request,
+        'app_reservas/laboratorio_informatico_listado.html',
+        {
+            'laboratorios': laboratorios,
+        }
+    )
+
+
 def nivel_detalle(request, num_cuerpo, num_nivel):
     # Obtiene el cuerpo.
     cuerpo = get_object_or_404(Cuerpo, numero=num_cuerpo)
