@@ -19,6 +19,9 @@ class Nivel(models.Model):
     def get_aulas(self):
         return self.aula_set.order_by('numero', 'nombre')
 
+    def get_laboratorios_informaticos(self):
+        return self.laboratorioinformatico_set.order_by('alias')
+
     # Información de la clase
     class Meta:
         app_label = 'app_reservas'
