@@ -17,7 +17,7 @@ class Nivel(models.Model):
         return 'Nivel %s' % self.numero
 
     def get_aulas(self):
-        return self.aula_set.order_by('numero')
+        return self.aula_set.order_by('numero', 'nombre')
 
     # Información de la clase
     class Meta:
