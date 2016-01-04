@@ -24,10 +24,6 @@ urlpatterns = [
             include('app_facturacion.urls')
         ),
         url(
-            r'^reservas/',
-            include('app_reservas.urls')
-        ),
-        url(
             r'^admin/',
             include(admin.site.urls)
         ),
@@ -44,6 +40,10 @@ urlpatterns = [
             {
                 'document_root': settings.STATIC_ROOT,
             }
+        ),
+        url(
+            r'',
+            include('app_reservas.urls')
         ),
     ])),
 ]
