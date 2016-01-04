@@ -101,12 +101,32 @@ USE_L10N = True
 USE_TZ = True
 
 
+# Establece el prefijo para el proyecto Django, según la configuración
+# del servidor web.
+DJANGO_URL_PREFIX = os.environ.get('DJANGO_URL_PREFIX', '')
+# Da formato al prefijo URL, para que sea de la forma '<prefijo>/'.
+if DJANGO_URL_PREFIX != '':
+    # Añade la barra final, en caso de que no esté presente.
+    if DJANGO_URL_PREFIX[-1] != '/':
+        DJANGO_URL_PREFIX += '/'
+    # Quita las barras iniciales, en caso de que estén presentes.
+    while len(DJANGO_URL_PREFIX) > 0 and DJANGO_URL_PREFIX[0] == '/':
+        if len(DJANGO_URL_PREFIX) == 1:
+            DJANGO_URL_PREFIX = ''
+        else:
+            DJANGO_URL_PREFIX = DJANGO_URL_PREFIX[1:]
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-STATIC_URL = '/static/'
+STATIC_URL = '/' + DJANGO_URL_PREFIX + 'static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -118,7 +138,7 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-MEDIA_URL = '/media/'
+MEDIA_URL = '/' + DJANGO_URL_PREFIX + 'media/'
 
 BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'components')
 
