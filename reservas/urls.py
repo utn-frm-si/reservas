@@ -18,30 +18,32 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 urlpatterns = [
-    url(
-        r'^facturacion/',
-        include('app_facturacion.urls')
-    ),
-    url(
-        r'^reservas/',
-        include('app_reservas.urls')
-    ),
-    url(
-        r'^admin/',
-        include(admin.site.urls)
-    ),
-    url(
-        r'^media/(?P<path>.*)$',
-        'django.views.static.serve',
-        {
-            'document_root': settings.MEDIA_ROOT,
-        }
-    ),
-    url(
-        r'^static/(?P<path>.*)$',
-        'django.views.static.serve',
-        {
-            'document_root': settings.STATIC_ROOT,
-        }
-    ),
+    url(r'^' + settings.DJANGO_URL_PREFIX, include([
+        url(
+            r'^facturacion/',
+            include('app_facturacion.urls')
+        ),
+        url(
+            r'^reservas/',
+            include('app_reservas.urls')
+        ),
+        url(
+            r'^admin/',
+            include(admin.site.urls)
+        ),
+        url(
+            r'^media/(?P<path>.*)$',
+            'django.views.static.serve',
+            {
+                'document_root': settings.MEDIA_ROOT,
+            }
+        ),
+        url(
+            r'^static/(?P<path>.*)$',
+            'django.views.static.serve',
+            {
+                'document_root': settings.STATIC_ROOT,
+            }
+        ),
+    ])),
 ]
