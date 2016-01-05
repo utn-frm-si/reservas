@@ -63,4 +63,9 @@ urlpatterns = [
         views.solicitud_laboratorio_informatico,
         name='solicitud_laboratorio_informatico'
     ),
+    url(
+        r'^solicitud/material_multimedia/$',
+        views.solicitud_material_multimedia,
+        name='solicitud_material_multimedia'
+    ),
 ]
