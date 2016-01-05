@@ -44,6 +44,16 @@ urlpatterns = [
         name='laboratorio_informatico_detalle'
     ),
     url(
+        r'^proyector_multimedia/$',
+        views.proyector_multimedia_listado,
+        name='proyector_multimedia_listado'
+    ),
+    url(
+        r'^proyector_multimedia/(?P<identificador_proyector>[A-Za-z0-9_-]+)/$',
+        views.proyector_multimedia_detalle,
+        name='proyector_multimedia_detalle'
+    ),
+    url(
         r'^solicitud/aula/$',
         views.solicitud_aula,
         name='solicitud_aula'

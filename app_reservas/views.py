@@ -7,7 +7,7 @@ from dateutil.parser import parse
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 
-from .models import Area, Aula, Cuerpo, LaboratorioInformatico, Nivel, Recurso
+from .models import Area, Aula, Cuerpo, LaboratorioInformatico, Nivel, ProyectorMultimedia, Recurso
 
 
 def area_detalle(request, slug_area):
@@ -54,6 +54,30 @@ def laboratorio_informatico_listado(request):
         'app_reservas/laboratorio_informatico_listado.html',
         {
             'laboratorios': laboratorios,
+        }
+    )
+
+
+def proyector_multimedia_detalle(request, identificador_proyector):
+    # Obtiene el proyector multimedia por su identificador.
+    proyector = get_object_or_404(ProyectorMultimedia, identificador=identificador_proyector)
+    return render(
+        request,
+        'app_reservas/proyector_multimedia_detalle.html',
+        {
+            'proyector': proyector,
+        }
+    )
+
+
+def proyector_multimedia_listado(request):
+    # Obtiene todos los proyectores_multimedia, ordenados por identificador.
+    proyectores = ProyectorMultimedia.objects.order_by('identificador')
+    return render(
+        request,
+        'app_reservas/proyector_multimedia_listado.html',
+        {
+            'proyectores': proyectores,
         }
     )
 
