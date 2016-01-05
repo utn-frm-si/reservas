@@ -168,3 +168,9 @@ def solicitud_laboratorio_informatico(request):
         request,
         'app_reservas/solicitud_laboratorio_informatico.html'
     )
+
+def solicitud_material_multimedia(request):
+    return render(
+        request,
+        'app_reservas/solicitud_material_multimedia.html'
+    )
