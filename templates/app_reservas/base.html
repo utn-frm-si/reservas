@@ -47,5 +47,9 @@
 <script src='{% static 'bootswatch-dist/js/bootstrap.min.js' %}'></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <!--<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
+<script>
+    // Resalta la opción del navbar que está siendo visualizada actualmente.
+    $('#navbar a[href="' + location.pathname + '"]').parent('li').addClass('active');
+</script>
 </body>
 </html>
