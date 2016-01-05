@@ -33,7 +33,12 @@
         lang: 'es',
         contentHeight: 'auto',
         eventSources: [
-            '{% url "recurso_eventos_json" aula.id %}'
+            {
+                url: '{% url "recurso_eventos_json" aula.id %}',
+                {% if aula.calendar_color %}
+                    color: '{{ aula.calendar_color }}',
+                {% endif %}
+            },
         ],
         minTime: '07:00:00',
     });

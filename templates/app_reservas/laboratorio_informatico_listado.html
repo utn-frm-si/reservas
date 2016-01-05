@@ -124,7 +124,12 @@
             ],
             eventSources: [
                 {% for laboratorio in laboratorios %}
-                    '{% url "recurso_eventos_json" laboratorio.id %}',
+                    {
+                        url: '{% url "recurso_eventos_json" laboratorio.id %}',
+                        {% if laboratorio.calendar_color %}
+                            color: '{{ laboratorio.calendar_color }}',
+                        {% endif %}
+                    },
                 {% endfor %}
             ],
             minTime: '07:00:00',

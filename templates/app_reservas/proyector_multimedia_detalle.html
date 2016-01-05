@@ -32,7 +32,12 @@
         lang: 'es',
         contentHeight: 'auto',
         eventSources: [
-            '{% url "recurso_eventos_json" proyector.id %}'
+            {
+                url: '{% url "recurso_eventos_json" proyector.id %}',
+                {% if proyector.calendar_color %}
+                    color: '{{ proyector.calendar_color }}',
+                {% endif %}
+            },
         ],
         minTime: '07:00:00',
     });
