@@ -16,7 +16,7 @@ function pg_wait {
 pg_wait
 
 python manage.py migrate
-python manage.py bower install -- --allow-root
+python manage.py bower_install -- --allow-root
 python manage.py collectstatic --noinput
 
 gunicorn reservas.wsgi:application -b :8000
