@@ -1,27 +1,16 @@
-{% extends 'app_reservas/base.html' %}
+{% extends 'app_reservas/base_calendario.html' %}
 {% load static %}
-
-{% block static_css %}
-    <!--Fullcalendar-Scheduler-->
-    <link rel='stylesheet' href='{% static 'fullcalendar/dist/fullcalendar.min.css' %}' />
-    <link rel='stylesheet' href='{% static 'fullcalendar-scheduler/dist/scheduler.min.css' %}' />
-    <script src='{% static 'moment/min/moment.min.js' %}'></script>
-    <script src='{% static 'jquery/dist/jquery.min.js' %}'></script>
-    <script src='{% static 'fullcalendar/dist/fullcalendar.min.js' %}'></script>
-    <script src='{% static 'fullcalendar/dist/lang/es.js' %}'></script>
-    <script src='{% static 'fullcalendar-scheduler/dist/scheduler.min.js' %}'></script>
-{% endblock %}
 
 {% block title %}
     {{ cuerpo.get_nombre_corto }}
 {% endblock %}
 
+
 {% block contenido %}
+    <h1 style="text-align: center;">{{ cuerpo.get_nombre_corto }}</h1>
 
-<h1 style="text-align: center;">{{ cuerpo.get_nombre_corto }}</h1>
-
-<br />
-<br />
+    <br />
+    <br />
 
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
         {% for nivel in cuerpo.get_niveles %}
@@ -178,73 +167,70 @@
     <br />
 
     <div id="calendar"></div>
+{% endblock contenido %}
 
+
+{% block scripts %}
+    {{ block.super }}
 
     <script>
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
         });
     </script>
+{% endblock %}
 
-<script>
-    var current_date = new Date();
-    var last_hour = (current_date.getHours() - 1) + ":00:00";
 
-    $('#calendar').fullCalendar({
-        defaultView: 'timelineDay',
-        schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
-        lang: 'es',
-        contentHeight: 'auto',
-        resourceColumns: [
+{% block fullcalendar_resources %}
+    resourceColumns: [
+        {
+            group: true,
+            labelText: 'Nivel',
+            field: 'nivel'
+        },
+        {
+            labelText: 'Recurso',
+            field: 'title'
+        },
+    ],
+    resources: [
+        {% for nivel in cuerpo.get_niveles %}
+            {% for aula in nivel.get_aulas %}
+                {
+                    id: '{{ aula.id }}',
+                    nivel: '{{ nivel.get_nombre_corto }}',
+                    title: '{{ aula.get_nombre_corto }}',
+                },
+            {% endfor %}
+            {% for laboratorio in nivel.get_laboratorios_informaticos %}
+                {
+                    id: '{{ laboratorio.id }}',
+                    nivel: '{{ nivel.get_nombre_corto }}',
+                    title: '{{ laboratorio.get_nombre_corto }}',
+                },
+            {% endfor %}
+        {% endfor %}
+    ],
+{% endblock fullcalendar_resources %}
+
+
+{% block fullcalendar_eventSources %}
+    {% for nivel in cuerpo.get_niveles %}
+        {% for aula in nivel.get_aulas %}
             {
-                group: true,
-				labelText: 'Nivel',
-				field: 'nivel'
+                url: '{% url "recurso_eventos_json" aula.id %}',
+                {% if aula.calendar_color %}
+                    color: '{{ aula.calendar_color }}',
+                {% endif %}
             },
-			{
-				labelText: 'Aula',
-				field: 'title'
-			},
-        ],
-        resources: [
-            {% for nivel in cuerpo.get_niveles %}
-                {% for aula in nivel.get_aulas %}
-                    {
-                        id: '{{ aula.id }}',
-                        nivel: '{{ nivel.get_nombre_corto }}',
-                        title: '{{ aula.get_nombre_corto }}',
-                    },
-                {% endfor %}
-                {% for laboratorio in nivel.get_laboratorios_informaticos %}
-                    {
-                        id: '{{ laboratorio.id }}',
-                        nivel: '{{ nivel.get_nombre_corto }}',
-                        title: '{{ laboratorio.get_nombre_corto }}',
-                    },
-                {% endfor %}
-            {% endfor %}
-        ],
-        eventSources: [
-            {% for nivel in cuerpo.get_niveles %}
-                {% for aula in nivel.get_aulas %}
-                    {
-                        url: '{% url "recurso_eventos_json" aula.id %}',
-                        {% if aula.calendar_color %}
-                            color: '{{ aula.calendar_color }}',
-                        {% endif %}
-                    },
-                {% endfor %}
-                {% for laboratorio in nivel.get_laboratorios_informaticos %}
-                    {
-                        url: '{% url "recurso_eventos_json" laboratorio.id %}',
-                        {% if laboratorio.calendar_color %}
-                            color: '{{ laboratorio.calendar_color }}',
-                        {% endif %}
-                    },
-                {% endfor %}
-            {% endfor %}
-        ],
-        minTime: '07:00:00',
-    });
-</script>
+        {% endfor %}
+        {% for laboratorio in nivel.get_laboratorios_informaticos %}
+            {
+                url: '{% url "recurso_eventos_json" laboratorio.id %}',
+                {% if laboratorio.calendar_color %}
+                    color: '{{ laboratorio.calendar_color }}',
+                {% endif %}
+            },
+        {% endfor %}
+    {% endfor %}
 {% endblock %}
