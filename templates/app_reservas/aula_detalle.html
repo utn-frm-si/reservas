@@ -1,46 +1,32 @@
-{% extends 'app_reservas/base.html' %}
+{% extends 'app_reservas/base_calendario.html' %}
 {% load static %}
-
-{% block static_css %}
-    <!--Fullcalendar-Scheduler-->
-    <link rel='stylesheet' href='{% static 'fullcalendar/dist/fullcalendar.min.css' %}' />
-    <link rel='stylesheet' href='{% static 'fullcalendar-scheduler/dist/scheduler.min.css' %}' />
-    <script src='{% static 'moment/min/moment.min.js' %}'></script>
-    <script src='{% static 'jquery/dist/jquery.min.js' %}'></script>
-    <script src='{% static 'fullcalendar/dist/fullcalendar.min.js' %}'></script>
-    <script src='{% static 'fullcalendar/dist/lang/es.js' %}'></script>
-    <script src='{% static 'fullcalendar-scheduler/dist/scheduler.min.js' %}'></script>
-{% endblock %}
 
 {% block title %}
     {{ aula }}
 {% endblock %}
 
+
 {% block contenido %}
+    <h1 style="text-align: center;">{{ aula.get_nombre_corto }}</h1>
+    <h3 style="text-align: center;">{{ aula.nivel }}</h3>
 
-<h1 style="text-align: center;">{{ aula.get_nombre_corto }}</h1>
-<h3 style="text-align: center;">{{ aula.nivel }}</h3>
+    <br />
+    <br />
 
-<br />
-<br />
+    <div id="calendar"></div>
+{% endblock contenido %}
 
-<div id="calendar"></div>
 
-<script>
-    $('#calendar').fullCalendar({
-        defaultView: 'agendaWeek',
-        schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
-        lang: 'es',
-        contentHeight: 'auto',
-        eventSources: [
-            {
-                url: '{% url "recurso_eventos_json" aula.id %}',
-                {% if aula.calendar_color %}
-                    color: '{{ aula.calendar_color }}',
-                {% endif %}
-            },
-        ],
-        minTime: '07:00:00',
-    });
-</script>
+{% block fullcalendar_defaultView %}
+    defaultView: 'agendaWeek',
+{% endblock fullcalendar_defaultView %}
+
+
+{% block fullcalendar_eventSources %}
+    {
+        url: '{% url "recurso_eventos_json" aula.id %}',
+        {% if aula.calendar_color %}
+            color: '{{ aula.calendar_color }}',
+        {% endif %}
+    },
 {% endblock %}

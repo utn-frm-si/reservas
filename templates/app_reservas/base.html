@@ -24,7 +24,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    {% block static_js %}{% endblock %}
+    {% block static_js_head %}{% endblock %}
 </head>
 
 <body>
@@ -47,9 +47,13 @@
 <script src='{% static 'bootswatch-dist/js/bootstrap.min.js' %}'></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <!--<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
+{% block static_js_body %}{% endblock %}
+
 <script>
     // Resalta la opción del navbar que está siendo visualizada actualmente.
     $('#navbar a[href="' + location.pathname + '"]').parent('li').addClass('active');
 </script>
+
+{% block scripts %}{% endblock %}
 </body>
 </html>
