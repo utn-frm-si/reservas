@@ -150,6 +150,18 @@
                                                           aria-hidden="true">
                                                     </span>
                                                 </a>
+                                                {% if laboratorio.archivo_ubicacion %}
+                                                    <a role="button"
+                                                       class="btn btn-xs btn-success"
+                                                       data-toggle="tooltip"
+                                                       data-placement="bottom"
+                                                       title="Ubicación"
+                                                       href="{{ laboratorio.archivo_ubicacion.url }}">
+                                                        <span class="glyphicon glyphicon-map-marker"
+                                                              aria-hidden="true">
+                                                        </span>
+                                                    </a>
+                                                {% endif %}
                                             </td>
                                         </tr>
                                     {% endfor %}
