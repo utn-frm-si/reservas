@@ -29,6 +29,7 @@
                 lang: 'es',
                 contentHeight: 'auto',
                 minTime: '07:00:00',
+                nowIndicator: true,
                 {% block fullcalendar_resources %}{% endblock %}
                 eventSources: [
                     {% block fullcalendar_eventSources %}{% endblock %}
@@ -49,17 +50,17 @@
     </script>
 
     <script>
-    $(document).ready(function() {
-        $('.fc-datepickerButton-button').datepicker({
-            format: 'dd/mm/yyyy',
-            language: 'es',
-            daysOfWeekDisabled: '0',
-            autoclose: true,
-            todayHighlight: true
-        })
-            .on('changeDate', function(e) {
-                $('#calendar').fullCalendar('gotoDate', e.date);
-            });
+        $(document).ready(function() {
+            $('.fc-datepickerButton-button').datepicker({
+                format: 'dd/mm/yyyy',
+                language: 'es',
+                daysOfWeekDisabled: '0',
+                autoclose: true,
+                todayHighlight: true
+            })
+                .on('changeDate', function(e) {
+                    $('#calendar').fullCalendar('gotoDate', e.date);
+                });
         });
     </script>
 {% endblock scripts %}
