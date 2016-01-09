@@ -43,7 +43,27 @@
                     left: 'prev,next today datepickerButton',
                     center: 'title',
                     right: '',
-                }
+                },
+                viewRender: function(view, element) {
+                    // Obtiene el objeto asociado al datepicker.
+                    var datepicker = $('.fc-datepickerButton-button');
+                    // Comprueba que el datepicker ya haya sido cargado. Sino, retorna.
+                    if (! datepicker.data('datepicker')) {
+                        return;
+                    };
+                    // Obtiene las fechas establecidas, en el calendario y en el datepicker.
+                    var fechaFullcalendar = new Date(view.intervalStart);
+                    var fechaDatepicker = new Date(datepicker.datepicker('getDate'));
+                    // Crea momentos en base a las fechas, especificadas en UTC.
+                    var momentoFullcalendar = moment(fechaFullcalendar).utc();
+                    var momentoDatepicker = moment(fechaDatepicker).utc();
+                    // Comprueba que los días indicados por ambas fechas sean distintos.
+                    // En caso de serlo, actualiza la fecha del datepicker para que refleje
+                    // correctamente el estado actual del calendario.
+                    if (! momentoFullcalendar.isSame(momentoDatepicker, 'day')) {
+                        datepicker.datepicker('setUTCDate', momentoFullcalendar.toDate());
+                    };
+                },
                 {% block fullcalendar_opciones %}{% endblock %}
             });
         });
