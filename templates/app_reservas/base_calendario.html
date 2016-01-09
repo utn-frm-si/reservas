@@ -64,6 +64,15 @@
                         datepicker.datepicker('setUTCDate', momentoFullcalendar.toDate());
                     };
                 },
+                loading: function(isLoading, view) {
+                    if (isLoading) {
+                        loadingSpinner = $('<i id="calendar_loading_indicator" class="fa fa-2x fa-spinner fa-spin"></i>');
+                        $('.fc-left').append(loadingSpinner);
+                    }
+                    else {
+                        $('#calendar_loading_indicator').remove();
+                    }
+                },
                 {% block fullcalendar_opciones %}{% endblock %}
             });
         });
