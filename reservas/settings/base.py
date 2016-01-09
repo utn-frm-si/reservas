@@ -149,6 +149,7 @@ BOWER_INSTALLED_APPS = (
     'fullcalendar-scheduler',
     'handsontable',
     'jquery',
+    'pace',
 )
 
 # Token de Google Calendar, utilizado para consultar la información de eventos
