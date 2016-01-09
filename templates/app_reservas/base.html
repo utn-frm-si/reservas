@@ -17,6 +17,8 @@
     <link rel="stylesheet" href='{% static 'bootswatch-dist/css/bootstrap.min.css' %}'>
     <!-- Font-Awesome CSS -->
     <link rel="stylesheet" href='{% static 'font-awesome/css/font-awesome.min.css' %}'>
+    <!-- Pace.js theme -->
+    <link rel="stylesheet" href='{% static 'PACE/themes/blue/pace-theme-flash.css' %}'>
 
     {% block static_css %}{% endblock %}
 
@@ -49,6 +51,8 @@
 <script src='{% static 'bootswatch-dist/js/bootstrap.min.js' %}'></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <!--<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
+<!-- Pace.js -->
+<script src='{% static 'PACE/pace.min.js' %}'></script>
 {% block static_js_body %}{% endblock %}
 
 <script>
