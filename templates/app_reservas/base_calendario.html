@@ -37,6 +37,7 @@
                 customButtons: {
                     datepickerButton: {
                         text: 'Calendario',
+                        icon: 'datepicker',
                     }
                 },
                 header: {
@@ -75,6 +76,9 @@
                 },
                 {% block fullcalendar_opciones %}{% endblock %}
             });
+
+            // Añade el ícono personalizado al botón del datepicker.
+            $('.fc-icon-datepicker').append('<i class="fa fa-calendar"></i>')
         });
     </script>
 
