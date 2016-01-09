@@ -1,0 +1,15 @@
+{% extends 'app_reservas/base.html' %}
+{% load static %}
+
+{% block contenido %}
+    <div style="text-align: center;">
+        <iframe src="{% block iframe_src %}{% endblock %}"
+                width="{% block iframe_width %}760{% endblock %}"
+                height="{% block iframe_height %}900{% endblock %}"
+                frameborder="0"
+                marginheight="0"
+                marginwidth="0">
+            Cargando...
+        </iframe>
+    </div>
+{% endblock contenido %}
