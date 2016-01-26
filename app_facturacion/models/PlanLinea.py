@@ -13,7 +13,7 @@ class PlanLinea(models.Model):
 
     # Representación del objeto
     def __str__(self):
-        return '<PlanLinea>: %s' % str(self.id)
+        return '<PlanLinea>: {0!s}'.format(str(self.id))
 
     # Información de la clase
     class Meta:

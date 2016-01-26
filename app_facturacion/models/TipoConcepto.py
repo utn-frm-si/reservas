@@ -10,7 +10,7 @@ class TipoConcepto(models.Model):
 
     # Representación del objeto
     def __str__(self):
-        return '%s' % self.nombre
+        return '{0!s}'.format(self.nombre)
 
     # Información de la clase
     class Meta:

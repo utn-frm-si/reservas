@@ -11,10 +11,10 @@ class ProyectorMultimedia(Recurso):
 
     # Representación del objeto
     def __str__(self):
-        return 'Proyector multimedia: %s' % self.get_nombre_corto()
+        return 'Proyector multimedia: {0!s}'.format(self.get_nombre_corto())
 
     def get_nombre_corto(self):
-        return 'PM-%s' % self.identificador
+        return 'PM-{0!s}'.format(self.identificador)
 
     # Información de la clase
     class Meta:

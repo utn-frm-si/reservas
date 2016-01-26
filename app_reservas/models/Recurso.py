@@ -14,10 +14,10 @@ class Recurso(models.Model):
 
     # Representación del objeto
     def __str__(self):
-        return '%s' % self.get_nombre_corto()
+        return '{0!s}'.format(self.get_nombre_corto())
 
     def get_nombre_corto(self):
-        return 'Recurso: %d' % self.id
+        return 'Recurso: {0:d}'.format(self.id)
 
     def get_eventos(self):
         return obtener_eventos(self.calendar_codigo)

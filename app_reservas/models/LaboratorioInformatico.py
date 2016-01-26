@@ -12,7 +12,7 @@ def establecer_destino_archivo_ubicacion(instance, filename):
     # Almacena el archivo en: 'app_reservas/ubicaciones/laboratorios_informaticos/<alias_del_laboratorio_informatico>.<extension>'
     ruta_archivos_ubicacion = 'app_reservas/ubicaciones/laboratorios_informaticos/'
     extension_archivo = filename.split('.')[-1] if '.' in filename else ''
-    nombre_archivo = '%s.%s' % (slugify(instance.alias), extension_archivo)
+    nombre_archivo = '{0!s}.{1!s}'.format(slugify(instance.alias), extension_archivo)
     return os.path.join(ruta_archivos_ubicacion, nombre_archivo)
 
 
@@ -27,10 +27,10 @@ class LaboratorioInformatico(Recurso):
 
     # Representación del objeto
     def __str__(self):
-        return 'Laboratorio informático: %s' % self.nombre
+        return 'Laboratorio informático: {0!s}'.format(self.nombre)
 
     def get_nombre_corto(self):
-        return '%s (%s)' % (self.nombre, self.alias)
+        return '{0!s} ({1!s})'.format(self.nombre, self.alias)
 
     # FIXME: Método necesario para que la migración funcione correctamente.
     @staticmethod
