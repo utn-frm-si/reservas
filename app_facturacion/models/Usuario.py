@@ -10,7 +10,7 @@ class Usuario(models.Model):
 
     # Representación del objeto
     def __str__(self):
-        return '%s, %s' % (self.apellido, self.nombre)
+        return '{0!s}, {1!s}'.format(self.apellido, self.nombre)
 
     # Información de la clase
     class Meta:

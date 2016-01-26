@@ -12,7 +12,7 @@ def establecer_destino_archivo_ubicacion(instance, filename):
     # Almacena el archivo en: 'app_reservas/ubicaciones/aulas/<nombre_completo_del_aula>.<extension>'
     ruta_archivos_ubicacion = 'app_reservas/ubicaciones/aulas/'
     extension_archivo = filename.split('.')[-1] if '.' in filename else ''
-    nombre_archivo = '%s.%s' % (slugify(str(instance)), extension_archivo)
+    nombre_archivo = '{0!s}.{1!s}'.format(slugify(str(instance)), extension_archivo)
     return os.path.join(ruta_archivos_ubicacion, nombre_archivo)
 
 
@@ -28,12 +28,12 @@ class Aula(Recurso):
 
     # Representación del objeto
     def __str__(self):
-        return '%s - %s' % (self.get_nombre_corto(), self.nivel)
+        return '{0!s} - {1!s}'.format(self.get_nombre_corto(), self.nivel)
 
     def get_nombre_corto(self):
         nombre_corto = ''
         if self.nombre is None or self.nombre == '':
-            nombre_corto = 'Aula %s' % self.numero
+            nombre_corto = 'Aula {0!s}'.format(self.numero)
         else:
             nombre_corto = self.nombre
         return nombre_corto

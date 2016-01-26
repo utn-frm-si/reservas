@@ -9,10 +9,10 @@ class Cuerpo(models.Model):
 
     # Representación del objeto
     def __str__(self):
-        return '%s' % self.get_nombre_corto()
+        return '{0!s}'.format(self.get_nombre_corto())
 
     def get_nombre_corto(self):
-        return 'Cuerpo %s' % self.numero
+        return 'Cuerpo {0!s}'.format(self.numero)
 
     def get_niveles(self):
         return self.nivel_set.order_by('numero')
