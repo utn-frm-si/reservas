@@ -33,7 +33,7 @@ class Aula(Recurso):
     def get_nombre_corto(self):
         nombre_corto = ''
         if self.nombre is None or self.nombre == '':
-            nombre_corto = 'Aula {0!s}'.format(self.numero)
+            nombre_corto = 'Aula {0:d}'.format(self.numero)
         else:
             nombre_corto = self.nombre
         return nombre_corto

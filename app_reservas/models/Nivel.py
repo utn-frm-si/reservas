@@ -14,7 +14,7 @@ class Nivel(models.Model):
         return '{0!s} - {1!s}'.format(self.get_nombre_corto(), self.cuerpo)
 
     def get_nombre_corto(self):
-        return 'Nivel {0!s}'.format(self.numero)
+        return 'Nivel {0:d}'.format(self.numero)
 
     def get_aulas(self):
         return self.aula_set.order_by('numero', 'nombre')

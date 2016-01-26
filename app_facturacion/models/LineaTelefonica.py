@@ -13,7 +13,7 @@ class LineaTelefonica(models.Model):
 
     # Representación del objeto
     def __str__(self):
-        return '{0!s}'.format(str(self.numero))
+        return '{0:d}'.format(self.numero)
 
     # Información de la clase
     class Meta:

@@ -12,7 +12,7 @@ class Cuerpo(models.Model):
         return '{0!s}'.format(self.get_nombre_corto())
 
     def get_nombre_corto(self):
-        return 'Cuerpo {0!s}'.format(self.numero)
+        return 'Cuerpo {0:d}'.format(self.numero)
 
     def get_niveles(self):
         return self.nivel_set.order_by('numero')
