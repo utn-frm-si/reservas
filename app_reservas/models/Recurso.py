@@ -30,7 +30,7 @@ class Recurso(models.Model):
             if primera_iteracion:
                 primera_iteracion = False
             else:
-                eventos_json += ','
+                eventos_json += ',\n'
             evento_str = json.dumps({
                 'title': evento['titulo'],
                 'start': evento['inicio_str'],
