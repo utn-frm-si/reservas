@@ -51,7 +51,7 @@
                     // Comprueba que el datepicker ya haya sido cargado. Sino, retorna.
                     if (! datepicker.data('datepicker')) {
                         return;
-                    };
+                    }
                     // Obtiene las fechas establecidas, en el calendario y en el datepicker.
                     var fechaFullcalendar = new Date(view.intervalStart);
                     var fechaDatepicker = new Date(datepicker.datepicker('getDate'));
@@ -63,7 +63,7 @@
                     // correctamente el estado actual del calendario.
                     if (! momentoFullcalendar.isSame(momentoDatepicker, 'day')) {
                         datepicker.datepicker('setUTCDate', momentoFullcalendar.toDate());
-                    };
+                    }
                 },
                 loading: function(isLoading, view) {
                     if (isLoading) {
@@ -84,12 +84,21 @@
 
     <script>
         $(document).ready(function() {
+            var primer_dia_anio_actual = new Date(new Date().getFullYear(),
+                                                  0,
+                                                  1);
+            var ultimo_dia_anio_siguiente = new Date(new Date().getFullYear() + 1,
+                                                     11,
+                                                     31);
+
             $('.fc-datepickerButton-button').datepicker({
                 format: 'dd/mm/yyyy',
                 language: 'es',
                 daysOfWeekDisabled: '0',
                 autoclose: true,
-                todayHighlight: true
+                todayHighlight: true,
+                startDate: primer_dia_anio_actual,
+                endDate: ultimo_dia_anio_siguiente,
             })
                 .on('changeDate', function(e) {
                     $('#calendar').fullCalendar('gotoDate', e.date);
