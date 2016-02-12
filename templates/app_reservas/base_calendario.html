@@ -20,8 +20,10 @@
 
 {% block scripts %}
     <script>
+        {% block fullcalendar_js_vars %}{% endblock %}
+
         $(document).ready(function() {
-            $('#calendar').fullCalendar({
+            $({% block fullcalendar_container %}'#calendar'{% endblock %}).fullCalendar({
                 {% block fullcalendar_defaultView %}
                     defaultView: 'timelineDay',
                 {% endblock %}
@@ -41,9 +43,11 @@
                     }
                 },
                 header: {
-                    left: 'prev,next today datepickerButton',
-                    center: 'title',
-                    right: '',
+                    {% block fullcalendar_header %}
+                        left: 'prev,next today datepickerButton',
+                        center: 'title',
+                        right: '',
+                    {% endblock %}
                 },
                 viewRender: function(view, element) {
                     // Obtiene el objeto asociado al datepicker.

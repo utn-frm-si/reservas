@@ -108,6 +108,18 @@ def cuerpo_detalle(request, num_cuerpo):
     )
 
 
+def tv_cuerpos(request):
+    # Obtiene todos los cuerpos, ordenados por número.
+    cuerpos = Cuerpo.objects.order_by('numero')
+    return render(
+        request,
+        'app_reservas/tv_cuerpos.html',
+        {
+            'cuerpos': cuerpos,
+        }
+    )
+
+
 def recurso_eventos_json(request, recurso_id):
     # Indica la ruta donde se almacenan los archivos JSON de eventos de recursos.
     ruta_archivos = 'media/app_reservas/eventos_recursos/'

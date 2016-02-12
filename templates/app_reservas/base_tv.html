@@ -1,0 +1,26 @@
+{% extends 'app_reservas/base_calendario.html' %}
+{% load static %}
+
+
+{% block fullcalendar_header %}
+    left: '',
+    center: '',
+    right: '',
+{% endblock %}
+
+
+{% block fullcalendar_js_vars %}
+    var display_hours = 5; // TODO: Parametrizar
+    var previous_hour = new Date().getHours() - 1;
+    var min_hour = Math.min(24 - display_hours, previous_hour);
+    var max_hour = min_hour + display_hours;
+
+    var min_time_string = min_hour.toString() + ':00:00';
+    var max_time_string = max_hour.toString() + ':00:00';
+{% endblock %}
+
+
+{% block fullcalendar_opciones %}
+    minTime: min_time_string,
+    maxTime: max_time_string,
+{% endblock %}

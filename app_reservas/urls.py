@@ -68,4 +68,9 @@ urlpatterns = [
         views.solicitud_material_multimedia,
         name='solicitud_material_multimedia'
     ),
+    url(
+        r'^tv/cuerpos/$',
+        views.tv_cuerpos,
+        name='tv_cuerpos'
+    ),
 ]
