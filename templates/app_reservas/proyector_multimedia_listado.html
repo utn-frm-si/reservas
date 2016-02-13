@@ -3,7 +3,7 @@
 
 {% block title %}
     Proyectores multimedia
-{% endblock %}
+{% endblock title %}
 
 {% block contenido %}
     <h1 style="text-align: center;">Proyectores multimedia</h1>
@@ -86,7 +86,7 @@
             $('[data-toggle="tooltip"]').tooltip()
         });
     </script>
-{% endblock %}
+{% endblock scripts %}
 
 
 {% block fullcalendar_resources %}
@@ -111,4 +111,4 @@
             {% endif %}
         },
     {% endfor %}
-{% endblock %}
+{% endblock fullcalendar_eventSources %}

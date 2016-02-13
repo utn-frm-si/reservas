@@ -3,7 +3,7 @@
 
 {% block title %}
     {{ proyector }}
-{% endblock %}
+{% endblock title %}
 
 {% block contenido %}
     <h1 style="text-align: center;">{{ proyector }}</h1>
@@ -27,4 +27,4 @@
             color: '{{ proyector.calendar_color }}',
         {% endif %}
     },
-{% endblock %}
+{% endblock fullcalendar_eventSources %}

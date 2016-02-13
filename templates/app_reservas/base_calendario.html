@@ -26,7 +26,7 @@
             $({% block fullcalendar_container %}'#calendar'{% endblock %}).fullCalendar({
                 {% block fullcalendar_defaultView %}
                     defaultView: 'timelineDay',
-                {% endblock %}
+                {% endblock fullcalendar_defaultView %}
                 schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
                 lang: 'es',
                 contentHeight: 'auto',
@@ -47,7 +47,7 @@
                         left: 'prev,next today datepickerButton',
                         center: 'title',
                         right: '',
-                    {% endblock %}
+                    {% endblock fullcalendar_header %}
                 },
                 viewRender: function(view, element) {
                     // Obtiene el objeto asociado al datepicker.

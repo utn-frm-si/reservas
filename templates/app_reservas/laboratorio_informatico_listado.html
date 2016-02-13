@@ -3,7 +3,7 @@
 
 {% block title %}
     Laboratorios informáticos
-{% endblock %}
+{% endblock title %}
 
 
 {% block contenido %}
@@ -110,7 +110,7 @@
             $('[data-toggle="tooltip"]').tooltip()
         });
     </script>
-{% endblock %}
+{% endblock scripts %}
 
 
 {% block fullcalendar_resources %}
@@ -135,4 +135,4 @@
             {% endif %}
         },
     {% endfor %}
-{% endblock %}
+{% endblock fullcalendar_eventSources %}
