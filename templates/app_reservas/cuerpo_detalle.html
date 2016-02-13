@@ -3,7 +3,7 @@
 
 {% block title %}
     {{ cuerpo.get_nombre_corto }}
-{% endblock %}
+{% endblock title %}
 
 
 {% block contenido %}
@@ -192,7 +192,7 @@
             $('[data-toggle="tooltip"]').tooltip()
         });
     </script>
-{% endblock %}
+{% endblock scripts %}
 
 
 {% block fullcalendar_resources %}
@@ -247,4 +247,4 @@
             },
         {% endfor %}
     {% endfor %}
-{% endblock %}
+{% endblock fullcalendar_eventSources %}

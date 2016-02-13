@@ -3,7 +3,7 @@
 
 {% block title %}
     {{ aula }}
-{% endblock %}
+{% endblock title %}
 
 
 {% block contenido %}
@@ -29,4 +29,4 @@
             color: '{{ aula.calendar_color }}',
         {% endif %}
     },
-{% endblock %}
+{% endblock fullcalendar_eventSources %}

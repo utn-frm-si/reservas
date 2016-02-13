@@ -6,7 +6,7 @@
     left: '',
     center: '',
     right: '',
-{% endblock %}
+{% endblock fullcalendar_header %}
 
 
 {% block fullcalendar_js_vars %}
@@ -17,10 +17,10 @@
 
     var min_time_string = min_hour.toString() + ':00:00';
     var max_time_string = max_hour.toString() + ':00:00';
-{% endblock %}
+{% endblock fullcalendar_js_vars %}
 
 
 {% block fullcalendar_opciones %}
     minTime: min_time_string,
     maxTime: max_time_string,
-{% endblock %}
+{% endblock fullcalendar_opciones %}
