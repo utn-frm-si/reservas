@@ -1,0 +1,95 @@
+@startuml diagrama_clases.png
+
+title Diagrama de clases
+
+hide circle
+
+package app_reservas <<Frame>> {
+    class Area {
+        ' Atributos
+        + int id
+        + str nombre
+        + str slug
+        ' Métodos
+        + get_aulas(): Aula[]
+    }
+
+    class Recurso {
+        ' Atributos
+        + int id
+        + str calendar_codigo
+        + str calendar_color
+        ' Métodos
+        + get_nombre_corto(): str
+        + get_eventos(): evento[]
+        + get_eventos_json(): str
+    }
+
+    class Aula {
+        ' Atributos
+        + int id
+        + int numero
+        + str nombre
+        + int capacidad
+        + File archivo_ubicacion
+        ' Métodos
+        + get_nombre_corto(): str
+    }
+
+    class Cuerpo {
+        ' Atributos
+        + int id
+        + int numero
+        ' Métodos
+        + get_nombre_corto(): str
+        + get_niveles(): Nivel[]
+    }
+
+    class LaboratorioInformatico {
+        ' Atributos
+        + int id
+        + str nombre
+        + str alias
+        + int capacidad
+        + File archivo_ubicacion
+        ' Métodos
+        + get_nombre_corto(): str
+    }
+
+    class Nivel {
+        ' Atributos
+        + int id
+        + int numero
+        ' Métodos
+        + get_nombre_corto(): str
+        + get_aulas(): Aula[]
+        + get_laboratorios_informaticos(): LaboratorioInformatico[]
+    }
+
+    class ProyectorMultimedia {
+        ' Atributos
+        + int id
+        + str identificador
+        ' Métodos
+        + get_nombre_corto(): str
+    }
+
+
+    ' Relaciones
+
+    Aula "n" --> "m" Area: areas
+    Aula "n" --> "1" Nivel: nivel
+
+    LaboratorioInformatico "n" --> "1" Nivel: nivel
+
+    Nivel "n" --> "1" Cuerpo: cuerpo
+
+
+    ' Herencias
+
+    Recurso <|-- Aula
+    Recurso <|-- LaboratorioInformatico
+    Recurso <|-- ProyectorMultimedia
+}
+
+@enduml
