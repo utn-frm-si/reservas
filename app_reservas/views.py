@@ -109,8 +109,17 @@ def cuerpo_detalle(request, num_cuerpo):
 
 
 def tv_cuerpos(request):
-    # Obtiene todos los cuerpos, ordenados por número.
-    cuerpos = Cuerpo.objects.order_by('numero')
+    # Obtiene por parámetro GET 'numero' los números de cuerpos a mostrar. En
+    # caso de no especificarse, se muestran todos los cuerpos.
+    cuerpos_solicitados = request.GET.getlist('numero')
+
+    if cuerpos_solicitados:
+        # Filtra los cuerpos para obtener los solicitados, ordenados por número.
+        cuerpos = Cuerpo.objects.filter(numero__in=cuerpos_solicitados).order_by('numero')
+    else:
+        # Obtiene todos los cuerpos, ordenados por número.
+        cuerpos = Cuerpo.objects.order_by('numero')
+
     return render(
         request,
         'app_reservas/tv_cuerpos.html',
