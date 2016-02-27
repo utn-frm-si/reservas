@@ -33,8 +33,10 @@
 
 <body>
 
-{% load navbar_tags %}
-{% obtener_informacion_navbar %}
+{% block header %}
+    {% load navbar_tags %}
+    {% obtener_informacion_navbar %}
+{% endblock header %}
 
 <div class="container">
 
