@@ -6,5 +6,8 @@ from app_reservas.models import Aula
 
 
 class AulaDetailView(DetailView):
+    """
+    Vista de detalle para una instancia específica de Aula.
+    """
     model = Aula
     context_object_name = 'aula'

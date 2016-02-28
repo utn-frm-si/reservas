@@ -6,11 +6,19 @@ from app_reservas.models import Cuerpo
 
 
 class TvCuerposListView(ListView):
+    """
+    Vista de lista para la visualización en TV de instancias de Cuerpo, ordenadas por número.
+    """
     model = Cuerpo
     context_object_name = 'cuerpos'
     template_name = 'app_reservas/tv_cuerpos.html'
 
     def get_queryset(self):
+        """
+        Retorna las instancias de Cuerpo cuyo número se encuentra especificado en el parámetro GET
+        'numero' de la URL, o todos los cuerpos en caso de que el parámetro no sea especificado.
+        Los cuerpos son ordenados por número.
+        """
         # Obtiene por parámetro GET 'numero' los números de cuerpos a mostrar. En
         # caso de no especificarse, se muestran todos los cuerpos.
         cuerpos_solicitados = self.request.GET.getlist('numero')

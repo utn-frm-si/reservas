@@ -10,6 +10,14 @@ from app_reservas.models import Recurso
 
 
 def recurso_eventos_json(request, pk):
+    """
+    Retorna en formato JSON una lista de los eventos para una instancia específica de Recurso (cuyo
+    ID está dado por el parámetro 'pk').
+
+    Si se especifican los parámetros GET 'start' y 'end' (ambos con formatos de fecha válidos), los
+    eventos a retornar quedan conformados sólo por aquellos cuya fecha de inicio está contenida en
+    el período especificado.
+    """
     # Indica la ruta donde se almacenan los archivos JSON de eventos de recursos.
     ruta_archivos = 'media/app_reservas/eventos_recursos/'
 

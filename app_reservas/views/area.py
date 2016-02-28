@@ -6,5 +6,8 @@ from app_reservas.models import Area
 
 
 class AreaDetailView(DetailView):
+    """
+    Vista de detalle para una instancia específica de Area.
+    """
     model = Area
     context_object_name = 'area'
