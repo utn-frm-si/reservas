@@ -1,76 +1,92 @@
 from django.conf.urls import url
 
-from . import views
+from .views import (
+    AreaDetailView,
+    AulaDetailView,
+    CuerpoDetailView,
+    IndexView,
+    LaboratorioInformaticoDetailView,
+    LaboratorioInformaticoListView,
+    NivelDetailView,
+    ProyectorMultimediaDetailView,
+    ProyectorMultimediaListView,
+    recurso_eventos_json,
+    SolicitudAulaView,
+    SolicitudLaboratorioInformaticoView,
+    SolicitudMaterialMultimediaView,
+    TvCuerposListView,
+)
+
 
 urlpatterns = [
     url(
         r'^$',
-        views.index,
+        IndexView.as_view(),
         name='index'
     ),
     url(
-        r'^cuerpo_(?P<num_cuerpo>[0-9]+)/$',
-        views.cuerpo_detalle,
+        r'^cuerpo_(?P<numero>\d+)/$',
+        CuerpoDetailView.as_view(),
         name='cuerpo_detalle'
     ),
     url(
-        r'^cuerpo_(?P<num_cuerpo>[0-9]+)/nivel_(?P<num_nivel>-?[0-9]+)/$',
-        views.nivel_detalle,
+        r'^cuerpo_(?P<numero_cuerpo>\d+)/nivel_(?P<numero_nivel>-?\d+)/$',
+        NivelDetailView.as_view(),
         name='nivel_detalle'
     ),
     url(
-        r'^aula/(?P<aula_id>[0-9]+)/$',
-        views.aula_detalle,
+        r'^aula/(?P<pk>\d+)/$',
+        AulaDetailView.as_view(),
         name='aula_detalle'
     ),
     url(
-        r'^area/(?P<slug_area>[A-Za-z0-9]+)/$',
-        views.area_detalle,
+        r'^area/(?P<slug>[-\w]+)/$',
+        AreaDetailView.as_view(),
         name='area_detalle'
     ),
     url(
-        r'^recurso/(?P<recurso_id>[0-9]+)/eventos/$',
-        views.recurso_eventos_json,
+        r'^recurso/(?P<pk>\d+)/eventos/$',
+        recurso_eventos_json,
         name='recurso_eventos_json'
     ),
     url(
         r'^laboratorio_informatico/$',
-        views.laboratorio_informatico_listado,
+        LaboratorioInformaticoListView.as_view(),
         name='laboratorio_informatico_listado'
     ),
     url(
-        r'^laboratorio_informatico/(?P<alias_laboratorio>[A-Za-z0-9]+)/$',
-        views.laboratorio_informatico_detalle,
+        r'^laboratorio_informatico/(?P<alias>[A-Za-z0-9]+)/$',
+        LaboratorioInformaticoDetailView.as_view(),
         name='laboratorio_informatico_detalle'
     ),
     url(
         r'^proyector_multimedia/$',
-        views.proyector_multimedia_listado,
+        ProyectorMultimediaListView.as_view(),
         name='proyector_multimedia_listado'
     ),
     url(
-        r'^proyector_multimedia/(?P<identificador_proyector>[A-Za-z0-9_-]+)/$',
-        views.proyector_multimedia_detalle,
+        r'^proyector_multimedia/(?P<identificador>[A-Za-z0-9_-]+)/$',
+        ProyectorMultimediaDetailView.as_view(),
         name='proyector_multimedia_detalle'
     ),
     url(
         r'^solicitud/aula/$',
-        views.solicitud_aula,
+        SolicitudAulaView.as_view(),
         name='solicitud_aula'
     ),
     url(
         r'^solicitud/laboratorio_informatico/$',
-        views.solicitud_laboratorio_informatico,
+        SolicitudLaboratorioInformaticoView.as_view(),
         name='solicitud_laboratorio_informatico'
     ),
     url(
         r'^solicitud/material_multimedia/$',
-        views.solicitud_material_multimedia,
+        SolicitudMaterialMultimediaView.as_view(),
         name='solicitud_material_multimedia'
     ),
     url(
         r'^tv/cuerpos/$',
-        views.tv_cuerpos,
+        TvCuerposListView.as_view(),
         name='tv_cuerpos'
     ),
 ]
