@@ -1,8 +1,21 @@
 # coding=utf-8
 
+from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
-from app_reservas.models import Cuerpo
+from app_reservas.models import (
+    Area,
+    Cuerpo,
+)
+
+
+class TvAreaDetailView(DetailView):
+    """
+    Vista de detalle para la visualización en TV de una instancia específica de Area.
+    """
+    model = Area
+    context_object_name = 'area'
+    template_name = 'app_reservas/tv_area.html'
 
 
 class TvCuerposListView(ListView):

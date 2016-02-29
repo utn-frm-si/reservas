@@ -17,4 +17,7 @@ from .solicitud import (
     SolicitudLaboratorioInformaticoView,
     SolicitudMaterialMultimediaView,
 )
-from .tv import TvCuerposListView
+from .tv import (
+    TvAreaDetailView,
+    TvCuerposListView,
+)
