@@ -2,7 +2,7 @@
 
 from django.views.generic.detail import DetailView
 
-from app_reservas.models import Aula
+from ..models import Aula
 
 
 class AulaDetailView(DetailView):

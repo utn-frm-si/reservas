@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
-import app_reservas.models.LaboratorioInformatico
+from ..models import LaboratorioInformatico
 
 
 class Migration(migrations.Migration):
@@ -15,6 +15,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='laboratorioinformatico',
             name='archivo_ubicacion',
-            field=models.FileField(upload_to=app_reservas.models.LaboratorioInformatico.establecer_destino_archivo_ubicacion, blank=True),
+            field=models.FileField(upload_to=LaboratorioInformatico.establecer_destino_archivo_ubicacion, blank=True),
         ),
     ]

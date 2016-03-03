@@ -1,7 +1,7 @@
 from django.db.models.signals import post_save
 
-from app_reservas.models import Recurso
-from app_reservas.tasks import obtener_eventos_recurso_especifico
+from ..models import Recurso
+from ..tasks import obtener_eventos_recurso_especifico
 
 
 def obtener_eventos(sender, instance, created, **kwargs):

@@ -5,7 +5,7 @@ from io import TextIOWrapper
 
 from django.shortcuts import render
 
-from app_facturacion.models import Usuario
+from .models import Usuario
 
 
 def index(request):

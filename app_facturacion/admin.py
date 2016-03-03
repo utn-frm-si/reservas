@@ -1,6 +1,14 @@
 from django.contrib import admin
 
-from .models import Area, LineaTelefonica, PlanLinea, TipoConcepto, TipoConceptoRegex, Usuario
+from .models import (
+    Area,
+    LineaTelefonica,
+    PlanLinea,
+    TipoConcepto,
+    TipoConceptoRegex,
+    Usuario,
+)
+
 
 admin.site.register(Area)
 admin.site.register(LineaTelefonica)

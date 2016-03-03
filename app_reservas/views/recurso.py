@@ -6,7 +6,7 @@ from dateutil.parser import parse
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 
-from app_reservas.models import Recurso
+from ..models import Recurso
 
 
 def recurso_eventos_json(request, pk):

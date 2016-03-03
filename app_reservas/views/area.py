@@ -2,7 +2,7 @@
 
 from django.views.generic.detail import DetailView
 
-from app_reservas.models import Area
+from ..models import Area
 
 
 class AreaDetailView(DetailView):

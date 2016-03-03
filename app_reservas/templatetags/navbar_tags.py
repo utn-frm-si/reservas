@@ -1,6 +1,10 @@
 from django import template
 
-from app_reservas.models import Area, Cuerpo
+from ..models import (
+    Area,
+    Cuerpo,
+)
+
 
 register = template.Library()
 
