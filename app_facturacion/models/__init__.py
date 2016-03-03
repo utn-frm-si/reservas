@@ -5,6 +5,7 @@ from .TipoConcepto import TipoConcepto
 from .TipoConceptoRegex import TipoConceptoRegex
 from .Usuario import Usuario
 
+
 __all__ = [
     'Area',
     'LineaTelefonica',

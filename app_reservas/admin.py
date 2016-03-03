@@ -1,6 +1,13 @@
 from django.contrib import admin
 
-from .models import Area, Aula, Cuerpo, LaboratorioInformatico, Nivel, ProyectorMultimedia
+from .models import (
+    Area,
+    Aula,
+    Cuerpo,
+    LaboratorioInformatico,
+    Nivel,
+    ProyectorMultimedia,
+)
 
 
 admin.site.register(Area)

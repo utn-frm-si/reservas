@@ -6,6 +6,7 @@ from .Nivel import Nivel
 from .ProyectorMultimedia import ProyectorMultimedia
 from .Recurso import Recurso
 
+
 __all__ = [
     'Area',
     'Aula',

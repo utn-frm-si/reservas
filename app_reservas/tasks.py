@@ -1,5 +1,8 @@
 import os
-from celery import group, shared_task
+from celery import (
+    group,
+    shared_task,
+)
 
 from .models import Recurso
 
