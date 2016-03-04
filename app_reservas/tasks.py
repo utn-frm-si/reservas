@@ -7,8 +7,6 @@ from celery import (
 )
 import json
 
-from .models import Recurso
-
 
 @shared_task(name='obtener_eventos_recursos')
 def obtener_eventos_recursos():
@@ -18,21 +16,23 @@ def obtener_eventos_recursos():
     # Crea el directorio, en caso de que no exista.
     os.makedirs(ruta_archivos, exist_ok=True)
 
+    # Importación de Recurso, para evitar dependencia circular.
+    from .models import Recurso
     # Obtiene todos los recursos existentes.
     recursos = Recurso.objects.all()
 
-    subtareas = group(obtener_eventos_recurso_especifico.s(recurso, ruta_archivos)
-                      for recurso in recursos)
+    subtareas = group(
+        obtener_eventos_recurso_especifico.s(recurso, ruta_archivos)
+        for recurso in recursos
+    )
     subtareas()
 
 
 @shared_task(name='obtener_eventos_recurso_especifico')
-def obtener_eventos_recurso_especifico(recurso,
-                                       ruta_archivos='media/app_reservas/eventos_recursos/'):
-    # Verifica que el objeto recibido sea una instancia de Recurso (o alguna de sus subclases).
-    if not isinstance(recurso, Recurso):
-        return
-
+def obtener_eventos_recurso_especifico(
+    recurso,
+    ruta_archivos='media/app_reservas/eventos_recursos/'
+):
     # Arma el nombre del archivo.
     nombre_archivo = str(recurso.id) + '.json'
     nombre_archivo_completo = ruta_archivos + nombre_archivo
