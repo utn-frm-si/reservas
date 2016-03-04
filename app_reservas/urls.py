@@ -5,6 +5,8 @@ from .views import (
     AulaDetailView,
     CuerpoDetailView,
     IndexView,
+    LaboratorioElectronicaDetailView,
+    LaboratorioElectronicaListView,
     LaboratorioInformaticoDetailView,
     LaboratorioInformaticoListView,
     NivelDetailView,
@@ -49,6 +51,16 @@ urlpatterns = [
         r'^recurso/(?P<pk>\d+)/eventos/$',
         recurso_eventos_json,
         name='recurso_eventos_json'
+    ),
+    url(
+        r'^laboratorios/electronica/$',
+        LaboratorioElectronicaListView.as_view(),
+        name='laboratorio_electronica_listado'
+    ),
+    url(
+        r'^laboratorio/electronica/(?P<alias>[A-Za-z0-9]+)/$',
+        LaboratorioElectronicaDetailView.as_view(),
+        name='laboratorio_electronica_detalle'
     ),
     url(
         r'^laboratorios/informatica/$',

@@ -1,0 +1,29 @@
+{% extends 'app_reservas/base_calendario.html' %}
+{% load static %}
+
+{% block title %}
+    {{ laboratorio }}
+{% endblock title %}
+
+
+{% block contenido %}
+    <h1 style="text-align: center;">{{ laboratorio }}</h1>
+    <h3 style="text-align: center;">{{ laboratorio.nivel }}</h3>
+
+    <div id="calendar" class="calendar"></div>
+{% endblock contenido %}
+
+
+{% block fullcalendar_defaultView %}
+    defaultView: 'agendaWeek',
+{% endblock fullcalendar_defaultView %}
+
+
+{% block fullcalendar_eventSources %}
+    {
+        url: '{% url "recurso_eventos_json" laboratorio.id %}',
+        {% if laboratorio.calendar_color %}
+            color: '{{ laboratorio.calendar_color }}',
+        {% endif %}
+    },
+{% endblock fullcalendar_eventSources %}
