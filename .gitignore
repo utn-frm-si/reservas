@@ -1,8 +1,16 @@
 # Directorio de componentes instalados por Django-Bower.
 /components
 
+# Directorio de media.
+/media
+
 # Variables de entorno utilizadas por Docker.
 environment.txt
+
+# Archivos temporales de Celery Beat.
+celerybeat*.bak
+celerybeat*.dat
+celerybeat*.dir
 
 ##########
 # Python #
