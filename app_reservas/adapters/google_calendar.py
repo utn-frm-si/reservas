@@ -3,11 +3,19 @@
 from apiclient import discovery
 from datetime import datetime
 from dateutil import parser
+from httplib2 import ServerNotFoundError
 
 from reservas.settings.base import GOOGLE_CALENDAR_TOKEN
 
 
 def crear_servicio():
+    """Construye un servicio para comunicarse con la API de Google Calendar.
+
+    Returns
+    -------
+    object
+        Objeto que proporciona el servicio de comunicación con la API de Google Calendar.
+    """
     return discovery.build('calendar', 'v3', developerKey=GOOGLE_CALENDAR_TOKEN)
 
 
@@ -16,14 +24,34 @@ def get_fecha_actual():
     return now
 
 
-def generar_lista_eventos(eventos):
+def generar_lista_eventos(calendar_id, limite_anio_siguiente=True):
+    """Genera el listado de eventos de un calendario específico de Google Calendar.
+
+    Retorna el listado de eventos de un calendario específico de Google Calendar, con la
+    información requerida por la aplicación. En caso de que se produzca algún problema de conexión
+    a Google Calendar, no se retorna ningún evento.
+
+    Parameters
+    ----------
+    calendar_id : str
+        ID de calendario de Google Calendar.
+    limite_anio_siguiente : bool, optional
+        Variable que especifica que los eventos a obtener comprendan únicamente a aquellos del año
+        actual y el año próximo. En caso de ser falso, se obtienen todos los eventos del
+        calendario, sin considerar la fecha de los mismos. Por defecto, es verdadero.
+
+    Returns
+    -------
+    list of dicts
+        Lista de eventos, organizados como diccionarios.
+    """
     lista_eventos = []
 
+    # Obtiene de Google Calendar los eventos del calendario.
+    eventos = obtener_eventos(calendar_id, limite_anio_siguiente)
+
     for evento in eventos:
-        if 'summary' in evento:
-            titulo = evento['summary']
-        else:
-            titulo = u'Evento sin título'
+        titulo = evento.get('summary', u'Evento sin título')
         inicio = evento['start'].get('dateTime', evento['start'].get('date'))
         fin = evento['end'].get('dateTime', evento['end'].get('date'))
         inicio = parser.parse(inicio)
@@ -42,6 +70,26 @@ def generar_lista_eventos(eventos):
 
 
 def obtener_eventos(calendar_id, limite_anio_siguiente=True):
+    """Obtiene de Google Calendar los eventos de un calendario específico.
+
+    Retorna los eventos de un calendario específico, solicitados a la API de Google Calendar. En
+    caso de que se produzca algún problema de conexión a Google Calendar, no se retorna ningún
+    evento.
+
+    Parameters
+    ----------
+    calendar_id : str
+        ID de calendario de Google Calendar.
+    limite_anio_siguiente : bool, optional
+        Variable que especifica que los eventos a obtener comprendan únicamente a aquellos del año
+        actual y el año próximo. En caso de ser falso, se obtienen todos los eventos del
+        calendario, sin considerar la fecha de los mismos. Por defecto, es verdadero.
+
+    Returns
+    -------
+    list of dicts
+        Lista de eventos, organizados como diccionarios.
+    """
     service = crear_servicio()
 
     primer_dia_anio_actual = None
@@ -61,34 +109,33 @@ def obtener_eventos(calendar_id, limite_anio_siguiente=True):
 
     eventos = []
     page_token = None
-    while True:
-        events_result = service.events().list(
-            calendarId=calendar_id,
-            maxResults=2500,
-            singleEvents=True,
-            timeMin=primer_dia_anio_actual,
-            timeMax=primer_dia_anio_subsiguiente,
-            pageToken=page_token,
-            orderBy='startTime'
-        ).execute()
 
+    while True:
+        try:
+            # Realiza la petición de eventos del calendario a Google Calendar.
+            events_result = service.events().list(
+                calendarId=calendar_id,
+                maxResults=2500,
+                singleEvents=True,
+                timeMin=primer_dia_anio_actual,
+                timeMax=primer_dia_anio_subsiguiente,
+                pageToken=page_token,
+                orderBy='startTime'
+            ).execute()
+        except ServerNotFoundError:
+            # En caso de problemas de conexión a Google Calendar, no se retorna ningún evento.
+            eventos = []
+            break
+
+        # Añade los eventos obtenidos de la petición al listado de eventos.
         eventos.extend(events_result.get('items', []))
+
+        # Se recupera el token de página retornado por la petición a Google Calendar. Este token,
+        # en caso de estar especificado, indica que se debe realizar otra petición para obtener una
+        # nueva página de eventos para el calendario.
         page_token = events_result.get('nextPageToken')
+        # Si no se obtuvo token de página, se ha finalizado con la obtención de eventos.
         if not page_token:
             break
 
-    return generar_lista_eventos(eventos)
-
-
-def obtener_eventos_dia(calendar_id):
-    service = crear_servicio()
-
-    events_result = service.events().list(
-        calendarId=calendar_id,
-        timeMin=get_fecha_actual(),
-        singleEvents=True,
-        orderBy='startTime'
-    ).execute()
-
-    eventos = events_result.get('items', [])
-    return generar_lista_eventos(eventos)
+    return eventos

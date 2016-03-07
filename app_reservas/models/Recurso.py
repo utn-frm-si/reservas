@@ -4,7 +4,7 @@ import json
 
 from django.db import models
 
-from ..adapters.google_calendar import obtener_eventos
+from ..adapters.google_calendar import generar_lista_eventos
 
 
 class Recurso(models.Model):
@@ -20,7 +20,7 @@ class Recurso(models.Model):
         return 'Recurso: {0:d}'.format(self.id)
 
     def get_eventos(self):
-        return obtener_eventos(self.calendar_codigo)
+        return generar_lista_eventos(self.calendar_codigo)
 
     def get_eventos_json(self):
         eventos = self.get_eventos()
