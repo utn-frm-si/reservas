@@ -3,6 +3,7 @@ from celery import (
     group,
     shared_task,
 )
+import json
 
 from .models import Recurso
 
@@ -24,12 +25,21 @@ def obtener_eventos_recursos():
 
 @shared_task(name='obtener_eventos_recurso_especifico')
 def obtener_eventos_recurso_especifico(recurso, ruta_archivos='media/app_reservas/eventos_recursos/'):
-    if isinstance(recurso, Recurso):
-        # Arma el nombre del archivo.
-        nombre_archivo = str(recurso.id) + '.json'
-        nombre_archivo_completo = ruta_archivos + nombre_archivo
+    # Verifica que el objeto recibido sea una instancia de Recurso (o alguna de sus subclases).
+    if not isinstance(recurso, Recurso):
+        return
 
+    # Arma el nombre del archivo.
+    nombre_archivo = str(recurso.id) + '.json'
+    nombre_archivo_completo = ruta_archivos + nombre_archivo
+
+    # Obtiene los eventos del recurso en formato JSON.
+    eventos = recurso.get_eventos_json()
+
+    # Verifica que se hayan obtenido eventos, ya que en caso de no obtenerse por algún problema de
+    # conexión, no debe sobrescribirse el archivo de eventos del recurso.
+    if len(json.loads(eventos)) > 0:
         # Crea o sobrescribe el archivo del recurso actual.
         with open(nombre_archivo_completo, 'w') as archivo:
             # Escribe en el archivo los eventos del recurso, en formato JSON.
-            archivo.write(recurso.get_eventos_json())
+            archivo.write(eventos)
