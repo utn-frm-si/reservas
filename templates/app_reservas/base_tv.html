@@ -16,6 +16,8 @@
 
 
 {% block static_css %}
+    {{ block.super }}
+
     <link rel="stylesheet" href='{% static 'apps/reservas/css/tv.css' %}'>
 {% endblock static_css %}
 
@@ -45,6 +47,6 @@
 {% block fullcalendar_opciones %}
     minTime: min_time_string,
     maxTime: max_time_string,
-    eventBackgroundColor: '#087830',
-    eventBorderColor: '#4CBB17',
+    eventBackgroundColor: '#4CBB17',
+    eventBorderColor: '#087830',
 {% endblock fullcalendar_opciones %}
