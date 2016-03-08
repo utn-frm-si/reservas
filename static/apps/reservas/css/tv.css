@@ -1,0 +1,23 @@
+/* Cuerpo de página */
+body {
+    /* Color de fondo de la página: Dark Gray */
+    background-color: #A9A9A9;
+    /* Color del texto de la página: Blanco */
+    color: white;
+}
+
+/* Calendarios */
+div.fc-view-container {
+    /* Color de fondo de los calendarios: Steel Blue */
+    background-color: #4682B4;
+}
+
+/* Eventos de calendario */
+.fc-event {
+    /* Tamaño normal de la fuente de los eventos */
+    font-size: 1em;
+    /* Fuente de los eventos en negrita */
+    font-weight: bold;
+    /* Fuente de los eventos sin subrayado */
+    text-decoration: none !important;
+}
