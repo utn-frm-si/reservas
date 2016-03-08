@@ -38,7 +38,7 @@ def obtener_eventos_recurso_especifico(recurso, ruta_archivos='media/app_reserva
 
     # Verifica que se hayan obtenido eventos, ya que en caso de no obtenerse por algún problema de
     # conexión, no debe sobrescribirse el archivo de eventos del recurso.
-    if len(json.loads(eventos)) > 0:
+    if json.loads(eventos):
         # Crea o sobrescribe el archivo del recurso actual.
         with open(nombre_archivo_completo, 'w') as archivo:
             # Escribe en el archivo los eventos del recurso, en formato JSON.
