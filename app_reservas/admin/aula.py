@@ -21,6 +21,12 @@ class AulaAdmin(admin.ModelAdmin):
         'calendar_color',
     )
 
+    list_filter = (
+        'nivel',
+        'nivel__cuerpo',
+        'areas',
+    )
+
     def _nombre(self, obj):
         """
         Obtiene el nombre de la instancia.
