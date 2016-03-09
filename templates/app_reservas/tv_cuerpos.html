@@ -18,96 +18,85 @@
 {% endblock contenido %}
 
 
-{% block fullcalendar_container %}
-    '.calendar'
-{% endblock fullcalendar_container %}
-
-
-{% block fullcalendar_resources %}
-    resourceColumns: [
-        {
-            group: true,
-            labelText: 'Nivel',
-            field: 'nivel'
-        },
-        {
-            labelText: 'Recurso',
-            field: 'title'
-        },
-    ],
-    resources: [
-        {% for cuerpo in cuerpos %}
-            {% for nivel in cuerpo.get_niveles %}
-                {% for aula in nivel.get_aulas %}
-                    {
-                        id: '{{ aula.id }}',
-                        nivel: '{{ nivel.get_nombre_corto }}',
-                        title: '{{ aula.get_nombre_corto }}',
-                    },
-                {% endfor %}
-                {% for laboratorio in nivel.get_laboratorios_informaticos %}
-                    {
-                        id: '{{ laboratorio.id }}',
-                        nivel: '{{ nivel.get_nombre_corto }}',
-                        title: '{{ laboratorio.get_nombre_corto }}',
-                    },
-                {% endfor %}
-            {% endfor %}
-        {% endfor %}
-    ],
-{% endblock fullcalendar_resources %}
-
-
-{% block fullcalendar_eventSources %}
-    {% for cuerpo in cuerpos %}
-        {% for nivel in cuerpo.get_niveles %}
-            {% for aula in nivel.get_aulas %}
-                {
-                    url: '{% url "recurso_eventos_json" aula.id %}',
-                    {% if aula.calendar_color %}
-                        color: '{{ aula.calendar_color }}',
-                    {% endif %}
-                },
-            {% endfor %}
-            {% for laboratorio in nivel.get_laboratorios_informaticos %}
-                {
-                    url: '{% url "recurso_eventos_json" laboratorio.id %}',
-                    {% if laboratorio.calendar_color %}
-                        color: '{{ laboratorio.calendar_color }}',
-                    {% endif %}
-                },
-            {% endfor %}
-        {% endfor %}
-    {% endfor %}
-{% endblock fullcalendar_eventSources %}
-
-
 {% block scripts %}
-    {{ block.super }}
-
     <script>
+        {% block fullcalendar_js_vars %}
+            {{ block.super }}
+        {% endblock fullcalendar_js_vars %}
+
         $(document).ready(function() {
-            // Quita de cada calendario los recursos correspondientes a un cuerpo distinto.
-            $('.calendar').each(function () {
-                // Obtiene el ID del calendario.
-                var calendar_id = $(this).attr('id');
-                // Remueve del calendario los recursos que no pertenecen al calendario del cuerpo
-                // actual.
-                {% for cuerpo in cuerpos %}
-                    {% for nivel in cuerpo.get_niveles %}
-                        {% for recurso in nivel.get_aulas %}
-                            if (calendar_id != 'calendar_cuerpo_{{ cuerpo.numero }}') {
-                                $(this).fullCalendar('removeResource', {{ recurso.id }});
-                            }
+            {% for cuerpo in cuerpos %}
+                $("#calendar_cuerpo_{{ cuerpo.numero }}").fullCalendar({
+                    {% block fullcalendar_defaultView %}
+                        {{ block.super }}
+                    {% endblock fullcalendar_defaultView %}
+                    schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
+                    lang: 'es',
+                    contentHeight: 'auto',
+                    minTime: '07:00:00',
+                    nowIndicator: true,
+                    resourceColumns: [
+                        {
+                            group: true,
+                            labelText: 'Nivel',
+                            field: 'nivel'
+                        },
+                        {
+                            labelText: 'Recurso',
+                            field: 'title'
+                        },
+                    ],
+                    resources: [
+                        {% for nivel in cuerpo.get_niveles %}
+                            {% for aula in nivel.get_aulas %}
+                                {
+                                    id: '{{ aula.id }}',
+                                    nivel: '{{ nivel.get_nombre_corto }}',
+                                    title: '{{ aula.get_nombre_corto }}',
+                                },
+                            {% endfor %}
+                            {% for laboratorio in nivel.get_laboratorios_informaticos %}
+                                {
+                                    id: '{{ laboratorio.id }}',
+                                    nivel: '{{ nivel.get_nombre_corto }}',
+                                    title: '{{ laboratorio.get_nombre_corto }}',
+                                },
+                            {% endfor %}
                         {% endfor %}
-                        {% for recurso in nivel.get_laboratorios_informaticos %}
-                            if (calendar_id != 'calendar_cuerpo_{{ cuerpo.numero }}') {
-                                $(this).fullCalendar('removeResource', {{ recurso.id }});
-                            }
+                    ],
+                    eventSources: [
+                        {% for nivel in cuerpo.get_niveles %}
+                            {% for aula in nivel.get_aulas %}
+                                {
+                                    url: '{% url "recurso_eventos_json" aula.id %}',
+                                    {% if aula.calendar_color %}
+                                        color: '{{ aula.calendar_color }}',
+                                    {% endif %}
+                                },
+                            {% endfor %}
+                            {% for laboratorio in nivel.get_laboratorios_informaticos %}
+                                {
+                                    url: '{% url "recurso_eventos_json" laboratorio.id %}',
+                                    {% if laboratorio.calendar_color %}
+                                        color: '{{ laboratorio.calendar_color }}',
+                                    {% endif %}
+                                },
+                            {% endfor %}
                         {% endfor %}
-                    {% endfor %}
-                {% endfor %}
-            });
+                    ],
+                    header: {
+                        {% block fullcalendar_header %}
+                            {{ block.super }}
+                        {% endblock fullcalendar_header %}
+                    },
+                    {% block fullcalendar_loading_callback %}
+                        {{ block.super }}
+                    {% endblock fullcalendar_loading_callback %}
+                    {% block fullcalendar_opciones %}
+                        {{ block.super }}
+                    {% endblock %}
+                });
+            {% endfor %}
         });
     </script>
 {% endblock scripts %}
