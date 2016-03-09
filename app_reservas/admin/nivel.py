@@ -15,6 +15,11 @@ class NivelAdmin(admin.ModelAdmin):
         '_cuerpo',
     )
 
+    list_filter = (
+        'numero',
+        'cuerpo',
+    )
+
     def _cuerpo(self, obj):
         """
         Obtiene el cuerpo asociado a la instancia.
