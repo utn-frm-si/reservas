@@ -20,7 +20,7 @@ class Nivel(models.Model):
         return self.aula_set.order_by('numero', 'nombre')
 
     def get_laboratorios_informaticos(self):
-        return self.laboratorioinformatico_set.order_by('alias')
+        return self.laboratorioinformatico_set.all()
 
     # Información de la clase
     class Meta:

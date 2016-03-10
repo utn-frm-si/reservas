@@ -55,5 +55,5 @@ class AulaAdmin(admin.ModelAdmin):
         """
         Obtiene el listado de áreas asociadas a la instancia.
         """
-        return ", ".join([area.nombre for area in obj.areas.order_by('nombre')])
+        return ", ".join([area.nombre for area in obj.areas.all()])
     _areas.short_description = 'Áreas'

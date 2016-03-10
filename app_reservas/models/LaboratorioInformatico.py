@@ -40,5 +40,6 @@ class LaboratorioInformatico(Recurso):
     # Información de la clase
     class Meta:
         app_label = 'app_reservas'
+        ordering = ['alias']
         verbose_name = 'Laboratorio informático'
         verbose_name_plural = 'Laboratorios informáticos'

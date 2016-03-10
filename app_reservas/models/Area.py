@@ -18,5 +18,6 @@ class Area(models.Model):
     # Información de la clase
     class Meta:
         app_label = 'app_reservas'
+        ordering = ['nombre']
         verbose_name = 'Área'
         verbose_name_plural = 'Áreas'
