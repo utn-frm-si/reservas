@@ -12,7 +12,7 @@ register = template.Library()
 @register.inclusion_tag('app_reservas/navbar.html')
 def obtener_informacion_navbar():
     context = {
-        'lista_cuerpos': Cuerpo.objects.order_by('numero'),
-        'lista_areas': Area.objects.order_by('nombre'),
+        'lista_cuerpos': Cuerpo.objects.all(),
+        'lista_areas': Area.objects.all(),
     }
     return context

@@ -20,5 +20,6 @@ class Cuerpo(models.Model):
     # Información de la clase
     class Meta:
         app_label = 'app_reservas'
+        ordering = ['numero']
         verbose_name = 'Cuerpo'
         verbose_name_plural = 'Cuerpos'

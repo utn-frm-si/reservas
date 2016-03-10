@@ -43,5 +43,6 @@ class TvCuerposListView(ListView):
             # Obtiene todos los cuerpos.
             cuerpos = Cuerpo.objects
 
-        # Retorna los cuerpos, ordenados por número.
-        return cuerpos.order_by('numero')
+        # Retorna los cuerpos, ordenados por número (el ordenamiento está definido a nivel de
+        # modelo).
+        return cuerpos.all()

@@ -19,5 +19,6 @@ class ProyectorMultimedia(Recurso):
     # Información de la clase
     class Meta:
         app_label = 'app_reservas'
+        ordering = ['identificador']
         verbose_name = 'Proyector multimedia'
         verbose_name_plural = 'Proyectores multimedia'
