@@ -26,12 +26,12 @@ urlpatterns = [
         name='index'
     ),
     url(
-        r'^cuerpo_(?P<numero>\d+)/$',
+        r'^cuerpo/(?P<numero>\d+)/$',
         CuerpoDetailView.as_view(),
         name='cuerpo_detalle'
     ),
     url(
-        r'^cuerpo_(?P<numero_cuerpo>\d+)/nivel_(?P<numero_nivel>-?\d+)/$',
+        r'^cuerpo/(?P<numero_cuerpo>\d+)/nivel/(?P<numero_nivel>-?\d+)/$',
         NivelDetailView.as_view(),
         name='nivel_detalle'
     ),
@@ -51,22 +51,22 @@ urlpatterns = [
         name='recurso_eventos_json'
     ),
     url(
-        r'^laboratorio_informatico/$',
+        r'^laboratorios/informatica/$',
         LaboratorioInformaticoListView.as_view(),
         name='laboratorio_informatico_listado'
     ),
     url(
-        r'^laboratorio_informatico/(?P<alias>[A-Za-z0-9]+)/$',
+        r'^laboratorio/informatica/(?P<alias>[A-Za-z0-9]+)/$',
         LaboratorioInformaticoDetailView.as_view(),
         name='laboratorio_informatico_detalle'
     ),
     url(
-        r'^proyector_multimedia/$',
+        r'^proyectores/$',
         ProyectorMultimediaListView.as_view(),
         name='proyector_multimedia_listado'
     ),
     url(
-        r'^proyector_multimedia/(?P<identificador>[A-Za-z0-9_-]+)/$',
+        r'^proyector/(?P<identificador>[A-Za-z0-9_-]+)/$',
         ProyectorMultimediaDetailView.as_view(),
         name='proyector_multimedia_detalle'
     ),
@@ -76,7 +76,7 @@ urlpatterns = [
         name='solicitud_aula'
     ),
     url(
-        r'^solicitud/laboratorio_informatico/$',
+        r'^solicitud/laboratorio/informatica/$',
         SolicitudLaboratorioInformaticoView.as_view(),
         name='solicitud_laboratorio_informatico'
     ),
