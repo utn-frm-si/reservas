@@ -6,6 +6,25 @@ body {
     color: white;
 }
 
+/* Cuerpos */
+.cuerpo {
+    /* Elemento no visible por defecto */
+    opacity: 0;
+    /* Elementos solapados al inicio de la página */
+    position: absolute;
+    /* Márgenes laterales */
+    left: 10px;
+    right: 10px;
+}
+
+/* Cuerpo visible */
+.cuerpo-visible {
+    /* Visibilidad del elemento */
+    opacity: 1 !important;
+    /* Efecto de la transición */
+    transition: all 1s ease-in-out;
+}
+
 /* Calendarios */
 div.fc-view-container {
     /* Color de fondo de los calendarios: Steel Blue */
