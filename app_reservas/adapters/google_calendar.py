@@ -19,11 +19,6 @@ def crear_servicio():
     return discovery.build('calendar', 'v3', developerKey=GOOGLE_CALENDAR_TOKEN)
 
 
-def get_fecha_actual():
-    now = datetime.utcnow().isoformat() + 'Z'
-    return now
-
-
 def generar_lista_eventos(calendar_id, limite_anio_siguiente=True):
     """Genera el listado de eventos de un calendario específico de Google Calendar.
 
@@ -57,14 +52,15 @@ def generar_lista_eventos(calendar_id, limite_anio_siguiente=True):
         inicio = parser.parse(inicio)
         fin = parser.parse(fin)
 
-        evento = {
-            'titulo': titulo,
-            'inicio': inicio,
-            'fin': fin,
-            'inicio_str': inicio.strftime("%Y-%m-%dT%H:%M:%S"),
-            'fin_str': fin.strftime("%Y-%m-%dT%H:%M:%S"),
-        }
-        lista_eventos.append(evento)
+        lista_eventos.append(
+            {
+                'titulo': titulo,
+                'inicio': inicio,
+                'fin': fin,
+                'inicio_str': inicio.strftime("%Y-%m-%dT%H:%M:%S"),
+                'fin_str': fin.strftime("%Y-%m-%dT%H:%M:%S"),
+            }
+        )
 
     return lista_eventos
 
