@@ -18,6 +18,6 @@ from .solicitud import (
     SolicitudMaterialMultimediaView,
 )
 from .tv import (
-    TvAreaDetailView,
+    TvBedeliaDetailView,
     TvCuerposListView,
 )
