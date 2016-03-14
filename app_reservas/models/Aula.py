@@ -31,11 +31,7 @@ class Aula(Recurso):
         return '{0!s} - {1!s}'.format(self.get_nombre_corto(), self.nivel)
 
     def get_nombre_corto(self):
-        nombre_corto = ''
-        if self.nombre is None or self.nombre == '':
-            nombre_corto = 'Aula {0:d}'.format(self.numero)
-        else:
-            nombre_corto = self.nombre
+        nombre_corto = self.nombre or 'Aula {0:d}'.format(self.numero)
         return nombre_corto
 
     # FIXME: Método necesario para que la migración funcione correctamente.
