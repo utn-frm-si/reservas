@@ -2,7 +2,7 @@
 
 from django.db import models
 
-from .Recurso import Recurso
+from .recurso import Recurso
 
 
 class ProyectorMultimedia(Recurso):
