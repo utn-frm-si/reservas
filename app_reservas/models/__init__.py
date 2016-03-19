@@ -1,10 +1,10 @@
-from .Area import Area
-from .Aula import Aula
-from .Cuerpo import Cuerpo
-from .LaboratorioInformatico import LaboratorioInformatico
-from .Nivel import Nivel
-from .ProyectorMultimedia import ProyectorMultimedia
-from .Recurso import Recurso
+from .area import Area
+from .aula import Aula
+from .cuerpo import Cuerpo
+from .laboratorioInformatico import LaboratorioInformatico
+from .nivel import Nivel
+from .proyectorMultimedia import ProyectorMultimedia
+from .recurso import Recurso
 
 
 __all__ = [

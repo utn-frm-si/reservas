@@ -5,7 +5,7 @@ import os
 from django.db import models
 from django.template.defaultfilters import slugify
 
-from .Recurso import Recurso
+from .recurso import Recurso
 
 
 def establecer_destino_archivo_ubicacion(instance, filename):
@@ -31,11 +31,6 @@ class LaboratorioInformatico(Recurso):
 
     def get_nombre_corto(self):
         return '{0!s} ({1!s})'.format(self.nombre, self.alias)
-
-    # FIXME: Método necesario para que la migración funcione correctamente.
-    @staticmethod
-    def establecer_destino_archivo_ubicacion(instance, filename):
-        return establecer_destino_archivo_ubicacion(instance, filename)
 
     # Información de la clase
     class Meta:

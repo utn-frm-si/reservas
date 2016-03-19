@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
-from ..models import Aula
+from ..models import aula
 
 
 class Migration(migrations.Migration):
@@ -15,6 +15,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='aula',
             name='archivo_ubicacion',
-            field=models.FileField(blank=True, upload_to=Aula.establecer_destino_archivo_ubicacion),
+            field=models.FileField(blank=True, upload_to=aula.establecer_destino_archivo_ubicacion),
         ),
     ]
