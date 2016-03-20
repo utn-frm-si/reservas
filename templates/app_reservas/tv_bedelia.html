@@ -2,12 +2,12 @@
 {% load static %}
 
 {% block title %}
-    {{ bedelia }}
+    Departamento de {{ bedelia.area }}
 {% endblock title %}
 
 
 {% block contenido %}
-        <h2 style="text-align: center;">{{ bedelia }}</h2>
+        <h2 style="text-align: center;">Departamento de {{ bedelia.area }}</h2>
 
         {% for recurso in bedelia.get_recursos %}
             <div id="calendar_{{ recurso.slug }}" class="calendar"></div>
