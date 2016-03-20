@@ -8,9 +8,9 @@ from .laboratorioInformatico import LaboratorioInformatico
 
 class Bedelia(models.Model):
     # Relaciones
-    area = models.ForeignKey('Area')
-    aulas = models.ManyToManyField('Aula')
-    laboratorios_informatica = models.ManyToManyField('LaboratorioInformatico')
+    area = models.OneToOneField('Area')
+    aulas = models.ManyToManyField('Aula', blank=True)
+    laboratorios_informatica = models.ManyToManyField('LaboratorioInformatico', blank=True)
 
     class Meta:
         """
