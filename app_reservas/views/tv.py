@@ -1,21 +1,29 @@
 # coding=utf-8
 
+from django.shortcuts import get_object_or_404
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
 from ..models import (
-    Area,
+    Bedelia,
     Cuerpo,
 )
 
 
-class TvAreaDetailView(DetailView):
+class TvBedeliaDetailView(DetailView):
     """
-    Vista de detalle para la visualización en TV de una instancia específica de Area.
+    Vista de detalle para la visualización en TV de una instancia específica de Bedelia.
     """
-    model = Area
-    context_object_name = 'area'
-    template_name = 'app_reservas/tv_area.html'
+    model = Bedelia
+    context_object_name = 'bedelia'
+    template_name = 'app_reservas/tv_bedelia.html'
+
+    def get_object(self, **kwargs):
+        """
+        Retorna la instancia de Bedelia que tiene asociada el área cuyo slug concuerda con el
+        parámetro 'area_slug' de la URL, o una respuesta 404 en caso de ser inválido.
+        """
+        return get_object_or_404(Bedelia, area__slug=self.kwargs['area_slug'])
 
 
 class TvCuerposListView(ListView):

@@ -36,6 +36,11 @@ package app_reservas <<Frame>> {
         + get_nombre_corto(): str
     }
 
+    class Bedelia {
+        ' Atributos
+        + int id
+    }
+
     class Cuerpo {
         ' Atributos
         + int id
@@ -79,6 +84,10 @@ package app_reservas <<Frame>> {
 
     Aula "n" --> "m" Area: areas
     Aula "n" --> "1" Nivel: nivel
+
+    Bedelia "n" --> "1" Area: area
+    Bedelia "n" -> "m" Aula: aulas
+    Bedelia "n" -> "m" LaboratorioInformatico: laboratorios_informatica
 
     LaboratorioInformatico "n" --> "1" Nivel: nivel
 

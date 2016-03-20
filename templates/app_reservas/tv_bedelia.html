@@ -1,0 +1,72 @@
+{% extends 'app_reservas/base_tv.html' %}
+{% load static %}
+
+{% block title %}
+    {{ bedelia }}
+{% endblock title %}
+
+
+{% block contenido %}
+        <h2 style="text-align: center;">{{ bedelia }}</h2>
+
+        {% for recurso in bedelia.get_recursos %}
+            <div id="calendar_{{ recurso.slug }}" class="calendar"></div>
+        {% endfor %}
+{% endblock contenido %}
+
+
+{% block scripts %}
+    <script>
+        {% block fullcalendar_js_vars %}
+            {{ block.super }}
+        {% endblock fullcalendar_js_vars %}
+
+        $(document).ready(function() {
+            {% for recurso in bedelia.get_recursos %}
+                $("#calendar_{{ recurso.slug }}").fullCalendar({
+                    {% block fullcalendar_defaultView %}
+                        {{ block.super }}
+                    {% endblock fullcalendar_defaultView %}
+                    schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
+                    lang: 'es',
+                    contentHeight: 'auto',
+                    minTime: '07:00:00',
+                    nowIndicator: true,
+                    resourceLabelText: "{{ recurso.nombre_singular }}",
+                    resources: [
+                        {% for elemento in recurso.elementos %}
+                            {
+                                id: '{{ elemento.id }}',
+                                title: '{{ elemento }}',
+                            },
+                        {% endfor %}
+                    ],
+                    eventSources: [
+                        {% for elemento in recurso.elementos %}
+                            {
+                                url: '{% url "recurso_eventos_json" elemento.id %}',
+                                {% if elemento.calendar_color %}
+                                    color: '{{ elemento.calendar_color }}',
+                                {% endif %}
+                            },
+                        {% endfor %}
+                    ],
+                    header: {
+                        {% block fullcalendar_header %}
+                            left: '',
+                            center: 'title',
+                            right: '',
+                        {% endblock fullcalendar_header %}
+                    },
+                    titleFormat: "[{{ recurso.nombre_plural }}]",
+                    {% block fullcalendar_loading_callback %}
+                        {{ block.super }}
+                    {% endblock fullcalendar_loading_callback %}
+                    {% block fullcalendar_opciones %}
+                        {{ block.super }}
+                    {% endblock %}
+                });
+            {% endfor %}
+        });
+    </script>
+{% endblock scripts %}
