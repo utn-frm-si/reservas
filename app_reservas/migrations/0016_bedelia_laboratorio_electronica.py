@@ -8,6 +8,7 @@ class Migration(migrations.Migration):
     """
     Creación de relación entre Bedelia y LaboratorioElectronica.
     """
+
     dependencies = [
         ('app_reservas', '0015_clase_laboratorio_electronica'),
     ]

@@ -17,7 +17,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Bedelia',
             fields=[
-                ('id', models.AutoField(auto_created=True, verbose_name='ID', primary_key=True, serialize=False)),
+                ('id', models.AutoField(auto_created=True,
+                                        verbose_name='ID',
+                                        primary_key=True,
+                                        serialize=False)),
             ],
             options={
                 'verbose_name': 'Bedelía',

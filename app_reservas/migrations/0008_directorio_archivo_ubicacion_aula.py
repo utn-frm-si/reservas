@@ -15,6 +15,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='aula',
             name='archivo_ubicacion',
-            field=models.FileField(blank=True, upload_to=aula.establecer_destino_archivo_ubicacion),
+            field=models.FileField(blank=True,
+                                   upload_to=aula.establecer_destino_archivo_ubicacion),
         ),
     ]

@@ -6,4 +6,4 @@ from .production import *
 # producción, y permite determinar el estado del Debug mediante la variable de
 # entorno 'DJANGO_DEBUG'.
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', ''))
-
+TEMPLATES[0]['OPTIONS']['debug'] = DEBUG

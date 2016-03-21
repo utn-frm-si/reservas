@@ -5,6 +5,9 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
+    """
+    Creación inicial de modelos.
+    """
 
     dependencies = [
     ]
@@ -13,14 +16,20 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Area',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', auto_created=True, serialize=False, primary_key=True)),
+                ('id', models.AutoField(verbose_name='ID',
+                                        auto_created=True,
+                                        serialize=False,
+                                        primary_key=True)),
                 ('nombre', models.CharField(max_length=50)),
             ],
         ),
         migrations.CreateModel(
             name='Aula',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', auto_created=True, serialize=False, primary_key=True)),
+                ('id', models.AutoField(verbose_name='ID',
+                                        auto_created=True,
+                                        serialize=False,
+                                        primary_key=True)),
                 ('numero', models.PositiveSmallIntegerField()),
                 ('nombre', models.CharField(blank=True, max_length=50)),
                 ('capacidad', models.PositiveSmallIntegerField()),
@@ -33,14 +42,20 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Cuerpo',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', auto_created=True, serialize=False, primary_key=True)),
+                ('id', models.AutoField(verbose_name='ID',
+                                        auto_created=True,
+                                        serialize=False,
+                                        primary_key=True)),
                 ('numero', models.PositiveSmallIntegerField()),
             ],
         ),
         migrations.CreateModel(
             name='Nivel',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', auto_created=True, serialize=False, primary_key=True)),
+                ('id', models.AutoField(verbose_name='ID',
+                                        auto_created=True,
+                                        serialize=False,
+                                        primary_key=True)),
                 ('numero', models.SmallIntegerField()),
                 ('cuerpo', models.ForeignKey(to='app_reservas.Cuerpo')),
             ],

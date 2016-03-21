@@ -19,12 +19,14 @@ def obtener_eventos_recursos():
     # Obtiene todos los recursos existentes.
     recursos = Recurso.objects.all()
 
-    subtareas = group(obtener_eventos_recurso_especifico.s(recurso, ruta_archivos) for recurso in recursos)
+    subtareas = group(obtener_eventos_recurso_especifico.s(recurso, ruta_archivos)
+                      for recurso in recursos)
     subtareas()
 
 
 @shared_task(name='obtener_eventos_recurso_especifico')
-def obtener_eventos_recurso_especifico(recurso, ruta_archivos='media/app_reservas/eventos_recursos/'):
+def obtener_eventos_recurso_especifico(recurso,
+                                       ruta_archivos='media/app_reservas/eventos_recursos/'):
     # Verifica que el objeto recibido sea una instancia de Recurso (o alguna de sus subclases).
     if not isinstance(recurso, Recurso):
         return

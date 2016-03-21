@@ -9,7 +9,11 @@ from .recurso import Recurso
 
 
 def establecer_destino_archivo_ubicacion(instance, filename):
-    # Almacena el archivo en: 'app_reservas/ubicaciones/laboratorios_informaticos/<alias_del_laboratorio_informatico>.<extension>'
+    """
+    Establece la ruta de destino para el archivo de ubicación cargado a la instancia.
+    """
+    # Almacena el archivo en:
+    # 'app_reservas/ubicaciones/laboratorios_informaticos/<alias>.<extension>'
     ruta_archivos_ubicacion = 'app_reservas/ubicaciones/laboratorios_informaticos/'
     extension_archivo = filename.split('.')[-1] if '.' in filename else ''
     nombre_archivo = '{0!s}.{1!s}'.format(slugify(instance.alias), extension_archivo)
@@ -21,20 +25,28 @@ class LaboratorioInformatico(Recurso):
     nombre = models.CharField(max_length=50)
     alias = models.CharField(max_length=10)
     capacidad = models.PositiveSmallIntegerField()
-    archivo_ubicacion = models.FileField(upload_to=establecer_destino_archivo_ubicacion, blank=True)
+    archivo_ubicacion = models.FileField(upload_to=establecer_destino_archivo_ubicacion,
+                                         blank=True)
     # Relaciones
     nivel = models.ForeignKey('Nivel')
 
-    # Representación del objeto
-    def __str__(self):
-        return 'Laboratorio informático: {0!s}'.format(self.nombre)
-
-    def get_nombre_corto(self):
-        return '{0!s} ({1!s})'.format(self.nombre, self.alias)
-
-    # Información de la clase
     class Meta:
+        """
+        Información de la clase.
+        """
         app_label = 'app_reservas'
         ordering = ['alias']
         verbose_name = 'Laboratorio informático'
         verbose_name_plural = 'Laboratorios informáticos'
+
+    def __str__(self):
+        """
+        Representación de la instancia.
+        """
+        return 'Laboratorio informático: {0!s}'.format(self.nombre)
+
+    def get_nombre_corto(self):
+        """
+        Retorna el nombre corto de la instancia.
+        """
+        return '{0!s} ({1!s})'.format(self.nombre, self.alias)

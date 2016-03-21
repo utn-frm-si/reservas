@@ -25,7 +25,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 # Establece la clave secreta a partir de la variable de entorno 'DJANGO_SECRET_KEY', o genera una
 # clave aleatoria si ésta no se encuentra seteada.
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY',
-                            ''.join([random.SystemRandom().choice('abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)')
+                            ''.join([random.SystemRandom()
+                                     .choice('abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)')
                                      for i in range(50)]))
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -33,6 +34,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Administradores del proyecto.
+ADMINS = []
+MANAGERS = []
 
 # Application definition
 
@@ -64,8 +68,7 @@ ROOT_URLCONF = 'reservas.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -74,6 +77,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'debug': DEBUG,
         },
     },
 ]

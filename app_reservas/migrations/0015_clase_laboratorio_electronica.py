@@ -7,8 +7,9 @@ from ..models import laboratorioElectronica
 
 class Migration(migrations.Migration):
     """
-    Creación de modelo LaboratorioElectronica.
+    Creación de modelo LaboratorioElectronica, subclase de Recurso.
     """
+
     dependencies = [
         ('app_reservas', '0014_model_ordering'),
     ]
