@@ -50,6 +50,17 @@ package app_reservas <<Frame>> {
         + get_niveles(): Nivel[]
     }
 
+    class LaboratorioElectronica {
+        ' Atributos
+        + int id
+        + str nombre
+        + str alias
+        + int capacidad
+        + File archivo_ubicacion
+        ' Métodos
+        + get_nombre_corto(): str
+    }
+
     class LaboratorioInformatico {
         ' Atributos
         + int id
@@ -87,8 +98,10 @@ package app_reservas <<Frame>> {
 
     Bedelia "1" --> "1" Area: area
     Bedelia "n" -> "0..m" Aula: aulas
+    Bedelia "n" -> "0..m" LaboratorioElectronica: laboratorios_electronica
     Bedelia "n" -> "0..m" LaboratorioInformatico: laboratorios_informatica
 
+    LaboratorioElectronica "n" --> "1" Nivel: nivel
     LaboratorioInformatico "n" --> "1" Nivel: nivel
 
     Nivel "n" --> "1" Cuerpo: cuerpo
@@ -97,6 +110,7 @@ package app_reservas <<Frame>> {
     ' Herencias
 
     Recurso <|-- Aula
+    Recurso <|-- LaboratorioElectronica
     Recurso <|-- LaboratorioInformatico
     Recurso <|-- ProyectorMultimedia
 }

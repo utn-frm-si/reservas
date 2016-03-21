@@ -3,6 +3,7 @@
 from django.db import models
 
 from .aula import Aula
+from .laboratorioElectronica import LaboratorioElectronica
 from .laboratorioInformatico import LaboratorioInformatico
 
 
@@ -10,6 +11,7 @@ class Bedelia(models.Model):
     # Relaciones
     area = models.OneToOneField('Area')
     aulas = models.ManyToManyField('Aula', blank=True)
+    laboratorios_electronica = models.ManyToManyField('LaboratorioElectronica', blank=True)
     laboratorios_informatica = models.ManyToManyField('LaboratorioInformatico', blank=True)
 
     class Meta:
@@ -31,6 +33,12 @@ class Bedelia(models.Model):
         Retorna el listado de aulas asociadas a la instancia.
         """
         return self.aulas.order_by('numero', 'nombre')
+
+    def get_laboratorios_electronica(self):
+        """
+        Retorna el listado de laboratorios de Electrónica asociados a la instancia.
+        """
+        return self.laboratorios_electronica.all()
 
     def get_laboratorios_informatica(self):
         """
@@ -63,6 +71,16 @@ class Bedelia(models.Model):
                     'nombre_plural': Aula._meta.verbose_name_plural,
                     'slug': 'aulas',
                     'elementos': self.get_aulas(),
+                }
+            )
+        # Añade los laboratorios de Electrónica asociados, en caso de existir.
+        if self.get_laboratorios_electronica():
+            recursos.append(
+                {
+                    'nombre_singular': LaboratorioElectronica._meta.verbose_name,
+                    'nombre_plural': LaboratorioElectronica._meta.verbose_name_plural,
+                    'slug': 'laboratorios_electronica',
+                    'elementos': self.get_laboratorios_electronica(),
                 }
             )
         # Añade los laboratorios de informática asociados, en caso de existir.

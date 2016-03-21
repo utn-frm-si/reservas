@@ -1,0 +1,135 @@
+{% extends 'app_reservas/base_calendario.html' %}
+{% load static %}
+
+{% block title %}
+    Laboratorios de Electrónica
+{% endblock title %}
+
+
+{% block contenido %}
+    <h1 style="text-align: center;">Laboratorios de Electrónica</h1>
+
+    <br/>
+    <br/>
+
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="heading_listado_laboratorios_electronica">
+                <h4 class="panel-title">
+                    <a role="button"
+                       data-toggle="collapse"
+                       data-parent="#accordion"
+                       href="#listado_laboratorios_electronica" aria-expanded="true" aria-controls="listado_laboratorios_electronica">
+                        Listado de laboratorios de Electrónica
+                    </a>
+                </h4>
+            </div>
+            <div id="listado_laboratorios_electronica" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading_listado_laboratorios_electronica">
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-condensed table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th class="text-center">
+                                    Laboratorio
+                                </th>
+                                <th class="text-center">
+                                    Capacidad
+                                </th>
+                                <th class="text-center">
+                                    Acciones
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% if laboratorios %}
+                                {% for laboratorio in laboratorios %}
+                                    <tr>
+                                        <td>
+                                            {{ laboratorio.get_nombre_corto }}
+                                        </td>
+                                        <td class="text-center">
+                                            {% if laboratorio.capacidad > 0 %}
+                                                {{ laboratorio.capacidad }}
+                                            {% else %}
+                                                &#8212;
+                                            {% endif %}
+                                        </td>
+                                        <td class="text-center">
+                                            <a role="button"
+                                               class="btn btn-xs btn-info"
+                                               data-toggle="tooltip"
+                                               data-placement="bottom"
+                                               title="Ver"
+                                               href="{% url 'laboratorio_electronica_detalle' laboratorio.alias %}">
+                                                <span class="glyphicon glyphicon-eye-open"
+                                                      aria-hidden="true">
+                                                </span>
+                                            </a>
+                                            {% if laboratorio.archivo_ubicacion %}
+                                                <a role="button"
+                                                   class="btn btn-xs btn-success"
+                                                   data-toggle="tooltip"
+                                                   data-placement="bottom"
+                                                   title="Ubicación"
+                                                   target='_blank'
+                                                   href="{{ laboratorio.archivo_ubicacion.url }}">
+                                                    <span class="glyphicon glyphicon-map-marker"
+                                                          aria-hidden="true">
+                                                    </span>
+                                                </a>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
+                                <td class="text-center alert-warning" colspan="4">
+                                    No hay laboratorios de Electrónica cargados.
+                                </td>
+                            {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="calendar" class="calendar"></div>
+{% endblock contenido %}
+
+
+{% block scripts %}
+    {{ block.super }}
+
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
+    </script>
+{% endblock scripts %}
+
+
+{% block fullcalendar_resources %}
+    resourceLabelText: 'Laboratorio de Electrónica',
+    resources: [
+        {% for laboratorio in laboratorios %}
+            {
+                id: '{{ laboratorio.id }}',
+                title: '{{ laboratorio.get_nombre_corto }}',
+            },
+        {% endfor %}
+    ],
+{% endblock fullcalendar_resources %}
+
+
+{% block fullcalendar_eventSources %}
+    {% for laboratorio in laboratorios %}
+        {
+            url: '{% url "recurso_eventos_json" laboratorio.id %}',
+            {% if laboratorio.calendar_color %}
+                color: '{{ laboratorio.calendar_color }}',
+            {% endif %}
+        },
+    {% endfor %}
+{% endblock fullcalendar_eventSources %}

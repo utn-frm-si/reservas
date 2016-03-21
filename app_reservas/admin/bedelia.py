@@ -13,6 +13,7 @@ class BedeliaAdmin(admin.ModelAdmin):
     list_display = (
         '_area',
         '_aulas',
+        '_laboratorios_electronica',
         '_laboratorios_informatica',
     )
 
@@ -32,6 +33,16 @@ class BedeliaAdmin(admin.ModelAdmin):
              for aula in obj.aulas.all()]
         )
     _aulas.short_description = 'Aulas'
+
+    def _laboratorios_electronica(self, obj):
+        """
+        Obtiene el listado de laboratorios de Electrónica asociados a la instancia.
+        """
+        return ", ".join(
+            [laboratorio.get_nombre_corto()
+             for laboratorio in obj.laboratorios_electronica.all()]
+        )
+    _laboratorios_electronica.short_description = 'Laboratorios de Electrónica'
 
     def _laboratorios_informatica(self, obj):
         """
