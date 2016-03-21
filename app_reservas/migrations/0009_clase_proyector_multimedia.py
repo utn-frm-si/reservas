@@ -5,6 +5,9 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
+    """
+    Creación de modelo ProyectorMultimedia, subclase de Recurso.
+    """
 
     dependencies = [
         ('app_reservas', '0008_directorio_archivo_ubicacion_aula'),
@@ -14,7 +17,11 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ProyectorMultimedia',
             fields=[
-                ('recurso_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='app_reservas.Recurso')),
+                ('recurso_ptr', models.OneToOneField(parent_link=True,
+                                                     auto_created=True,
+                                                     primary_key=True,
+                                                     serialize=False,
+                                                     to='app_reservas.Recurso')),
                 ('identificador', models.CharField(max_length=20)),
             ],
             options={

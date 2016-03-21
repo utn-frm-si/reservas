@@ -22,6 +22,7 @@ class Migration(migrations.Migration):
             model_name='laboratorioinformatico',
             name='archivo_ubicacion',
             field=models.FileField(blank=True,
-                                   upload_to=laboratorioInformatico.establecer_destino_archivo_ubicacion),
+                                   upload_to=laboratorioInformatico
+                                   .establecer_destino_archivo_ubicacion),
         ),
     ]

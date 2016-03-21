@@ -9,16 +9,23 @@ class ProyectorMultimedia(Recurso):
     # Atributos
     identificador = models.CharField(max_length=20)
 
-    # Representación del objeto
-    def __str__(self):
-        return 'Proyector multimedia: {0!s}'.format(self.get_nombre_corto())
-
-    def get_nombre_corto(self):
-        return 'PM-{0!s}'.format(self.identificador)
-
-    # Información de la clase
     class Meta:
+        """
+        Información de la clase.
+        """
         app_label = 'app_reservas'
         ordering = ['identificador']
         verbose_name = 'Proyector multimedia'
         verbose_name_plural = 'Proyectores multimedia'
+
+    def __str__(self):
+        """
+        Representación de la instancia.
+        """
+        return 'Proyector multimedia: {0!s}'.format(self.get_nombre_corto())
+
+    def get_nombre_corto(self):
+        """
+        Retorna el nombre corto de la instancia.
+        """
+        return 'PM-{0!s}'.format(self.identificador)

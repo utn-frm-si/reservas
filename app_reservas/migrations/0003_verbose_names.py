@@ -5,6 +5,9 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
+    """
+    Especificación de nombres verbose para los modelos.
+    """
 
     dependencies = [
         ('app_reservas', '0002_area_slug'),

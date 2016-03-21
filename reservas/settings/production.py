@@ -3,6 +3,8 @@
 from .base import *
 
 DEBUG = False
+TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
+
 ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '*')
 
 DATABASES = {

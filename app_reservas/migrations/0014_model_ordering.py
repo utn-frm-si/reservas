@@ -16,18 +16,26 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='area',
-            options={'ordering': ['nombre'], 'verbose_name_plural': 'Áreas', 'verbose_name': 'Área'},
+            options={'ordering': ['nombre'],
+                     'verbose_name_plural': 'Áreas',
+                     'verbose_name': 'Área'},
         ),
         migrations.AlterModelOptions(
             name='cuerpo',
-            options={'ordering': ['numero'], 'verbose_name_plural': 'Cuerpos', 'verbose_name': 'Cuerpo'},
+            options={'ordering': ['numero'],
+                     'verbose_name_plural': 'Cuerpos',
+                     'verbose_name': 'Cuerpo'},
         ),
         migrations.AlterModelOptions(
             name='laboratorioinformatico',
-            options={'ordering': ['alias'], 'verbose_name_plural': 'Laboratorios informáticos', 'verbose_name': 'Laboratorio informático'},
+            options={'ordering': ['alias'],
+                     'verbose_name_plural': 'Laboratorios informáticos',
+                     'verbose_name': 'Laboratorio informático'},
         ),
         migrations.AlterModelOptions(
             name='proyectormultimedia',
-            options={'ordering': ['identificador'], 'verbose_name_plural': 'Proyectores multimedia', 'verbose_name': 'Proyector multimedia'},
+            options={'ordering': ['identificador'],
+                     'verbose_name_plural': 'Proyectores multimedia',
+                     'verbose_name': 'Proyector multimedia'},
         ),
     ]

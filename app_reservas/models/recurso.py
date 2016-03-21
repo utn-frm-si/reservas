@@ -12,11 +12,24 @@ class Recurso(models.Model):
     calendar_codigo = models.CharField(max_length=100)
     calendar_color = models.CharField(max_length=10, blank=True)
 
-    # Representación del objeto
+    class Meta:
+        """
+        Información de la clase.
+        """
+        app_label = 'app_reservas'
+        verbose_name = 'Recurso'
+        verbose_name_plural = 'Recursos'
+
     def __str__(self):
+        """
+        Representación de la instancia.
+        """
         return '{0!s}'.format(self.get_nombre_corto())
 
     def get_nombre_corto(self):
+        """
+        Retorna el nombre corto de la instancia.
+        """
         return 'Recurso: {0:d}'.format(self.id)
 
     def get_eventos(self):
@@ -40,9 +53,3 @@ class Recurso(models.Model):
             eventos_json += evento_str
         eventos_json += ']'
         return eventos_json
-
-    # Información de la clase
-    class Meta:
-        app_label = 'app_reservas'
-        verbose_name = 'Recurso'
-        verbose_name_plural = 'Recursos'

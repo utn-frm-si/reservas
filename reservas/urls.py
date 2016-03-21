@@ -45,5 +45,6 @@ urlpatterns = [
             r'',
             include('app_reservas.urls')
         ),
-    ])),
+        ]
+    )),
 ]
