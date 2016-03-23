@@ -9,8 +9,8 @@
 {% block contenido %}
         <h2 style="text-align: center;">Departamento de {{ bedelia.area }}</h2>
 
-        {% for recurso in bedelia.get_recursos %}
-            <div id="calendar_{{ recurso.slug }}" class="calendar"></div>
+        {% for tipo_recurso in bedelia.get_recursos %}
+            <div id="calendar_{{ tipo_recurso.slug }}" class="calendar"></div>
         {% endfor %}
 {% endblock contenido %}
 
@@ -22,8 +22,8 @@
         {% endblock fullcalendar_js_vars %}
 
         $(document).ready(function() {
-            {% for recurso in bedelia.get_recursos %}
-                $("#calendar_{{ recurso.slug }}").fullCalendar({
+            {% for tipo_recurso in bedelia.get_recursos %}
+                $("#calendar_{{ tipo_recurso.slug }}").fullCalendar({
                     {% block fullcalendar_defaultView %}
                         {{ block.super }}
                     {% endblock fullcalendar_defaultView %}
@@ -32,21 +32,21 @@
                     contentHeight: 'auto',
                     minTime: '07:00:00',
                     nowIndicator: true,
-                    resourceLabelText: "{{ recurso.nombre_singular }}",
+                    resourceLabelText: "{{ tipo_recurso.nombre_singular }}",
                     resources: [
-                        {% for elemento in recurso.elementos %}
+                        {% for recurso in tipo_recurso.elementos %}
                             {
-                                id: '{{ elemento.id }}',
-                                title: '{{ elemento }}',
+                                id: '{{ recurso.id }}',
+                                title: '{{ recurso }}',
                             },
                         {% endfor %}
                     ],
                     eventSources: [
-                        {% for elemento in recurso.elementos %}
+                        {% for recurso in tipo_recurso.elementos %}
                             {
-                                url: '{% url "recurso_eventos_json" elemento.id %}',
-                                {% if elemento.calendar_color %}
-                                    color: '{{ elemento.calendar_color }}',
+                                url: '{% url "recurso_eventos_json" recurso.id %}',
+                                {% if recurso.calendar_color %}
+                                    color: '{{ recurso.calendar_color }}',
                                 {% endif %}
                             },
                         {% endfor %}
@@ -58,7 +58,7 @@
                             right: '',
                         {% endblock fullcalendar_header %}
                     },
-                    titleFormat: "[{{ recurso.nombre_plural }}]",
+                    titleFormat: "[{{ tipo_recurso.nombre_plural }}]",
                     {% block fullcalendar_loading_callback %}
                         {{ block.super }}
                     {% endblock fullcalendar_loading_callback %}

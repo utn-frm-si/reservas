@@ -34,143 +34,81 @@
                 </div>
                 <div id="nivel_{{ nivel.id }}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading_nivel_{{ nivel.id }}">
                     <div class="panel-body">
-                        <div class="table-responsive">
-                            <table class="table table-condensed table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center">
-                                            Aula
-                                        </th>
-                                        <th class="text-center">
-                                            Capacidad
-                                        </th>
-                                        <th class="text-center">
-                                            Áreas a cargo
-                                        </th>
-                                        <th class="text-center">
-                                            Acciones
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% if nivel.get_aulas %}
-                                    {% for aula in nivel.get_aulas %}
+                        {% for tipo_recurso in nivel.get_recursos %}
+                            <div class="table-responsive">
+                                <table class="table table-condensed table-bordered table-striped">
+                                    <thead>
                                         <tr>
-                                            <td>
-                                                {{ aula.get_nombre_corto }}
-                                            </td>
-                                            <td class="text-center">
-                                                {% if aula.capacidad > 0 %}
-                                                    {{ aula.capacidad }}
-                                                {% else %}
-                                                    &#8212;
-                                                {% endif %}
-                                            </td>
-                                            <td class="text-center">
-                                                {% for area in aula.areas.all %}
-                                                    {{ area }}
-                                                    {% if not forloop.last %}
+                                            <th class="text-center">
+                                                {{ tipo_recurso.nombre_singular }}
+                                            </th>
+                                            <th class="text-center">
+                                                Capacidad
+                                            </th>
+                                            {% if tipo_recurso.nombre_singular == "Aula" %}
+                                                <th class="text-center">
+                                                    Áreas a cargo
+                                                </th>
+                                            {% endif %}
+                                            <th class="text-center">
+                                                Acciones
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for recurso in tipo_recurso.elementos %}
+                                            <tr>
+                                                <td>
+                                                    {{ recurso.get_nombre_corto }}
+                                                </td>
+                                                <td class="text-center">
+                                                    {% if recurso.capacidad > 0 %}
+                                                        {{ recurso.capacidad }}
+                                                    {% else %}
                                                         &#8212;
                                                     {% endif %}
-                                                {% endfor %}
-                                            </td>
-                                            <td class="text-center">
-                                                <a role="button"
-                                                   class="btn btn-xs btn-info"
-                                                   data-toggle="tooltip"
-                                                   data-placement="bottom"
-                                                   title="Ver"
-                                                   href="{% url 'aula_detalle' aula.id %}">
-                                                    <span class="glyphicon glyphicon-eye-open"
-                                                          aria-hidden="true">
-                                                    </span>
-                                                </a>
-                                                {% if aula.archivo_ubicacion %}
+                                                </td>
+                                                {% if tipo_recurso.nombre_singular == "Aula" %}
+                                                    <td class="text-center">
+                                                        {% for area in recurso.areas.all %}
+                                                            {{ area }}
+                                                            {% if not forloop.last %}
+                                                                &#8212;
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </td>
+                                                {% endif %}
+                                                <td class="text-center">
                                                     <a role="button"
-                                                       class="btn btn-xs btn-success"
+                                                       class="btn btn-xs btn-info"
                                                        data-toggle="tooltip"
                                                        data-placement="bottom"
-                                                       title="Ubicación"
-                                                       target='_blank'
-                                                       href="{{ aula.archivo_ubicacion.url }}">
-                                                        <span class="glyphicon glyphicon-map-marker"
+                                                       title="Ver"
+                                                       href="{% url tipo_recurso.slug|add:'_detalle' recurso.id %}">
+                                                        <span class="glyphicon glyphicon-eye-open"
                                                               aria-hidden="true">
                                                         </span>
                                                     </a>
-                                                {% endif %}
-                                            </td>
-                                        </tr>
-                                    {% endfor %}
-                                    {% else %}
-                                        <td class="text-center alert-warning" colspan="4">
-                                            Este nivel no tiene aulas asociadas.
-                                        </td>
-                                    {% endif %}
-
-                                </tbody>
-                            </table>
-                        </div>
-
-                        {% if nivel.get_laboratorios_informaticos %}
-                        <div class="table-responsive">
-                            <table class="table table-condensed table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center">
-                                            Laboratorio informático
-                                        </th>
-                                        <th class="text-center">
-                                            Capacidad
-                                        </th>
-                                        <th class="text-center">
-                                            Acciones
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for laboratorio in nivel.get_laboratorios_informaticos %}
-                                        <tr>
-                                            <td>
-                                                {{ laboratorio.get_nombre_corto }}
-                                            </td>
-                                            <td class="text-center">
-                                                {% if laboratorio.capacidad > 0 %}
-                                                    {{ laboratorio.capacidad }}
-                                                {% else %}
-                                                    &#8212;
-                                                {% endif %}
-                                            </td>
-                                            <td class="text-center">
-                                                <a role="button"
-                                                   class="btn btn-xs btn-info"
-                                                   data-toggle="tooltip"
-                                                   data-placement="bottom"
-                                                   title="Ver"
-                                                   href="{% url 'laboratorio_informatico_detalle' laboratorio.alias %}">
-                                                    <span class="glyphicon glyphicon-eye-open"
-                                                          aria-hidden="true">
-                                                    </span>
-                                                </a>
-                                                {% if laboratorio.archivo_ubicacion %}
-                                                    <a role="button"
-                                                       class="btn btn-xs btn-success"
-                                                       data-toggle="tooltip"
-                                                       data-placement="bottom"
-                                                       title="Ubicación"
-                                                       target='_blank'
-                                                       href="{{ laboratorio.archivo_ubicacion.url }}">
-                                                        <span class="glyphicon glyphicon-map-marker"
-                                                              aria-hidden="true">
-                                                        </span>
-                                                    </a>
-                                                {% endif %}
-                                            </td>
-                                        </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                        {% endif %}
+                                                    {% if recurso.archivo_ubicacion %}
+                                                        <a role="button"
+                                                           class="btn btn-xs btn-success"
+                                                           data-toggle="tooltip"
+                                                           data-placement="bottom"
+                                                           title="Ubicación"
+                                                           target='_blank'
+                                                           href="{{ recurso.archivo_ubicacion.url }}">
+                                                            <span class="glyphicon glyphicon-map-marker"
+                                                                  aria-hidden="true">
+                                                            </span>
+                                                        </a>
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -206,19 +144,14 @@
     ],
     resources: [
         {% for nivel in cuerpo.get_niveles %}
-            {% for aula in nivel.get_aulas %}
-                {
-                    id: '{{ aula.id }}',
-                    nivel: '{{ nivel.get_nombre_corto }}',
-                    title: '{{ aula.get_nombre_corto }}',
-                },
-            {% endfor %}
-            {% for laboratorio in nivel.get_laboratorios_informaticos %}
-                {
-                    id: '{{ laboratorio.id }}',
-                    nivel: '{{ nivel.get_nombre_corto }}',
-                    title: '{{ laboratorio.get_nombre_corto }}',
-                },
+            {% for tipo_recurso in nivel.get_recursos %}
+                {% for recurso in tipo_recurso.elementos %}
+                    {
+                        id: '{{ recurso.id }}',
+                        nivel: '{{ nivel.get_nombre_corto }}',
+                        title: '{{ recurso.get_nombre_corto }}',
+                    },
+                {% endfor %}
             {% endfor %}
         {% endfor %}
     ],
@@ -227,21 +160,15 @@
 
 {% block fullcalendar_eventSources %}
     {% for nivel in cuerpo.get_niveles %}
-        {% for aula in nivel.get_aulas %}
-            {
-                url: '{% url "recurso_eventos_json" aula.id %}',
-                {% if aula.calendar_color %}
-                    color: '{{ aula.calendar_color }}',
-                {% endif %}
-            },
-        {% endfor %}
-        {% for laboratorio in nivel.get_laboratorios_informaticos %}
-            {
-                url: '{% url "recurso_eventos_json" laboratorio.id %}',
-                {% if laboratorio.calendar_color %}
-                    color: '{{ laboratorio.calendar_color }}',
-                {% endif %}
-            },
+        {% for tipo_recurso in nivel.get_recursos %}
+            {% for recurso in tipo_recurso.elementos %}
+                {
+                    url: '{% url "recurso_eventos_json" recurso.id %}',
+                    {% if recurso.calendar_color %}
+                        color: '{{ recurso.calendar_color }}',
+                    {% endif %}
+                },
+            {% endfor %}
         {% endfor %}
     {% endfor %}
 {% endblock fullcalendar_eventSources %}

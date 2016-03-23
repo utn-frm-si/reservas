@@ -2,6 +2,8 @@
 
 from django.db import models
 
+from ..services.recursos import get_recursos_asociados
+
 
 class Nivel(models.Model):
     # Atributos
@@ -35,8 +37,26 @@ class Nivel(models.Model):
         """
         return self.aula_set.order_by('numero', 'nombre')
 
+    def get_laboratorios_electronica(self):
+        """
+        Retorna el listado de laboratorios de Electrónica asociados a la instancia.
+        """
+        return self.laboratorioelectronica_set.all()
+
     def get_laboratorios_informaticos(self):
         """
         Retorna el listado de laboratorios informáticos asociados a la instancia.
         """
         return self.laboratorioinformatico_set.all()
+
+    def get_recursos(self):
+        """
+        Retorna todos los recursos asociados a la instancia.
+
+        Returns
+        -------
+        list of dicts
+            Lista de diccionarios, uno por cada tipo de recurso asociado que presenta al menos una
+            instancia relacionada.
+        """
+        return get_recursos_asociados(self)

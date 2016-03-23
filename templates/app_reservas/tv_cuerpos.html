@@ -47,39 +47,28 @@
                     ],
                     resources: [
                         {% for nivel in cuerpo.get_niveles %}
-                            {% for aula in nivel.get_aulas %}
-                                {
-                                    id: '{{ aula.id }}',
-                                    nivel: '{{ nivel.get_nombre_corto }}',
-                                    title: '{{ aula.get_nombre_corto }}',
-                                },
-                            {% endfor %}
-                            {% for laboratorio in nivel.get_laboratorios_informaticos %}
-                                {
-                                    id: '{{ laboratorio.id }}',
-                                    nivel: '{{ nivel.get_nombre_corto }}',
-                                    title: '{{ laboratorio.get_nombre_corto }}',
-                                },
+                            {% for tipo_recurso in nivel.get_recursos %}
+                                {% for recurso in tipo_recurso.elementos %}
+                                    {
+                                        id: '{{ recurso.id }}',
+                                        nivel: '{{ nivel.get_nombre_corto }}',
+                                        title: '{{ recurso.get_nombre_corto }}',
+                                    },
+                                {% endfor %}
                             {% endfor %}
                         {% endfor %}
                     ],
                     eventSources: [
                         {% for nivel in cuerpo.get_niveles %}
-                            {% for aula in nivel.get_aulas %}
+                            {% for tipo_recurso in nivel.get_recursos %}
+                                {% for recurso in tipo_recurso.elementos %}
                                 {
-                                    url: '{% url "recurso_eventos_json" aula.id %}',
-                                    {% if aula.calendar_color %}
-                                        color: '{{ aula.calendar_color }}',
+                                    url: '{% url "recurso_eventos_json" recurso.id %}',
+                                    {% if recurso.calendar_color %}
+                                        color: '{{ recurso.calendar_color }}',
                                     {% endif %}
                                 },
-                            {% endfor %}
-                            {% for laboratorio in nivel.get_laboratorios_informaticos %}
-                                {
-                                    url: '{% url "recurso_eventos_json" laboratorio.id %}',
-                                    {% if laboratorio.calendar_color %}
-                                        color: '{{ laboratorio.calendar_color }}',
-                                    {% endif %}
-                                },
+                                {% endfor %}
                             {% endfor %}
                         {% endfor %}
                     ],
