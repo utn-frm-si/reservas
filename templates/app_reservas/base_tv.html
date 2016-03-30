@@ -32,7 +32,19 @@
 {% block fullcalendar_js_vars %}
     var display_hours = 5; // TODO: Parametrizar
     var previous_hour = new Date().getHours() - 1;
-    var min_hour = Math.min(24 - display_hours, previous_hour);
+
+    // Determina la hora mínima a mostrar, que no debe ser anterior a las 7:00 ni superar las
+    // 24:00 al sumarle la cantidad de horas a visualizar.
+    if (previous_hour < 7) {
+        min_hour = 7
+    }
+    else if (previous_hour > 24 - display_hours) {
+        min_hour = 24 - display_hours
+    }
+    else {
+        min_hour = previous_hour
+    }
+
     var max_hour = min_hour + display_hours;
 
     var min_time_string = min_hour.toString() + ':00:00';
