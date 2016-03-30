@@ -23,7 +23,8 @@ class Nivel(models.Model):
         """
         Representación de la instancia.
         """
-        return '{0!s} - {1!s}'.format(self.get_nombre_corto(), self.cuerpo)
+        return '{0!s} - {1!s}'.format(self.get_nombre_corto(),
+                                      self.cuerpo.get_nombre_corto())
 
     def get_nombre_corto(self):
         """

@@ -5,6 +5,7 @@ from django.db import models
 
 class Cuerpo(models.Model):
     # Atributos
+    nombre = models.CharField(max_length=50, blank=True)
     numero = models.PositiveSmallIntegerField()
 
     class Meta:
@@ -20,7 +21,12 @@ class Cuerpo(models.Model):
         """
         Representación de la instancia.
         """
-        return '{0!s}'.format(self.get_nombre_corto())
+        if self.nombre:
+            s = '{0!s}: {1!s}'.format(self.get_nombre_corto(),
+                                      self.nombre)
+        else:
+            s = '{0!s}'.format(self.get_nombre_corto())
+        return s
 
     def get_nombre_corto(self):
         """

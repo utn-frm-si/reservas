@@ -10,7 +10,7 @@
     <div id="cuerpos">
         {% for cuerpo in cuerpos %}
             <div id="cuerpo_{{ cuerpo.numero }}" class="cuerpo" data-calendario-numero="{{ forloop.counter }}">
-                <h2 style="text-align: center;">{{ cuerpo.get_nombre_corto }}</h2>
+                <h2 style="text-align: center;">{{ cuerpo }}</h2>
 
                 <div id="calendar_cuerpo_{{ cuerpo.numero }}" class="calendar"></div>
             </div>
