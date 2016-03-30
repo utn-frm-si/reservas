@@ -7,13 +7,15 @@
 
 
 {% block contenido %}
-    {% for cuerpo in cuerpos %}
-        <div id="cuerpo_{{ cuerpo.numero }}" class="cuerpo" data-calendario-numero="{{ forloop.counter }}">
-            <h2 style="text-align: center;">{{ cuerpo.get_nombre_corto }}</h2>
+    <div id="cuerpos">
+        {% for cuerpo in cuerpos %}
+            <div id="cuerpo_{{ cuerpo.numero }}" class="cuerpo" data-calendario-numero="{{ forloop.counter }}">
+                <h2 style="text-align: center;">{{ cuerpo.get_nombre_corto }}</h2>
 
-            <div id="calendar_cuerpo_{{ cuerpo.numero }}" class="calendar"></div>
-        </div>
-    {% endfor %}
+                <div id="calendar_cuerpo_{{ cuerpo.numero }}" class="calendar"></div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock contenido %}
 
 
@@ -86,32 +88,18 @@
                 });
             {% endfor %}
 
-            // Función que genera la transición de cuerpos, al ir mostrando un cuerpo a la vez, y
-            // ocultando los cuerpos restantes.
+            // Función que genera la transición de cuerpos, al ir quitando el último cuerpo del
+            // listado, y añadiéndolo al principio del mismo.
             function generarTransicionCuerpo() {
-                // Obtiene el cuerpo visible actualmente.
-                var calendario_actual = $(".cuerpo-visible");
-                // Obtiene el número de calendario del cuerpo visible.
-                var calendario_numero = parseInt(calendario_actual.data('calendario-numero'));
-                // Calcula el número del calendario próximo a mostrarse.
-                calendario_numero == {{ cuerpos|length }}
-                        ? calendario_numero = 1
-                        : calendario_numero++;
-
-                // Oculta el calendario visible actualmente.
-                calendario_actual.removeClass("cuerpo-visible");
-                // Muestra el próximo calendario.
-                $('.cuerpo[data-calendario-numero="' + calendario_numero + '"]')
-                        .addClass("cuerpo-visible");
+                var ultimo_cuerpo = $(".cuerpo").last();
+                ultimo_cuerpo.hide();
+                $("#cuerpos").prepend(ultimo_cuerpo);
+                ultimo_cuerpo.fadeIn(1500);
             }
-
-            // Hace visible el primer calendario.
-            $('.cuerpo[data-calendario-numero="1"]')
-                        .addClass("cuerpo-visible");
 
             // Ejecuta la transición sólo cuando hay más de un cuerpo disponible en la vista.
             if ({{ cuerpos|length }} > 1) {
-                // Establece la transición entre cuerpos cada 10 segundos.
+                // Establece la transición de cuerpos cada 10 segundos.
                 var timer = setInterval(generarTransicionCuerpo, 10000);
             }
         });
