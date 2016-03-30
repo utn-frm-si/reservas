@@ -114,16 +114,12 @@ USE_TZ = True
 # del servidor web.
 DJANGO_URL_PREFIX = os.environ.get('DJANGO_URL_PREFIX', '')
 # Da formato al prefijo URL, para que sea de la forma '<prefijo>/'.
-if DJANGO_URL_PREFIX != '':
-    # Añade la barra final, en caso de que no esté presente.
-    if DJANGO_URL_PREFIX[-1] != '/':
-        DJANGO_URL_PREFIX += '/'
-    # Quita las barras iniciales, en caso de que estén presentes.
-    while len(DJANGO_URL_PREFIX) > 0 and DJANGO_URL_PREFIX[0] == '/':
-        if len(DJANGO_URL_PREFIX) == 1:
-            DJANGO_URL_PREFIX = ''
-        else:
-            DJANGO_URL_PREFIX = DJANGO_URL_PREFIX[1:]
+# 1. Quita las barras iniciales y finales, por si el prefijo cuenta con más de una.
+DJANGO_URL_PREFIX = DJANGO_URL_PREFIX.strip('/')
+# 2. Añade una única barra final, en caso de que el prefijo no haya quedado vacío luego de la
+# operación anterior.
+if DJANGO_URL_PREFIX:
+    DJANGO_URL_PREFIX += '/'
 
 
 # Static files (CSS, JavaScript, Images)
