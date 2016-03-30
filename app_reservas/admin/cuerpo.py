@@ -12,6 +12,7 @@ class CuerpoAdmin(admin.ModelAdmin):
     """
     list_display = (
         'numero',
+        'nombre',
         '_niveles',
     )
 
