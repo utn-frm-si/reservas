@@ -44,6 +44,7 @@ package app_reservas <<Frame>> {
     class Cuerpo {
         ' Atributos
         + int id
+        + str nombre
         + int numero
         ' Métodos
         + get_nombre_corto(): str
