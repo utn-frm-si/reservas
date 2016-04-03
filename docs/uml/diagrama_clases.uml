@@ -80,7 +80,7 @@ package app_reservas <<Frame>> {
         ' Métodos
         + get_nombre_corto(): str
         + get_aulas(): Aula[]
-        + get_laboratorios_informaticos(): LaboratorioInformatico[]
+        + get_laboratorios_informatica(): LaboratorioInformatico[]
     }
 
     class ProyectorMultimedia {
