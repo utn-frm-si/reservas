@@ -4,6 +4,8 @@ body {
     background-color: #A9A9A9;
     /* Color del texto de la página: Blanco */
     color: white;
+    /* Deshabilitación de scroll vertical */
+    overflow-y: hidden;
 }
 
 /* Cuerpos */
