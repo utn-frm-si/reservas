@@ -28,11 +28,13 @@
                 {% block fullcalendar_defaultView %}
                     defaultView: 'timelineDay',
                 {% endblock fullcalendar_defaultView %}
-                schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
-                lang: 'es',
-                contentHeight: 'auto',
-                minTime: '07:00:00',
-                nowIndicator: true,
+                {% block fullcalendar_base_config %}
+                    schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
+                    lang: 'es',
+                    contentHeight: 'auto',
+                    minTime: '07:00:00',
+                    nowIndicator: true,
+                {% endblock fullcalendar_base_config %}
                 {% block fullcalendar_resources %}{% endblock %}
                 eventSources: [
                     {% block fullcalendar_eventSources %}{% endblock %}

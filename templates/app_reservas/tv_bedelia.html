@@ -27,11 +27,9 @@
                     {% block fullcalendar_defaultView %}
                         {{ block.super }}
                     {% endblock fullcalendar_defaultView %}
-                    schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
-                    lang: 'es',
-                    contentHeight: 'auto',
-                    minTime: '07:00:00',
-                    nowIndicator: true,
+                    {% block fullcalendar_base_config %}
+                        {{ block.super }}
+                    {% endblock fullcalendar_base_config %}
                     resourceLabelText: "{{ tipo_recurso.nombre_singular }}",
                     resources: [
                         {% for recurso in tipo_recurso.elementos %}
