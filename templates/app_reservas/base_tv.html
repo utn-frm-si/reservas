@@ -30,6 +30,8 @@
 
 
 {% block fullcalendar_js_vars %}
+    {{ block.super }}
+
     var display_hours = 5; // TODO: Parametrizar
     var previous_hour = new Date().getHours() - 1;
 
