@@ -5,6 +5,7 @@
     <link rel='stylesheet' href='{% static 'fullcalendar/dist/fullcalendar.min.css' %}' />
     <link rel='stylesheet' href='{% static 'fullcalendar-scheduler/dist/scheduler.min.css' %}' />
     <link rel="stylesheet" href='{% static 'bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css' %}' />
+    <link rel="stylesheet" href='{% static 'qtip2/jquery.qtip.min.css' %}' />
     <link rel="stylesheet" href='{% static 'apps/reservas/css/base_calendario.css' %}' />
 {% endblock static_css %}
 
@@ -16,12 +17,36 @@
     <script src='{% static 'fullcalendar-scheduler/dist/scheduler.min.js' %}'></script>
     <script src='{% static 'bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js' %}'></script>
     <script src='{% static 'bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js' %}'></script>
+    <script src='{% static 'qtip2/jquery.qtip.min.js' %}'></script>
 {% endblock static_js_body %}
 
 
 {% block scripts %}
     <script>
-        {% block fullcalendar_js_vars %}{% endblock %}
+        {% block fullcalendar_js_vars %}
+            var tooltip = $('<div />').qtip({
+                id: 'fullcalendar',
+                prerender: true,
+                content: {
+                    text: '',
+                    title: {
+                        button: true
+                    }
+                },
+                position: {
+                    my: 'bottom center',
+                    at: 'top center',
+                    target: 'event',
+                    adjust: {
+                        mouse: false,
+                        scroll: false
+                    }
+                },
+                show: false,
+                hide: false,
+                style: 'qtip-blue qtip-rounded qtip-shadow'
+            }).qtip('api');
+        {% endblock fullcalendar_js_vars %}
 
         $(document).ready(function() {
             $({% block fullcalendar_container %}'#calendar'{% endblock %}).fullCalendar({
@@ -52,6 +77,24 @@
                         right: '',
                     {% endblock fullcalendar_header %}
                 },
+                eventClick: function(event, jsEvent, view) {
+                    {% block fullcalendar_eventClick_callback %}
+                        var title = '<h5><b>' + event.title + '</b></h5>';
+                        var content = '<b>Inicio</b>: ' + moment(event.start).format("dddd, LL, H:mm") +
+                            '<br />' + '<b>Fin</b>: ' + moment(event.end).format("dddd, LL, H:mm");
+
+                        tooltip.set({
+                            'content.title': title,
+                            'content.text': content
+                        })
+                            .reposition(jsEvent).show(jsEvent);
+                    {% endblock fullcalendar_eventClick_callback %}
+                },
+                dayClick: function(date, jsEvent, view) {
+                    {% block fullcalendar_dayClick_callback %}
+                        tooltip.hide();
+                    {% endblock fullcalendar_dayClick_callback %}
+                },
                 viewRender: function(view, element) {
                     // Obtiene el objeto asociado al datepicker.
                     var datepicker = $('.fc-datepickerButton-button');
@@ -71,6 +114,8 @@
                     if (! momentoFullcalendar.isSame(momentoDatepicker, 'day')) {
                         datepicker.datepicker('setUTCDate', momentoFullcalendar.toDate());
                     }
+
+                    tooltip.hide();
                 },
                 {% block fullcalendar_loading_callback %}
                     loading: function(isLoading, view) {
