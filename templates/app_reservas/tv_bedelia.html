@@ -7,11 +7,16 @@
 
 
 {% block contenido %}
-        <h2 style="text-align: center;">Departamento de {{ bedelia.area }}</h2>
+    <div class="contenedor-calendario">
+        <h1>Departamento de {{ bedelia.area }}</h1>
 
         {% for tipo_recurso in bedelia.get_recursos %}
+            {% if not forloop.first %}
+                <br />
+            {% endif %}
             <div id="calendar_{{ tipo_recurso.slug }}" class="calendar"></div>
         {% endfor %}
+    </div>
 {% endblock contenido %}
 
 

@@ -9,8 +9,8 @@
 {% block contenido %}
     <div id="cuerpos">
         {% for cuerpo in cuerpos %}
-            <div id="cuerpo_{{ cuerpo.numero }}" class="cuerpo" data-calendario-numero="{{ forloop.counter }}">
-                <h2 style="text-align: center;">{{ cuerpo }}</h2>
+            <div id="cuerpo_{{ cuerpo.numero }}" class="contenedor-calendario" data-calendario-numero="{{ forloop.counter }}">
+                <h1>{{ cuerpo }}</h1>
 
                 <div id="calendar_cuerpo_{{ cuerpo.numero }}" class="calendar"></div>
             </div>
@@ -89,7 +89,7 @@
             // Función que genera la transición de cuerpos, al ir quitando el último cuerpo del
             // listado, y añadiéndolo al principio del mismo.
             function generarTransicionCuerpo() {
-                var ultimo_cuerpo = $(".cuerpo").last();
+                var ultimo_cuerpo = $(".contenedor-calendario").last();
                 ultimo_cuerpo.hide();
                 $("#cuerpos").prepend(ultimo_cuerpo);
                 ultimo_cuerpo.fadeIn(1500);
