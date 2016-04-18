@@ -1,0 +1,5 @@
+# Ubicar el archivo en /etc/cron.d/
+
+# Reinicia el contenedor de Celery todos los días a las 2 AM, para evitar que
+# se cuelgue el servicio de AMQP.
+0  2  *  *  *  root    docker restart reservas_celery_1
