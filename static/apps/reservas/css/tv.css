@@ -1,24 +1,39 @@
 /* Cuerpo de página */
 body {
-    /* Color de fondo de la página: Dark Gray */
-    background-color: #A9A9A9;
-    /* Color del texto de la página: Blanco */
-    color: white;
+    /* Color de fondo de la página: Chalk Gray */
+    background-color: #F3F2F2;
+    /* Color del texto de la página: Negro */
+    color: black;
     /* Deshabilitación de scroll vertical */
     overflow-y: hidden;
 }
 
-/* Cuerpos */
-.cuerpo {
-    /* Márgenes laterales */
-    left: 10px;
-    right: 10px;
+/* Títulos */
+h1 {
+    /* Fuente en negrita */
+    font-weight: bold;
+    /* Alineación del texto centrado */
+    text-align: center;
+}
+
+/* Contenedores de calendario */
+.contenedor-calendario {
+    /* Borde */
+    border: 3px gray solid;
+    /* Márgenes verticales */
+    margin-top: 15px;
+    margin-bottom: 15px;
+    /* Color de fondo: darkgray */
+    background-color: darkgray;
+    /* Sombra del bloque */
+    box-shadow: 5px 5px 5px black;
 }
 
 /* Calendarios */
 .calendar {
-    /* Eliminación de separación vertical superior */
+    /* Eliminación de separación vertical */
     padding-top: 0px;
+    padding-bottom: 0px;
 }
 
 /* Contenedores de vistas de calendario */
@@ -31,8 +46,22 @@ div.fc-view-container {
 .fc-event {
     /* Tamaño normal de la fuente de los eventos */
     font-size: 1em;
+    /* Color del texto del evento: Negro */
+    color: black;
     /* Fuente de los eventos en negrita */
     font-weight: bold;
     /* Fuente de los eventos sin subrayado */
     text-decoration: none !important;
+}
+
+/* Barra de herramientas de la cabecera del calendario */
+.fc-toolbar {
+    /* Ocultamiento de la barra completa */
+    display: none;
+}
+
+/* Línea indicativa de la hora actual en el calendario */
+.fc-now-indicator-line {
+    /* Grosor de la línea */
+    border-left-width: 3px !important;
 }
