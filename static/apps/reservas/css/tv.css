@@ -6,6 +6,8 @@ body {
     color: black;
     /* Deshabilitación de scroll vertical */
     overflow-y: hidden;
+    /* Ocultamiento del cursor */
+    cursor: none;
 }
 
 /* Títulos */
