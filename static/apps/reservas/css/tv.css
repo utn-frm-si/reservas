@@ -25,6 +25,10 @@ h1 {
     /* Márgenes verticales */
     margin-top: 15px;
     margin-bottom: 15px;
+    /* Padding */
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
     /* Color de fondo: darkgray */
     background-color: darkgray;
     /* Sombra del bloque */
