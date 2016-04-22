@@ -26,6 +26,23 @@ class TvBedeliaDetailView(DetailView):
         return get_object_or_404(Bedelia, area__slug=self.kwargs['area_slug'])
 
 
+class TvBedeliaCuerposDetailView(DetailView):
+    """
+    Vista de detalle para la visualización en TV de una instancia específica de Bedelia, con sus
+    recursos ordenados por cuerpo.
+    """
+    model = Bedelia
+    context_object_name = 'bedelia'
+    template_name = 'app_reservas/tv_bedelia_cuerpos.html'
+
+    def get_object(self, **kwargs):
+        """
+        Retorna la instancia de Bedelia que tiene asociada el área cuyo slug concuerda con el
+        parámetro 'area_slug' de la URL, o una respuesta 404 en caso de ser inválido.
+        """
+        return get_object_or_404(Bedelia, area__slug=self.kwargs['area_slug'])
+
+
 class TvCuerposListView(ListView):
     """
     Vista de lista para la visualización en TV de instancias de Cuerpo, ordenadas por número.

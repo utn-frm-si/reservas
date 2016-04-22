@@ -65,3 +65,50 @@ def get_recursos_asociados(instancia):
                 )
 
     return recursos
+
+
+def get_recursos_asociados_por_cuerpo(instancia):
+    """Retorna todos los recursos asociados a la instancia, separados por cuerpo.
+
+    Genera una lista conformada por diccionarios, uno por cada cuerpo que presenta recursos
+    asociados. Cada uno de estos diccionarios indica el cuerpo y una lista con las instancias de
+    ese tipo que están relacionadas a la instancia.
+    En caso de que la instancia no tenga recursos relacionados de un cuerpo, el diccionario de este
+    cuerpo no es añadido a la lista.
+
+    Parameters
+    ----------
+    instancia : object
+        Instancia de la cual se obtienen sus recursos asociados.
+
+    Returns
+    -------
+    list of dicts
+        Lista de diccionarios, uno por cada cuerpo que presenta al menos una instancia relacionada.
+    """
+    lista_elementos = []
+    recursos_por_cuerpo = []
+
+    # Obtiene los recursos asociados a la instancia.
+    recursos = get_recursos_asociados(instancia)
+    # Combina en una única lista todos los elementos de los diferentes tipos de recurso asociados.
+    for tipo_recurso in recursos:
+        lista_elementos.extend(tipo_recurso['elementos'])
+
+    # Crea una lista con los cuerpos que presentan al menos un recurso relacionado (sin
+    # repeticiones), y la ordena por el número de cuerpo.
+    cuerpos = list({elemento.nivel.cuerpo for elemento in lista_elementos})
+    cuerpos.sort(key=lambda cuerpo: cuerpo.numero)
+
+    # Itera entre los cuerpos.
+    for cuerpo in cuerpos:
+        # Añade los recursos asociados del cuerpo actual.
+        recursos_por_cuerpo.append(
+            {
+                'cuerpo': cuerpo,
+                'elementos': [elemento for elemento in lista_elementos
+                              if elemento.nivel.cuerpo == cuerpo],
+            }
+        )
+
+    return recursos_por_cuerpo

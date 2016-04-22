@@ -16,6 +16,7 @@ from .views import (
     SolicitudAulaView,
     SolicitudLaboratorioInformaticoView,
     SolicitudMaterialMultimediaView,
+    TvBedeliaCuerposDetailView,
     TvBedeliaDetailView,
     TvCuerposListView,
 )
@@ -106,5 +107,10 @@ urlpatterns = [
         r'^tv/bedelia/(?P<area_slug>[-\w]+)/$',
         TvBedeliaDetailView.as_view(),
         name='tv_area'
+    ),
+    url(
+        r'^tv/bedelia/(?P<area_slug>[-\w]+)/cuerpos/$',
+        TvBedeliaCuerposDetailView.as_view(),
+        name='tv_area_cuerpos'
     ),
 ]

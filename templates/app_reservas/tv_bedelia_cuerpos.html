@@ -1,0 +1,98 @@
+{% extends 'app_reservas/tv_bedelia.html' %}
+{% load static %}
+
+
+{% block contenido %}
+    <h1>Departamento de {{ bedelia.area }}</h1>
+
+    <div id="cuerpos">
+        {% for recursos_cuerpo in bedelia.get_recursos_por_cuerpo %}
+            <div id="cuerpo_{{ recursos_cuerpo.cuerpo.numero }}" class="contenedor-calendario">
+                <h1>{{ recursos_cuerpo.cuerpo }}</h1>
+
+                <div id="calendar_cuerpo_{{ recursos_cuerpo.cuerpo.numero }}" class="calendar"></div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock contenido %}
+
+
+{% block scripts %}
+    <script>
+        {% block fullcalendar_js_vars %}
+            {{ block.super }}
+        {% endblock fullcalendar_js_vars %}
+
+        $(document).ready(function() {
+            {% for recursos_cuerpo in bedelia.get_recursos_por_cuerpo %}
+                $("#calendar_cuerpo_{{ recursos_cuerpo.cuerpo.numero }}").fullCalendar({
+                    {% block fullcalendar_defaultView %}
+                        {{ block.super }}
+                    {% endblock fullcalendar_defaultView %}
+                    {% block fullcalendar_base_config %}
+                        {{ block.super }}
+                    {% endblock fullcalendar_base_config %}
+                    resourceColumns: [
+                        {
+                            group: true,
+                            labelText: 'Nivel',
+                            field: 'nivel'
+                        },
+                        {
+                            labelText: 'Recurso',
+                            field: 'title'
+                        },
+                    ],
+                    resources: [
+                        {% for recurso in recursos_cuerpo.elementos %}
+                            {
+                                id: '{{ recurso.id }}',
+                                nivel: '{{ recurso.nivel.get_nombre_corto }}',
+                                title: '{{ recurso.get_nombre_corto }}',
+                            },
+                        {% endfor %}
+                    ],
+                    eventSources: [
+                        {% for recurso in recursos_cuerpo.elementos %}
+                                {
+                                    url: '{% url "recurso_eventos_json" recurso.id %}',
+                                    {% if recurso.calendar_color %}
+                                        color: '{{ recurso.calendar_color }}',
+                                    {% endif %}
+                                },
+                        {% endfor %}
+                    ],
+                    header: {
+                        {% block fullcalendar_header %}
+                            left: '',
+                            center: 'title',
+                            right: '',
+                        {% endblock fullcalendar_header %}
+                    },
+                    titleFormat: "[{{ recursos_cuerpo.cuerpo }}]",
+                    {% block fullcalendar_loading_callback %}
+                        {{ block.super }}
+                    {% endblock fullcalendar_loading_callback %}
+                    {% block fullcalendar_opciones %}
+                        {{ block.super }}
+                    {% endblock %}
+                });
+            {% endfor %}
+
+            // Función que genera la transición de cuerpos, al ir quitando el último cuerpo del
+            // listado, y añadiéndolo al principio del mismo.
+            function generarTransicionCuerpo() {
+                var ultimo_cuerpo = $(".contenedor-calendario").last();
+                ultimo_cuerpo.hide();
+                $("#cuerpos").prepend(ultimo_cuerpo);
+                ultimo_cuerpo.fadeIn(1500);
+            }
+
+            // Ejecuta la transición sólo cuando hay más de un cuerpo disponible en la vista.
+            if ($(".contenedor-calendario").length > 1) {
+                // Establece la transición de cuerpos cada 10 segundos.
+                var timer = setInterval(generarTransicionCuerpo, 10000);
+            }
+        });
+    </script>
+{% endblock scripts %}
