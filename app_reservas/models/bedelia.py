@@ -2,7 +2,10 @@
 
 from django.db import models
 
-from ..services.recursos import get_recursos_asociados
+from ..services.recursos import (
+    get_recursos_asociados,
+    get_recursos_asociados_por_cuerpo,
+)
 
 
 class Bedelia(models.Model):
@@ -55,3 +58,15 @@ class Bedelia(models.Model):
             instancia relacionada.
         """
         return get_recursos_asociados(self)
+
+    def get_recursos_por_cuerpo(self):
+        """
+        Retorna todos los recursos asociados a la instancia, separados por cuerpo.
+
+        Returns
+        -------
+        list of dicts
+            Lista de diccionarios, uno por cada cuerpo que presenta al menos una instancia
+            relacionada.
+        """
+        return get_recursos_asociados_por_cuerpo(self)
