@@ -9,7 +9,7 @@
 {% block contenido %}
     <div id="cuerpos">
         {% for cuerpo in cuerpos %}
-            <div id="cuerpo_{{ cuerpo.numero }}" class="contenedor-calendario" data-calendario-numero="{{ forloop.counter }}">
+            <div id="cuerpo_{{ cuerpo.numero }}" class="contenedor-calendario">
                 <h1>{{ cuerpo }}</h1>
 
                 <div id="calendar_cuerpo_{{ cuerpo.numero }}" class="calendar"></div>
@@ -62,12 +62,12 @@
                         {% for nivel in cuerpo.get_niveles %}
                             {% for tipo_recurso in nivel.get_recursos %}
                                 {% for recurso in tipo_recurso.elementos %}
-                                {
-                                    url: '{% url "recurso_eventos_json" recurso.id %}',
-                                    {% if recurso.calendar_color %}
-                                        color: '{{ recurso.calendar_color }}',
-                                    {% endif %}
-                                },
+                                    {
+                                        url: '{% url "recurso_eventos_json" recurso.id %}',
+                                        {% if recurso.calendar_color %}
+                                            color: '{{ recurso.calendar_color }}',
+                                        {% endif %}
+                                    },
                                 {% endfor %}
                             {% endfor %}
                         {% endfor %}
@@ -96,7 +96,7 @@
             }
 
             // Ejecuta la transición sólo cuando hay más de un cuerpo disponible en la vista.
-            if ({{ cuerpos|length }} > 1) {
+            if ($(".contenedor-calendario").length > 1) {
                 // Establece la transición de cuerpos cada 10 segundos.
                 var timer = setInterval(generarTransicionCuerpo, 10000);
             }

@@ -54,12 +54,12 @@
                     ],
                     eventSources: [
                         {% for recurso in recursos_cuerpo.elementos %}
-                                {
-                                    url: '{% url "recurso_eventos_json" recurso.id %}',
-                                    {% if recurso.calendar_color %}
-                                        color: '{{ recurso.calendar_color }}',
-                                    {% endif %}
-                                },
+                            {
+                                url: '{% url "recurso_eventos_json" recurso.id %}',
+                                {% if recurso.calendar_color %}
+                                    color: '{{ recurso.calendar_color }}',
+                                {% endif %}
+                            },
                         {% endfor %}
                     ],
                     header: {
