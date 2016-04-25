@@ -27,4 +27,4 @@ class Area(models.Model):
         """
         Retorna el listado de aulas asociadas a la instancia.
         """
-        return self.aula_set.order_by('numero', 'nombre')
+        return self.aula_set.all()
