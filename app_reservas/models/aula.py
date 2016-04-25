@@ -35,6 +35,7 @@ class Aula(Recurso):
         Información de la clase.
         """
         app_label = 'app_reservas'
+        ordering = ['nivel', 'numero', 'nombre']
         verbose_name = 'Aula'
         verbose_name_plural = 'Aulas'
 

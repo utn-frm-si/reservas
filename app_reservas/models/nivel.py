@@ -36,7 +36,7 @@ class Nivel(models.Model):
         """
         Retorna el listado de aulas asociadas a la instancia.
         """
-        return self.aula_set.order_by('numero', 'nombre')
+        return self.aula_set.all()
 
     def get_laboratorios_electronica(self):
         """

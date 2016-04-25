@@ -33,7 +33,7 @@ class Bedelia(models.Model):
         """
         Retorna el listado de aulas asociadas a la instancia.
         """
-        return self.aulas.order_by('numero', 'nombre')
+        return self.aulas.all()
 
     def get_laboratorios_electronica(self):
         """
