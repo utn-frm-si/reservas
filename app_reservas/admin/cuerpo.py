@@ -20,5 +20,5 @@ class CuerpoAdmin(admin.ModelAdmin):
         """
         Obtiene el listado de niveles asociados a la instancia.
         """
-        return ", ".join([nivel.get_nombre_corto() for nivel in obj.nivel_set.order_by('numero')])
+        return ", ".join([nivel.get_nombre_corto() for nivel in obj.nivel_set.all()])
     _niveles.short_description = 'Niveles'

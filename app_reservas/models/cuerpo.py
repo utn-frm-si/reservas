@@ -38,4 +38,4 @@ class Cuerpo(models.Model):
         """
         Retorna el listado de niveles asociados a la instancia.
         """
-        return self.nivel_set.order_by('numero')
+        return self.nivel_set.all()
