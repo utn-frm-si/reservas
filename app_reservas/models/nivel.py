@@ -16,6 +16,7 @@ class Nivel(models.Model):
         Información de la clase.
         """
         app_label = 'app_reservas'
+        ordering = ['cuerpo', 'numero']
         verbose_name = 'Nivel'
         verbose_name_plural = 'Niveles'
 
