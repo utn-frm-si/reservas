@@ -40,6 +40,10 @@ h1 {
     /* Eliminación de separación vertical */
     padding-top: 0px;
     padding-bottom: 0px;
+    /* Color del texto: Chalk Gray */
+    color: #F3F2F2;
+    /* Fuente en negrita */
+    font-weight: bold;
 }
 
 /* Contenedores de vistas de calendario */
