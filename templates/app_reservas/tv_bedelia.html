@@ -58,7 +58,7 @@
                                     {
                                         id: '{{ recurso.id }}',
                                         nivel: '{{ recurso.nivel.get_nombre_corto }}',
-                                        cuerpo: '{{ recurso.nivel.cuerpo }}',
+                                        cuerpo: '{{ recurso.nivel.cuerpo.get_nombre_corto }}',
                                         title: '{{ recurso.get_nombre_corto }}',
                                     },
                                 {% endif %}
