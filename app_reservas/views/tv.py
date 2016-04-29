@@ -25,6 +25,25 @@ class TvBedeliaDetailView(DetailView):
         """
         return get_object_or_404(Bedelia, area__slug=self.kwargs['area_slug'])
 
+    def get_context_data(self, **kwargs):
+        """
+        Añade al contexto la información de cuerpo y nivel especificados
+        mediante parámetros GET.
+        """
+        # Obtiene la información de contexto base.
+        context = super(TvBedeliaDetailView, self).get_context_data(**kwargs)
+        # Obtiene los parámetros GET de cuerpo y nivel especificados.
+        cuerpo = self.request.GET.get('cuerpo')
+        nivel = self.request.GET.get('nivel')
+        # Convierte los parámetros a entero y los añade al contexto, sólo en
+        # caso de que se hayan especificado y sean números.
+        if cuerpo and cuerpo.isdigit():
+            context['cuerpo_solicitado'] = int(cuerpo)
+        if nivel and nivel.isdigit():
+            context['nivel_solicitado'] = int(nivel)
+        # Retorna el contexto modificado.
+        return context
+
 
 class TvBedeliaCuerposDetailView(DetailView):
     """

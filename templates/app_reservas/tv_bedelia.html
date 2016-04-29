@@ -35,23 +35,48 @@
                     {% block fullcalendar_base_config %}
                         {{ block.super }}
                     {% endblock fullcalendar_base_config %}
-                    resourceLabelText: "{{ tipo_recurso.nombre_singular }}",
+                    resourceColumns: [
+                        {
+                            group: true,
+                            labelText: 'Cuerpo',
+                            field: 'cuerpo'
+                        },
+                        {
+                            group: true,
+                            labelText: 'Nivel',
+                            field: 'nivel'
+                        },
+                        {
+                            labelText: '{{ tipo_recurso.nombre_singular }}',
+                            field: 'title'
+                        },
+                    ],
                     resources: [
                         {% for recurso in tipo_recurso.elementos %}
-                            {
-                                id: '{{ recurso.id }}',
-                                title: '{{ recurso }}',
-                            },
+                            {% if not cuerpo_solicitado or cuerpo_solicitado == recurso.nivel.cuerpo.numero %}
+                                {% if not nivel_solicitado or nivel_solicitado == recurso.nivel.numero %}
+                                    {
+                                        id: '{{ recurso.id }}',
+                                        nivel: '{{ recurso.nivel.get_nombre_corto }}',
+                                        cuerpo: '{{ recurso.nivel.cuerpo }}',
+                                        title: '{{ recurso.get_nombre_corto }}',
+                                    },
+                                {% endif %}
+                            {% endif %}
                         {% endfor %}
                     ],
                     eventSources: [
                         {% for recurso in tipo_recurso.elementos %}
-                            {
-                                url: '{% url "recurso_eventos_json" recurso.id %}',
-                                {% if recurso.calendar_color %}
-                                    color: '{{ recurso.calendar_color }}',
+                            {% if not cuerpo_solicitado or cuerpo_solicitado == recurso.nivel.cuerpo.numero %}
+                                {% if not nivel_solicitado or nivel_solicitado == recurso.nivel.numero %}
+                                    {
+                                        url: '{% url "recurso_eventos_json" recurso.id %}',
+                                        {% if recurso.calendar_color %}
+                                            color: '{{ recurso.calendar_color }}',
+                                        {% endif %}
+                                    },
                                 {% endif %}
-                            },
+                            {% endif %}
                         {% endfor %}
                     ],
                     header: {

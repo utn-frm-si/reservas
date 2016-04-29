@@ -65,11 +65,10 @@
                     header: {
                         {% block fullcalendar_header %}
                             left: '',
-                            center: 'title',
+                            center: '',
                             right: '',
                         {% endblock fullcalendar_header %}
                     },
-                    titleFormat: "[{{ recursos_cuerpo.cuerpo }}]",
                     {% block fullcalendar_loading_callback %}
                         {{ block.super }}
                     {% endblock fullcalendar_loading_callback %}
