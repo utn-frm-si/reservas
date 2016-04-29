@@ -22,7 +22,7 @@ from .solicitud import (
     SolicitudMaterialMultimediaView,
 )
 from .tv import (
-    TvBedeliaCuerposDetailView,
-    TvBedeliaDetailView,
     TvCuerposListView,
+    TvVisorCuerposDetailView,
+    TvVisorDetailView,
 )

@@ -36,11 +36,6 @@ package app_reservas <<Frame>> {
         + get_nombre_corto(): str
     }
 
-    class Bedelia {
-        ' Atributos
-        + int id
-    }
-
     class Cuerpo {
         ' Atributos
         + int id
@@ -91,21 +86,35 @@ package app_reservas <<Frame>> {
         + get_nombre_corto(): str
     }
 
+    class VisorTv {
+        ' Atributos
+        + int id
+        + str nombre
+        + str slug
+        ' Métodos
+        + get_nombre_corto(): str
+        + get_aulas(): Aula[]
+        + get_laboratorios_electronica(): LaboratorioElectronica[]
+        + get_laboratorios_informatica(): LaboratorioInformatico[]
+        + get_recursos(): {tipo_recurso: Recurso[]}[]
+        + get_recursos_por_cuerpo(): {Cuerpo: Recurso[]}[]
+    }
+
 
     ' Relaciones
 
     Aula "n" --> "m" Area: areas
     Aula "n" --> "1" Nivel: nivel
 
-    Bedelia "1" --> "1" Area: area
-    Bedelia "n" -> "0..m" Aula: aulas
-    Bedelia "n" -> "0..m" LaboratorioElectronica: laboratorios_electronica
-    Bedelia "n" -> "0..m" LaboratorioInformatico: laboratorios_informatica
-
     LaboratorioElectronica "n" --> "1" Nivel: nivel
     LaboratorioInformatico "n" --> "1" Nivel: nivel
 
     Nivel "n" --> "1" Cuerpo: cuerpo
+
+    VisorTv "n" --> "1" Area: area
+    VisorTv "n" -> "0..m" Aula: aulas
+    VisorTv "n" -> "0..m" LaboratorioElectronica: laboratorios_electronica
+    VisorTv "n" -> "0..m" LaboratorioInformatico: laboratorios_informatica
 
 
     ' Herencias

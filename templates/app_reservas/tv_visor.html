@@ -2,15 +2,15 @@
 {% load static %}
 
 {% block title %}
-    Departamento de {{ bedelia.area }}
+    {{ visor.get_nombre_corto }}
 {% endblock title %}
 
 
 {% block contenido %}
     <div class="contenedor-calendario">
-        <h1>Departamento de {{ bedelia.area }}</h1>
+        <h1>{{ visor.get_nombre_corto }}</h1>
 
-        {% for tipo_recurso in bedelia.get_recursos %}
+        {% for tipo_recurso in visor.get_recursos %}
             {% if not forloop.first %}
                 <br />
             {% endif %}
@@ -27,7 +27,7 @@
         {% endblock fullcalendar_js_vars %}
 
         $(document).ready(function() {
-            {% for tipo_recurso in bedelia.get_recursos %}
+            {% for tipo_recurso in visor.get_recursos %}
                 $("#calendar_{{ tipo_recurso.slug }}").fullCalendar({
                     {% block fullcalendar_defaultView %}
                         {{ block.super }}
