@@ -47,29 +47,33 @@
                     ],
                     resources: [
                         {% for nivel in cuerpo.get_niveles %}
-                            {% for tipo_recurso in nivel.get_recursos %}
-                                {% for recurso in tipo_recurso.elementos %}
-                                    {
-                                        id: '{{ recurso.id }}',
-                                        nivel: '{{ nivel.get_nombre_corto }}',
-                                        title: '{{ recurso.get_nombre_corto }}',
-                                    },
+                            {% if not nivel_solicitado or nivel_solicitado == nivel.numero %}
+                                {% for tipo_recurso in nivel.get_recursos %}
+                                    {% for recurso in tipo_recurso.elementos %}
+                                        {
+                                            id: '{{ recurso.id }}',
+                                            nivel: '{{ nivel.get_nombre_corto }}',
+                                            title: '{{ recurso.get_nombre_corto }}',
+                                        },
+                                    {% endfor %}
                                 {% endfor %}
-                            {% endfor %}
+                            {% endif %}
                         {% endfor %}
                     ],
                     eventSources: [
                         {% for nivel in cuerpo.get_niveles %}
-                            {% for tipo_recurso in nivel.get_recursos %}
-                                {% for recurso in tipo_recurso.elementos %}
-                                    {
-                                        url: '{% url "recurso_eventos_json" recurso.id %}',
-                                        {% if recurso.calendar_color %}
-                                            color: '{{ recurso.calendar_color }}',
-                                        {% endif %}
-                                    },
+                            {% if not nivel_solicitado or nivel_solicitado == nivel.numero %}
+                                {% for tipo_recurso in nivel.get_recursos %}
+                                    {% for recurso in tipo_recurso.elementos %}
+                                        {
+                                            url: '{% url "recurso_eventos_json" recurso.id %}',
+                                            {% if recurso.calendar_color %}
+                                                color: '{{ recurso.calendar_color }}',
+                                            {% endif %}
+                                        },
+                                    {% endfor %}
                                 {% endfor %}
-                            {% endfor %}
+                            {% endif %}
                         {% endfor %}
                     ],
                     header: {

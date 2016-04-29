@@ -90,3 +90,19 @@ class TvCuerposListView(ListView):
         # Retorna los cuerpos, ordenados por número (el ordenamiento está definido a nivel de
         # modelo).
         return cuerpos.all()
+
+    def get_context_data(self, **kwargs):
+        """
+        Añade al contexto la información de nivel especificado mediante
+        parámetro GET.
+        """
+        # Obtiene la información de contexto base.
+        context = super(TvCuerposListView, self).get_context_data(**kwargs)
+        # Obtiene el parámetro GET de nivel especificado.
+        nivel = self.request.GET.get('nivel')
+        # Convierte el parámetro a entero y lo añade al contexto, sólo en caso
+        # de que se haya especificado y sea número.
+        if nivel and nivel.isdigit():
+            context['nivel_solicitado'] = int(nivel)
+        # Retorna el contexto modificado.
+        return context
