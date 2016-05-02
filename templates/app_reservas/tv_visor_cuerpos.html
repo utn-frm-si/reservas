@@ -1,12 +1,12 @@
-{% extends 'app_reservas/tv_bedelia.html' %}
+{% extends 'app_reservas/tv_visor.html' %}
 {% load static %}
 
 
 {% block contenido %}
-    <h1>Departamento de {{ bedelia.area }}</h1>
+    <h1>{{ visor.get_nombre_corto }}</h1>
 
     <div id="cuerpos">
-        {% for recursos_cuerpo in bedelia.get_recursos_por_cuerpo %}
+        {% for recursos_cuerpo in visor.get_recursos_por_cuerpo %}
             <div id="cuerpo_{{ recursos_cuerpo.cuerpo.numero }}" class="contenedor-calendario">
                 <h1>{{ recursos_cuerpo.cuerpo }}</h1>
 
@@ -24,7 +24,7 @@
         {% endblock fullcalendar_js_vars %}
 
         $(document).ready(function() {
-            {% for recursos_cuerpo in bedelia.get_recursos_por_cuerpo %}
+            {% for recursos_cuerpo in visor.get_recursos_por_cuerpo %}
                 $("#calendar_cuerpo_{{ recursos_cuerpo.cuerpo.numero }}").fullCalendar({
                     {% block fullcalendar_defaultView %}
                         {{ block.super }}

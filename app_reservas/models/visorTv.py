@@ -8,9 +8,12 @@ from ..services.recursos import (
 )
 
 
-class Bedelia(models.Model):
+class VisorTv(models.Model):
+    # Atributos
+    nombre = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=50)
     # Relaciones
-    area = models.OneToOneField('Area')
+    area = models.ForeignKey('Area')
     aulas = models.ManyToManyField('Aula', blank=True)
     laboratorios_electronica = models.ManyToManyField('LaboratorioElectronica', blank=True)
     laboratorios_informatica = models.ManyToManyField('LaboratorioInformatico', blank=True)
@@ -20,14 +23,20 @@ class Bedelia(models.Model):
         Información de la clase.
         """
         app_label = 'app_reservas'
-        verbose_name = 'Bedelía'
-        verbose_name_plural = 'Bedelías'
+        verbose_name = 'Visor de TV'
+        verbose_name_plural = 'Visores de TV'
 
     def __str__(self):
         """
         Representación de la instancia.
         """
-        return 'Bedelía: {0!s}'.format(str(self.area))
+        return 'Visor de TV: {0!s}'.format(self.nombre)
+
+    def get_nombre_corto(self):
+        """
+        Retorna el nombre corto de la instancia.
+        """
+        return self.nombre
 
     def get_aulas(self):
         """

@@ -2,15 +2,17 @@
 
 from django.contrib import admin
 
-from ..models import Bedelia
+from ..models import VisorTv
 
 
-@admin.register(Bedelia)
-class BedeliaAdmin(admin.ModelAdmin):
+@admin.register(VisorTv)
+class VisorTvAdmin(admin.ModelAdmin):
     """
-    Especificación de la representación de Bedelia en la interfaz de administración.
+    Especificación de la representación de VisorTv en la interfaz de administración.
     """
     list_display = (
+        'nombre',
+        'slug',
         '_area',
         '_aulas',
         '_laboratorios_electronica',

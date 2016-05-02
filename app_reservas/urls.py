@@ -16,9 +16,9 @@ from .views import (
     SolicitudAulaView,
     SolicitudLaboratorioInformaticoView,
     SolicitudMaterialMultimediaView,
-    TvBedeliaCuerposDetailView,
-    TvBedeliaDetailView,
     TvCuerposListView,
+    TvVisorCuerposDetailView,
+    TvVisorDetailView,
 )
 
 
@@ -104,13 +104,26 @@ urlpatterns = [
         name='tv_cuerpos'
     ),
     url(
-        r'^tv/bedelia/(?P<area_slug>[-\w]+)/$',
-        TvBedeliaDetailView.as_view(),
-        name='tv_area'
+        r'^tv/visor/(?P<slug>[-\w]+)/$',
+        TvVisorDetailView.as_view(),
+        name='tv_visor'
     ),
     url(
-        r'^tv/bedelia/(?P<area_slug>[-\w]+)/cuerpos/$',
-        TvBedeliaCuerposDetailView.as_view(),
-        name='tv_area_cuerpos'
+        r'^tv/visor/(?P<slug>[-\w]+)/cuerpos/$',
+        TvVisorCuerposDetailView.as_view(),
+        name='tv_visor_cuerpos'
+    ),
+
+    # TODO: Eliminar. Vistas obsoletas debido a las vistas de VisorTv. Sólo se
+    # mantienen para compatibilidad con los visores que funcionan actualmente.
+    url(
+        r'^tv/bedelia/(?P<slug>[-\w]+)/$',
+        TvVisorDetailView.as_view(),
+        name='tv_bedelia'
+    ),
+    url(
+        r'^tv/bedelia/(?P<slug>[-\w]+)/cuerpos/$',
+        TvVisorCuerposDetailView.as_view(),
+        name='tv_bedelia_cuerpos'
     ),
 ]

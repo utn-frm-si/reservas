@@ -5,25 +5,26 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
 from ..models import (
-    Bedelia,
     Cuerpo,
+    VisorTv,
 )
 
 
-class TvBedeliaDetailView(DetailView):
+class TvVisorDetailView(DetailView):
     """
-    Vista de detalle para la visualización en TV de una instancia específica de Bedelia.
+    Vista de detalle para la visualización en TV de una instancia específica de
+    VisorTv.
     """
-    model = Bedelia
-    context_object_name = 'bedelia'
-    template_name = 'app_reservas/tv_bedelia.html'
+    model = VisorTv
+    context_object_name = 'visor'
+    template_name = 'app_reservas/tv_visor.html'
 
     def get_object(self, **kwargs):
         """
-        Retorna la instancia de Bedelia que tiene asociada el área cuyo slug concuerda con el
-        parámetro 'area_slug' de la URL, o una respuesta 404 en caso de ser inválido.
+        Retorna la instancia de VisorTv cuyo slug concuerda con el parámetro
+        'slug' de la URL, o una respuesta 404 en caso de ser inválido.
         """
-        return get_object_or_404(Bedelia, area__slug=self.kwargs['area_slug'])
+        return get_object_or_404(VisorTv, slug=self.kwargs['slug'])
 
     def get_context_data(self, **kwargs):
         """
@@ -31,7 +32,7 @@ class TvBedeliaDetailView(DetailView):
         mediante parámetros GET.
         """
         # Obtiene la información de contexto base.
-        context = super(TvBedeliaDetailView, self).get_context_data(**kwargs)
+        context = super(TvVisorDetailView, self).get_context_data(**kwargs)
         # Obtiene los parámetros GET de cuerpo y nivel especificados.
         cuerpo = self.request.GET.get('cuerpo')
         nivel = self.request.GET.get('nivel')
@@ -45,26 +46,27 @@ class TvBedeliaDetailView(DetailView):
         return context
 
 
-class TvBedeliaCuerposDetailView(DetailView):
+class TvVisorCuerposDetailView(DetailView):
     """
-    Vista de detalle para la visualización en TV de una instancia específica de Bedelia, con sus
-    recursos ordenados por cuerpo.
+    Vista de detalle para la visualización en TV de una instancia específica de
+    VisorTv, con sus recursos ordenados por cuerpo.
     """
-    model = Bedelia
-    context_object_name = 'bedelia'
-    template_name = 'app_reservas/tv_bedelia_cuerpos.html'
+    model = VisorTv
+    context_object_name = 'visor'
+    template_name = 'app_reservas/tv_visor_cuerpos.html'
 
     def get_object(self, **kwargs):
         """
-        Retorna la instancia de Bedelia que tiene asociada el área cuyo slug concuerda con el
-        parámetro 'area_slug' de la URL, o una respuesta 404 en caso de ser inválido.
+        Retorna la instancia de VisorTv cuyo slug concuerda con el parámetro
+        'slug' de la URL, o una respuesta 404 en caso de ser inválido.
         """
-        return get_object_or_404(Bedelia, area__slug=self.kwargs['area_slug'])
+        return get_object_or_404(VisorTv, slug=self.kwargs['slug'])
 
 
 class TvCuerposListView(ListView):
     """
-    Vista de lista para la visualización en TV de instancias de Cuerpo, ordenadas por número.
+    Vista de lista para la visualización en TV de instancias de Cuerpo,
+    ordenadas por número.
     """
     model = Cuerpo
     context_object_name = 'cuerpos'
