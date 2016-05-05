@@ -51,3 +51,10 @@ class Aula(Recurso):
         """
         nombre_corto = self.nombre or 'Aula {0:d}'.format(self.numero)
         return nombre_corto
+
+    def get_identificador_url(self):
+        """
+        Retorna el identificador utilizado para acceder a la URL de detalle de
+        la instancia.
+        """
+        return str(self.id)

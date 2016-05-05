@@ -33,6 +33,7 @@ package app_reservas <<Frame>> {
         + int capacidad
         + File archivo_ubicacion
         ' Métodos
+        + get_identificador_url(): str
         + get_nombre_corto(): str
     }
 
@@ -54,6 +55,7 @@ package app_reservas <<Frame>> {
         + int capacidad
         + File archivo_ubicacion
         ' Métodos
+        + get_identificador_url(): str
         + get_nombre_corto(): str
     }
 
@@ -65,6 +67,7 @@ package app_reservas <<Frame>> {
         + int capacidad
         + File archivo_ubicacion
         ' Métodos
+        + get_identificador_url(): str
         + get_nombre_corto(): str
     }
 
@@ -83,6 +86,7 @@ package app_reservas <<Frame>> {
         + int id
         + str identificador
         ' Métodos
+        + get_identificador_url(): str
         + get_nombre_corto(): str
     }
 

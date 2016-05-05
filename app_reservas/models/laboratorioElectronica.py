@@ -53,3 +53,10 @@ class LaboratorioElectronica(Recurso):
         Retorna el nombre corto de la instancia.
         """
         return '{0!s} ({1!s})'.format(self.nombre, self.alias)
+
+    def get_identificador_url(self):
+        """
+        Retorna el identificador utilizado para acceder a la URL de detalle de
+        la instancia.
+        """
+        return self.alias
