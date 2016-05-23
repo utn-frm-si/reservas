@@ -16,6 +16,7 @@ from .views import (
     ProyectorMultimediaListView,
     recurso_eventos_json,
     SolicitudAulaView,
+    SolicitudInstalacionSoftwareView,
     SolicitudLaboratorioInformaticoView,
     SolicitudMaterialMultimediaView,
     TvCuerposListView,
@@ -89,6 +90,11 @@ urlpatterns = [
         r'^solicitud/aula/$',
         SolicitudAulaView.as_view(),
         name='solicitud_aula'
+    ),
+    url(
+        r'^solicitud/instalacion_software/$',
+        SolicitudInstalacionSoftwareView.as_view(),
+        name='solicitud_instalacion_software'
     ),
     url(
         r'^solicitud/laboratorio/informatica/$',

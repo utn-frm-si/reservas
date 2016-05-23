@@ -10,6 +10,13 @@ class SolicitudAulaView(TemplateView):
     template_name = 'app_reservas/solicitud_aula.html'
 
 
+class SolicitudInstalacionSoftwareView(TemplateView):
+    """
+    Vista de plantilla para la página de solicitud de instalación de software.
+    """
+    template_name = 'app_reservas/solicitud_instalacion_software.html'
+
+
 class SolicitudLaboratorioInformaticoView(TemplateView):
     """
     Vista de plantilla para la página de solicitud de laboratorio informático.
