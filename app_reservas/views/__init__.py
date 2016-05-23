@@ -18,6 +18,7 @@ from .proyector_multimedia import (
 from .recurso import recurso_eventos_json
 from .solicitud import (
     SolicitudAulaView,
+    SolicitudInstalacionSoftwareView,
     SolicitudLaboratorioInformaticoView,
     SolicitudMaterialMultimediaView,
 )
