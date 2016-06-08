@@ -1,11 +1,12 @@
 from .area import Area
 from .aula import Aula
 from .cuerpo import Cuerpo
-from .laboratorioElectronica import LaboratorioElectronica
+from .laboratorio import Laboratorio
 from .laboratorioInformatico import LaboratorioInformatico
 from .nivel import Nivel
 from .proyectorMultimedia import ProyectorMultimedia
 from .recurso import Recurso
+from .tipoLaboratorio import TipoLaboratorio
 from .visorTv import VisorTv
 
 
@@ -13,10 +14,11 @@ __all__ = [
     'Area',
     'Aula',
     'Cuerpo',
-    'LaboratorioElectronica',
+    'Laboratorio',
     'LaboratorioInformatico',
     'Nivel',
     'ProyectorMultimedia',
     'Recurso',
+    'TipoLaboratorio',
     'VisorTv',
 ]

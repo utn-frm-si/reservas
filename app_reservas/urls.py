@@ -7,8 +7,7 @@ from .views import (
     AulaDetailView,
     CuerpoDetailView,
     IndexView,
-    LaboratorioElectronicaDetailView,
-    LaboratorioElectronicaListView,
+    LaboratorioDetailView,
     LaboratorioInformaticoDetailView,
     LaboratorioInformaticoListView,
     NivelDetailView,
@@ -19,6 +18,7 @@ from .views import (
     SolicitudInstalacionSoftwareView,
     SolicitudLaboratorioInformaticoView,
     SolicitudMaterialMultimediaView,
+    TipoLaboratorioDetailView,
     TvCuerposListView,
     TvVisorCuerposDetailView,
     TvVisorDetailView,
@@ -57,16 +57,6 @@ urlpatterns = [
         name='recurso_eventos_json'
     ),
     url(
-        r'^laboratorios/electronica/$',
-        LaboratorioElectronicaListView.as_view(),
-        name='laboratorio_electronica_listado'
-    ),
-    url(
-        r'^laboratorio/electronica/(?P<alias>[A-Za-z0-9]+)/$',
-        LaboratorioElectronicaDetailView.as_view(),
-        name='laboratorio_electronica_detalle'
-    ),
-    url(
         r'^laboratorios/informatica/$',
         LaboratorioInformaticoListView.as_view(),
         name='laboratorio_informatico_listado'
@@ -75,6 +65,16 @@ urlpatterns = [
         r'^laboratorio/informatica/(?P<alias>[A-Za-z0-9]+)/$',
         LaboratorioInformaticoDetailView.as_view(),
         name='laboratorio_informatico_detalle'
+    ),
+    url(
+        r'^laboratorios/(?P<slug>[-\w]+)/$',
+        TipoLaboratorioDetailView.as_view(),
+        name='tipo_laboratorio_detalle'
+    ),
+    url(
+        r'^laboratorio/(?P<tipo>[A-Za-z0-9]+)/(?P<alias>[A-Za-z0-9]+)/$',
+        LaboratorioDetailView.as_view(),
+        name='laboratorio_detalle'
     ),
     url(
         r'^proyectores/$',

@@ -39,11 +39,11 @@ class Nivel(models.Model):
         """
         return self.aula_set.all()
 
-    def get_laboratorios_electronica(self):
+    def get_laboratorios(self):
         """
-        Retorna el listado de laboratorios de Electrónica asociados a la instancia.
+        Retorna el listado de laboratorios asociados a la instancia.
         """
-        return self.laboratorioelectronica_set.all()
+        return self.laboratorio_set.all()
 
     def get_laboratorios_informatica(self):
         """

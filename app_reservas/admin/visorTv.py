@@ -15,7 +15,7 @@ class VisorTvAdmin(admin.ModelAdmin):
         'slug',
         '_area',
         '_aulas',
-        '_laboratorios_electronica',
+        '_laboratorios',
         '_laboratorios_informatica',
     )
 
@@ -36,15 +36,15 @@ class VisorTvAdmin(admin.ModelAdmin):
         )
     _aulas.short_description = 'Aulas'
 
-    def _laboratorios_electronica(self, obj):
+    def _laboratorios(self, obj):
         """
-        Obtiene el listado de laboratorios de Electrónica asociados a la instancia.
+        Obtiene el listado de laboratorios de Ingeniería asociados a la instancia.
         """
         return ", ".join(
             [laboratorio.get_nombre_corto()
-             for laboratorio in obj.laboratorios_electronica.all()]
+             for laboratorio in obj.laboratorios.all()]
         )
-    _laboratorios_electronica.short_description = 'Laboratorios de Electrónica'
+    _laboratorios.short_description = 'Laboratorios de Ingeniería'
 
     def _laboratorios_informatica(self, obj):
         """

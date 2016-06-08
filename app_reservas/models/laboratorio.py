@@ -13,16 +13,18 @@ def establecer_destino_archivo_ubicacion(instance, filename):
     Establece la ruta de destino para el archivo de ubicación cargado a la instancia.
     """
     # Almacena el archivo en:
-    # 'app_reservas/ubicaciones/laboratorios/electronica/<alias_del_laboratorio>.<extension>'
-    ruta_archivos_ubicacion = 'app_reservas/ubicaciones/laboratorios/electronica/'
+    # 'app_reservas/ubicaciones/laboratorios/<tipo>/<alias>.<extension>'
+    ruta_archivos_ubicacion = 'app_reservas/ubicaciones/laboratorios/{}/'.format(
+        instance.tipo.slug,
+    )
     extension_archivo = filename.split('.')[-1] if '.' in filename else ''
     nombre_archivo = '{0!s}.{1!s}'.format(slugify(instance.alias), extension_archivo)
     return os.path.join(ruta_archivos_ubicacion, nombre_archivo)
 
 
-class LaboratorioElectronica(Recurso):
+class Laboratorio(Recurso):
     """
-    Recurso que representa un laboratorio de Electrónica.
+    Recurso que representa un laboratorio de Ingeniería.
     """
     # Atributos
     nombre = models.CharField(max_length=50)
@@ -32,6 +34,7 @@ class LaboratorioElectronica(Recurso):
                                          blank=True)
     # Relaciones
     nivel = models.ForeignKey('Nivel')
+    tipo = models.ForeignKey('TipoLaboratorio')
 
     class Meta:
         """
@@ -39,14 +42,17 @@ class LaboratorioElectronica(Recurso):
         """
         app_label = 'app_reservas'
         ordering = ['alias']
-        verbose_name = 'Laboratorio de Electrónica'
-        verbose_name_plural = 'Laboratorios de Electrónica'
+        verbose_name = 'Laboratorio de Ingeniería'
+        verbose_name_plural = 'Laboratorios de Ingeniería'
 
     def __str__(self):
         """
         Representación de la instancia.
         """
-        return 'Laboratorio de Electrónica: {0!s}'.format(self.nombre)
+        return 'Laboratorio de {0!s}: {1!s}'.format(
+            self.tipo,
+            self.nombre,
+        )
 
     def get_nombre_corto(self):
         """

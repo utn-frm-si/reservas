@@ -15,7 +15,7 @@ class VisorTv(models.Model):
     # Relaciones
     area = models.ForeignKey('Area')
     aulas = models.ManyToManyField('Aula', blank=True)
-    laboratorios_electronica = models.ManyToManyField('LaboratorioElectronica', blank=True)
+    laboratorios = models.ManyToManyField('Laboratorio', blank=True)
     laboratorios_informatica = models.ManyToManyField('LaboratorioInformatico', blank=True)
 
     class Meta:
@@ -44,11 +44,11 @@ class VisorTv(models.Model):
         """
         return self.aulas.all()
 
-    def get_laboratorios_electronica(self):
+    def get_laboratorios(self):
         """
-        Retorna el listado de laboratorios de Electrónica asociados a la instancia.
+        Retorna el listado de laboratorios asociados a la instancia.
         """
-        return self.laboratorios_electronica.all()
+        return self.laboratorios.all()
 
     def get_laboratorios_informatica(self):
         """
