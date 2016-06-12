@@ -13,7 +13,8 @@
             <ul class="nav navbar-nav">
                 <li>
                     <a href="{% url 'index' %}">
-                        <i class="fa fa-home fa-lg fa-fw"></i>&nbsp;Inicio
+                        <i class="fa fa-home fa-lg fa-fw"></i>
+                        &nbsp;<span class="hidden-sm">Inicio</span>
                     </a>
                 </li>
                 <li class="dropdown">
@@ -23,7 +24,8 @@
                        role="button"
                        aria-haspopup="true"
                        aria-expanded="false">
-                        <i class="fa fa-university fa-lg fa-fw"></i>&nbsp;Distribución física <span class="caret"></span>
+                        <span class="hidden-sm"><i class="fa fa-university fa-lg fa-fw"></i></span>
+                        &nbsp;Distribución física <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
                         {% for cuerpo in lista_cuerpos %}
@@ -42,7 +44,8 @@
                        role="button"
                        aria-haspopup="true"
                        aria-expanded="false">
-                        <i class="fa fa-book fa-lg fa-fw"></i>&nbsp;Aulas <span class="caret"></span>
+                        <span class="hidden-sm"><i class="fa fa-book fa-lg fa-fw"></i></span>
+                        &nbsp;Aulas <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
                         {% for area in lista_areas %}
@@ -61,7 +64,28 @@
                        role="button"
                        aria-haspopup="true"
                        aria-expanded="false">
-                        <i class="fa fa-desktop fa-lg fa-fw"></i>&nbsp;ALI <span class="caret"></span>
+                        <span class="hidden-sm"><i class="fa fa-flask fa-lg fa-fw"></i></span>
+                        &nbsp;Laboratorios <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        {% for tipo in lista_tipos_laboratorio %}
+                            <li>
+                                <a href="{% url 'tipo_laboratorio_detalle' tipo.slug %}">
+                                    {{ tipo.nombre }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#"
+                       class="dropdown-toggle"
+                       data-toggle="dropdown"
+                       role="button"
+                       aria-haspopup="true"
+                       aria-expanded="false">
+                        <span class="hidden-sm"><i class="fa fa-desktop fa-lg fa-fw"></i></span>
+                        &nbsp;ALI <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li>
@@ -83,7 +107,8 @@
                        role="button"
                        aria-haspopup="true"
                        aria-expanded="false">
-                        <i class="fa fa- fa-pencil-square-o fa-lg fa-fw"></i>&nbsp;Solicitudes <span class="caret"></span>
+                        <span class="hidden-sm"><i class="fa fa- fa-pencil-square-o fa-lg fa-fw"></i></span>
+                        &nbsp;Solicitudes <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="{% url 'solicitud_aula' %}">Aula</a></li>
