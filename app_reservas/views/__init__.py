@@ -2,10 +2,7 @@ from .area import AreaDetailView
 from .aula import AulaDetailView
 from .cuerpo import CuerpoDetailView
 from .index import IndexView
-from .laboratorio_electronica import (
-    LaboratorioElectronicaDetailView,
-    LaboratorioElectronicaListView,
-)
+from .laboratorio import LaboratorioDetailView
 from .laboratorio_informatico import (
     LaboratorioInformaticoDetailView,
     LaboratorioInformaticoListView,
@@ -22,6 +19,7 @@ from .solicitud import (
     SolicitudLaboratorioInformaticoView,
     SolicitudMaterialMultimediaView,
 )
+from .tipo_laboratorio import TipoLaboratorioDetailView
 from .tv import (
     TvCuerposListView,
     TvVisorCuerposDetailView,

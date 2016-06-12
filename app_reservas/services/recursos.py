@@ -3,7 +3,7 @@
 from django.template.defaultfilters import slugify
 
 from ..models.aula import Aula
-from ..models.laboratorioElectronica import LaboratorioElectronica
+from ..models.laboratorio import Laboratorio
 from ..models.laboratorioInformatico import LaboratorioInformatico
 
 
@@ -35,9 +35,9 @@ def get_recursos_asociados(instancia):
             'metodo': 'get_aulas',
         },
         {
-            'modelo': LaboratorioElectronica,
-            'slug': 'laboratorio_electronica',
-            'metodo': 'get_laboratorios_electronica',
+            'modelo': Laboratorio,
+            'slug': 'laboratorio',
+            'metodo': 'get_laboratorios',
         },
         {
             'modelo': LaboratorioInformatico,

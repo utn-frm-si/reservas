@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
-from ..models import laboratorioElectronica
+from ..models import laboratorio
 
 
 class Migration(migrations.Migration):
@@ -29,7 +29,7 @@ class Migration(migrations.Migration):
                 (
                     'archivo_ubicacion',
                     models.FileField(blank=True,
-                                     upload_to=laboratorioElectronica
+                                     upload_to=laboratorio
                                      .establecer_destino_archivo_ubicacion)
                 ),
                 ('nivel', models.ForeignKey(to='app_reservas.Nivel')),

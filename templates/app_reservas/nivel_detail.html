@@ -82,7 +82,11 @@
                                                    data-toggle="tooltip"
                                                    data-placement="bottom"
                                                    title="Ver"
-                                                   href="{% url tipo_recurso.slug|add:'_detalle' recurso.get_identificador_url %}">
+                                                   {% if tipo_recurso.slug == "laboratorio" %}
+                                                       href="{% url tipo_recurso.slug|add:'_detalle' recurso.tipo.slug recurso.get_identificador_url %}">
+                                                   {% else %}
+                                                       href="{% url tipo_recurso.slug|add:'_detalle' recurso.get_identificador_url %}">
+                                                   {% endif %}
                                                     <span class="glyphicon glyphicon-eye-open"
                                                           aria-hidden="true">
                                                     </span>

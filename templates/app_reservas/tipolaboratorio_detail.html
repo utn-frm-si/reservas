@@ -2,12 +2,12 @@
 {% load static %}
 
 {% block title %}
-    Laboratorios de Electrónica
+    Laboratorios de {{ tipo_laboratorio }}
 {% endblock title %}
 
 
 {% block contenido %}
-    <h1 style="text-align: center;">Laboratorios de Electrónica</h1>
+    <h1 style="text-align: center;">Laboratorios de {{ tipo_laboratorio }}</h1>
 
     <br/>
     <br/>
@@ -20,7 +20,7 @@
                        data-toggle="collapse"
                        data-parent="#accordion"
                        href="#listado_laboratorios_electronica" aria-expanded="true" aria-controls="listado_laboratorios_electronica">
-                        Listado de laboratorios de Electrónica
+                        Listado de laboratorios de {{ tipo_laboratorio }}
                     </a>
                 </h4>
             </div>
@@ -42,8 +42,8 @@
                             </tr>
                             </thead>
                             <tbody>
-                            {% if laboratorios %}
-                                {% for laboratorio in laboratorios %}
+                            {% if tipo_laboratorio.laboratorio_set.exists %}
+                                {% for laboratorio in tipo_laboratorio.laboratorio_set.all %}
                                     <tr>
                                         <td>
                                             {{ laboratorio.get_nombre_corto }}
@@ -61,7 +61,7 @@
                                                data-toggle="tooltip"
                                                data-placement="bottom"
                                                title="Ver"
-                                               href="{% url 'laboratorio_electronica_detalle' laboratorio.alias %}">
+                                               href="{% url 'laboratorio_detalle' tipo_laboratorio.slug laboratorio.alias %}">
                                                 <span class="glyphicon glyphicon-eye-open"
                                                       aria-hidden="true">
                                                 </span>
@@ -84,7 +84,7 @@
                                 {% endfor %}
                             {% else %}
                                 <td class="text-center alert-warning" colspan="4">
-                                    No hay laboratorios de Electrónica cargados.
+                                    No hay laboratorios de {{ tipo_laboratorio }} cargados.
                                 </td>
                             {% endif %}
                             </tbody>
@@ -111,9 +111,9 @@
 
 
 {% block fullcalendar_resources %}
-    resourceLabelText: 'Laboratorio de Electrónica',
+    resourceLabelText: 'Laboratorio de {{ tipo_laboratorio }}',
     resources: [
-        {% for laboratorio in laboratorios %}
+        {% for laboratorio in tipo_laboratorio.laboratorio_set.all %}
             {
                 id: '{{ laboratorio.id }}',
                 title: '{{ laboratorio.get_nombre_corto }}',
@@ -124,7 +124,7 @@
 
 
 {% block fullcalendar_eventSources %}
-    {% for laboratorio in laboratorios %}
+    {% for laboratorio in tipo_laboratorio.laboratorio_set.all %}
         {
             url: '{% url "recurso_eventos_json" laboratorio.id %}',
             {% if laboratorio.calendar_color %}

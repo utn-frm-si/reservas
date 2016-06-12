@@ -2,17 +2,18 @@
 
 from django.contrib import admin
 
-from ..models import LaboratorioElectronica
+from ..models import Laboratorio
 
 
-@admin.register(LaboratorioElectronica)
-class LaboratorioElectronicaAdmin(admin.ModelAdmin):
+@admin.register(Laboratorio)
+class LaboratorioAdmin(admin.ModelAdmin):
     """
-    Especificación de la representación de LaboratorioElectronica en la interfaz de administración.
+    Especificación de la representación de Laboratorio en la interfaz de administración.
     """
     list_display = (
         'alias',
         'nombre',
+        '_tipo',
         'capacidad',
         '_nivel',
         '_cuerpo',
@@ -22,9 +23,18 @@ class LaboratorioElectronicaAdmin(admin.ModelAdmin):
     )
 
     list_filter = (
+        'tipo',
         'nivel',
         'nivel__cuerpo',
     )
+
+    def _tipo(self, obj):
+        """
+        Obtiene el tipo asociado a la instancia.
+        """
+        return obj.tipo
+    _tipo.short_description = 'Tipo'
+    _tipo.admin_order_field = 'tipo__nombre'
 
     def _nivel(self, obj):
         """
