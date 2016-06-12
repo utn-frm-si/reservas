@@ -14,6 +14,7 @@ from .views import (
     ProyectorMultimediaDetailView,
     ProyectorMultimediaListView,
     recurso_eventos_json,
+    SolicitudAliReclamosSugerencias,
     SolicitudAulaView,
     SolicitudInstalacionSoftwareView,
     SolicitudLaboratorioInformaticoView,
@@ -85,6 +86,11 @@ urlpatterns = [
         r'^proyector/(?P<identificador>[A-Za-z0-9_-]+)/$',
         ProyectorMultimediaDetailView.as_view(),
         name='proyector_multimedia_detalle'
+    ),
+    url(
+        r'^solicitud/ali/reclamos_sugerencias/$',
+        SolicitudAliReclamosSugerencias.as_view(),
+        name='solicitud_ali_reclamos_sugerencias'
     ),
     url(
         r'^solicitud/aula/$',
