@@ -3,6 +3,13 @@
 from django.views.generic.base import TemplateView
 
 
+class SolicitudAliReclamosSugerencias(TemplateView):
+    """
+    Vista de plantilla para la página de reclamos y sugerencias del ALI.
+    """
+    template_name = 'app_reservas/solicitud_ali_reclamos_sugerencias.html'
+
+
 class SolicitudAulaView(TemplateView):
     """
     Vista de plantilla para la página de solicitud de aula.
