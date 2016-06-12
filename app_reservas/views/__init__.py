@@ -1,3 +1,4 @@
+from .ali import AliVideoconferenciasDetailView
 from .area import AreaDetailView
 from .aula import AulaDetailView
 from .cuerpo import CuerpoDetailView

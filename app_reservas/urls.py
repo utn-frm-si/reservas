@@ -3,6 +3,7 @@
 from django.conf.urls import url
 
 from .views import (
+    AliVideoconferenciasDetailView,
     AreaDetailView,
     AulaDetailView,
     CuerpoDetailView,
@@ -56,6 +57,11 @@ urlpatterns = [
         r'^recurso/(?P<pk>\d+)/eventos/$',
         recurso_eventos_json,
         name='recurso_eventos_json'
+    ),
+    url(
+        r'^ali/videoconferencias/$',
+        AliVideoconferenciasDetailView.as_view(),
+        name='ali_videoconferencias_detalle'
     ),
     url(
         r'^laboratorios/informatica/$',
