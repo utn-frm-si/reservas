@@ -94,15 +94,18 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{% url 'proyector_multimedia_listado' %}">
-                                Proyectores multimedia
-                            </a>
-                        </li>
-                        <li>
                             <a href="{% url 'ali_videoconferencias_detalle' %}">
                                 Videoconferencias
                             </a>
                         </li>
+                        <li role="separator" class="divider"></li>
+                        {% for tipo in lista_tipos_recurso_ali %}
+                            <li>
+                                <a href="{% url 'tipo_recurso_ali_detalle' tipo.slug %}">
+                                    {{ tipo.nombre_plural }}
+                                </a>
+                            </li>
+                        {% endfor %}
                         <li role="separator" class="divider"></li>
                         <li><a href="{% url 'solicitud_ali_reclamos_sugerencias' %}">Reclamos y sugerencias</a></li>
                     </ul>

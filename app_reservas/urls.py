@@ -12,15 +12,15 @@ from .views import (
     LaboratorioInformaticoDetailView,
     LaboratorioInformaticoListView,
     NivelDetailView,
-    ProyectorMultimediaDetailView,
-    ProyectorMultimediaListView,
     recurso_eventos_json,
+    RecursoAliDetailView,
     SolicitudAliReclamosSugerencias,
     SolicitudAulaView,
     SolicitudInstalacionSoftwareView,
     SolicitudLaboratorioInformaticoView,
     SolicitudMaterialMultimediaView,
     TipoLaboratorioDetailView,
+    TipoRecursoAliDetailView,
     TvCuerposListView,
     TvVisorCuerposDetailView,
     TvVisorDetailView,
@@ -84,14 +84,14 @@ urlpatterns = [
         name='laboratorio_detalle'
     ),
     url(
-        r'^proyectores/$',
-        ProyectorMultimediaListView.as_view(),
-        name='proyector_multimedia_listado'
+        r'^ali/(?P<slug>[-\w]+)/$',
+        TipoRecursoAliDetailView.as_view(),
+        name='tipo_recurso_ali_detalle'
     ),
     url(
-        r'^proyector/(?P<identificador>[A-Za-z0-9_-]+)/$',
-        ProyectorMultimediaDetailView.as_view(),
-        name='proyector_multimedia_detalle'
+        r'^ali/(?P<tipo>[-\w]+)/(?P<identificador>[A-Za-z0-9_-]+)/$',
+        RecursoAliDetailView.as_view(),
+        name='recurso_ali_detalle'
     ),
     url(
         r'^solicitud/ali/reclamos_sugerencias/$',

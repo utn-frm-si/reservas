@@ -9,11 +9,8 @@ from .laboratorio_informatico import (
     LaboratorioInformaticoListView,
 )
 from .nivel import NivelDetailView
-from .proyector_multimedia import (
-    ProyectorMultimediaDetailView,
-    ProyectorMultimediaListView,
-)
 from .recurso import recurso_eventos_json
+from .recurso_ali import RecursoAliDetailView
 from .solicitud import (
     SolicitudAliReclamosSugerencias,
     SolicitudAulaView,
@@ -22,6 +19,7 @@ from .solicitud import (
     SolicitudMaterialMultimediaView,
 )
 from .tipo_laboratorio import TipoLaboratorioDetailView
+from .tipo_recurso_ali import TipoRecursoAliDetailView
 from .tv import (
     TvCuerposListView,
     TvVisorCuerposDetailView,

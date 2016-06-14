@@ -2,11 +2,11 @@
 {% load static %}
 
 {% block title %}
-    {{ proyector }}
+    {{ recurso }}
 {% endblock title %}
 
 {% block contenido %}
-    <h1 style="text-align: center;">{{ proyector }}</h1>
+    <h1 style="text-align: center;">{{ recurso }}</h1>
 
     <div id="calendar" class="calendar"></div>
 {% endblock contenido %}
@@ -19,9 +19,9 @@
 
 {% block fullcalendar_eventSources %}
     {
-        url: '{% url "recurso_eventos_json" proyector.id %}',
-        {% if proyector.calendar_color %}
-            color: '{{ proyector.calendar_color }}',
+        url: '{% url "recurso_eventos_json" recurso.id %}',
+        {% if recurso.calendar_color %}
+            color: '{{ recurso.calendar_color }}',
         {% endif %}
     },
 {% endblock fullcalendar_eventSources %}

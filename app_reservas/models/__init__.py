@@ -4,9 +4,10 @@ from .cuerpo import Cuerpo
 from .laboratorio import Laboratorio
 from .laboratorioInformatico import LaboratorioInformatico
 from .nivel import Nivel
-from .proyectorMultimedia import ProyectorMultimedia
 from .recurso import Recurso
+from .recursoAli import RecursoAli
 from .tipoLaboratorio import TipoLaboratorio
+from .tipoRecursoAli import TipoRecursoAli
 from .visorTv import VisorTv
 
 
@@ -17,8 +18,9 @@ __all__ = [
     'Laboratorio',
     'LaboratorioInformatico',
     'Nivel',
-    'ProyectorMultimedia',
     'Recurso',
+    'RecursoAli',
     'TipoLaboratorio',
+    'TipoRecursoAli',
     'VisorTv',
 ]
