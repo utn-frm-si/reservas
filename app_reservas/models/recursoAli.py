@@ -5,9 +5,10 @@ from django.db import models
 from .recurso import Recurso
 
 
-class ProyectorMultimedia(Recurso):
+class RecursoAli(Recurso):
     # Atributos
     identificador = models.CharField(max_length=20)
+    tipo = models.ForeignKey('TipoRecursoAli')
 
     class Meta:
         """
@@ -15,20 +16,32 @@ class ProyectorMultimedia(Recurso):
         """
         app_label = 'app_reservas'
         ordering = ['identificador']
-        verbose_name = 'Proyector multimedia'
-        verbose_name_plural = 'Proyectores multimedia'
+        verbose_name = 'Recurso del ALI'
+        verbose_name_plural = 'Recursos del ALI'
 
     def __str__(self):
         """
         Representación de la instancia.
         """
-        return 'Proyector multimedia: {0!s}'.format(self.get_nombre_corto())
+        return '{0!s}: {1!s}'.format(
+            self.tipo,
+            self.get_nombre_corto(),
+        )
 
     def get_nombre_corto(self):
         """
         Retorna el nombre corto de la instancia.
         """
-        return 'PM-{0!s}'.format(self.identificador)
+        if self.tipo.is_sufijo:
+            return '{0!s}-{1!s}'.format(
+                self.identificador,
+                self.tipo.prefijo,
+            )
+        else:
+            return '{0!s}-{1!s}'.format(
+                self.tipo.prefijo,
+                self.identificador,
+            )
 
     def get_identificador_url(self):
         """

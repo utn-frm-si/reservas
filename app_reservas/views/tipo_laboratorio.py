@@ -7,7 +7,7 @@ from ..models import TipoLaboratorio
 
 class TipoLaboratorioDetailView(DetailView):
     """
-    Vista de detalle para una instancia específica de Area.
+    Vista de detalle para una instancia específica de TipoLaboratorio.
     """
     model = TipoLaboratorio
     context_object_name = 'tipo_laboratorio'

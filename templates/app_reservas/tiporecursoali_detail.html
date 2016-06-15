@@ -2,35 +2,35 @@
 {% load static %}
 
 {% block title %}
-    Proyectores multimedia
+    {{ tipo_recurso.nombre_plural }}
 {% endblock title %}
 
 {% block contenido %}
-    <h1 style="text-align: center;">Proyectores multimedia</h1>
+    <h1 style="text-align: center;">{{ tipo_recurso.nombre_plural }}</h1>
 
     <br/>
     <br/>
 
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
         <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="heading_listado_proyectores_multimedia">
+            <div class="panel-heading" role="tab" id="heading_listado_tipo_recurso">
                 <h4 class="panel-title">
                     <a role="button"
                        data-toggle="collapse"
                        data-parent="#accordion"
-                       href="#listado_proyectores_multimedia" aria-expanded="true" aria-controls="listado_proyectores_multimedia">
-                        Listado de proyectores multimedia
+                       href="#listado_tipo_recurso" aria-expanded="true" aria-controls="listado_tipo_recurso">
+                        Listado de {{ tipo_recurso.nombre_plural }}
                     </a>
                 </h4>
             </div>
-            <div id="listado_proyectores_multimedia" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading_listado_proyectores_multimedia">
+            <div id="listado_tipo_recurso" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading_listado_tipo_recurso">
                 <div class="panel-body">
                     <div class="table-responsive">
                         <table class="table table-condensed table-bordered table-striped">
                             <thead>
                             <tr>
                                 <th class="text-center">
-                                    Proyector multimedia
+                                    {{ tipo_recurso }}
                                 </th>
                                 <th class="text-center">
                                     Acciones
@@ -38,11 +38,11 @@
                             </tr>
                             </thead>
                             <tbody>
-                            {% if proyectores %}
-                                {% for proyector in proyectores %}
+                            {% if tipo_recurso.recursoali_set.exists %}
+                                {% for recurso in tipo_recurso.recursoali_set.all %}
                                     <tr>
                                         <td>
-                                            {{ proyector.get_nombre_corto }}
+                                            {{ recurso.get_nombre_corto }}
                                         </td>
                                         <td class="text-center">
                                             <a role="button"
@@ -50,7 +50,7 @@
                                                data-toggle="tooltip"
                                                data-placement="bottom"
                                                title="Ver"
-                                               href="{% url 'proyector_multimedia_detalle' proyector.identificador %}">
+                                               href="{% url 'recurso_ali_detalle' tipo_recurso.slug recurso.identificador %}">
                                                 <span class="glyphicon glyphicon-eye-open"
                                                       aria-hidden="true">
                                                 </span>
@@ -60,7 +60,7 @@
                                 {% endfor %}
                             {% else %}
                                 <td class="text-center alert-warning" colspan="4">
-                                    No hay proyectores multimedia cargados.
+                                    No hay {{ tipo_recurso.nombre_plural }} cargados.
                                 </td>
                             {% endif %}
                             </tbody>
@@ -87,12 +87,12 @@
 
 
 {% block fullcalendar_resources %}
-    resourceLabelText: 'Proyector multimedia',
+    resourceLabelText: '{{ tipo_recurso }}',
     resources: [
-        {% for proyector in proyectores %}
+        {% for recurso in tipo_recurso.recursoali_set.all %}
             {
-                id: '{{ proyector.id }}',
-                title: '{{ proyector.get_nombre_corto }}',
+                id: '{{ recurso.id }}',
+                title: '{{ recurso.get_nombre_corto }}',
             },
         {% endfor %}
     ],
@@ -100,11 +100,11 @@
 
 
 {% block fullcalendar_eventSources %}
-    {% for proyector in proyectores %}
+    {% for recurso in tipo_recurso.recursoali_set.all %}
         {
-            url: '{% url "recurso_eventos_json" proyector.id %}',
-            {% if proyector.calendar_color %}
-                color: '{{ proyector.calendar_color }}',
+            url: '{% url "recurso_eventos_json" recurso.id %}',
+            {% if recurso.calendar_color %}
+                color: '{{ recurso.calendar_color }}',
             {% endif %}
         },
     {% endfor %}
