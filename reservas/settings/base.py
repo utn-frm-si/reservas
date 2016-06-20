@@ -156,6 +156,7 @@ BOWER_INSTALLED_APPS = (
     'jquery',
     'pace',
     'qtip2',
+    'slick-carousel',
 )
 
 # Token de Google Calendar, utilizado para consultar la información de eventos
