@@ -7,8 +7,19 @@ from .recurso import Recurso
 
 class RecursoAli(Recurso):
     # Atributos
-    identificador = models.CharField(max_length=20)
-    tipo = models.ForeignKey('TipoRecursoAli')
+    identificador = models.CharField(
+        max_length=20,
+        verbose_name='Identificador',
+        help_text='Identificador del recurso. No debe incluirse el prefijo o sufijo propio del '
+                  'tipo de recurso. Por ejemplo, si el identificador completo es "PM-078-DIE", en '
+                  'este campo debe introducirse "078-DIE", ya que el prefijo "PM" es propio del '
+                  'tipo de recurso "Proyector multimedia".',
+    )
+    # Relaciones
+    tipo = models.ForeignKey(
+        'TipoRecursoAli',
+        verbose_name='Tipo',
+    )
 
     class Meta:
         """

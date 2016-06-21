@@ -9,8 +9,22 @@ from ..adapters.google_calendar import generar_lista_eventos
 
 class Recurso(models.Model):
     # Atributos
-    calendar_codigo = models.CharField(max_length=100)
-    calendar_color = models.CharField(max_length=10, blank=True)
+    calendar_codigo = models.CharField(
+        max_length=100,
+        verbose_name='ID del calendario',
+        help_text='Puede conocerse al acceder a los detalles del calendario en Google Calendar. '
+                  'Su formato habitual es: "identificador@group.calendar.google.com". '
+                  'Por ejemplo, un valor válido es: '
+                  '"pi4pfu4alasbojtd1v1bj32oc0@group.calendar.google.com".',
+    )
+    calendar_color = models.CharField(
+        max_length=10,
+        blank=True,
+        verbose_name='Color del calendario',
+        help_text='Color con el que se visualizan los eventos del calendario. '
+                  'Debe estar en formato hexadecimal. Por ejemplo, un valor válido es: '
+                  '"#ff8c0a"',
+    )
 
     class Meta:
         """

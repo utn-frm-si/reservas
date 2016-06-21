@@ -7,9 +7,14 @@ from ..services.recursos import get_recursos_asociados
 
 class Nivel(models.Model):
     # Atributos
-    numero = models.SmallIntegerField()
+    numero = models.SmallIntegerField(
+        verbose_name='Número',
+    )
     # Relaciones
-    cuerpo = models.ForeignKey('Cuerpo')
+    cuerpo = models.ForeignKey(
+        'Cuerpo',
+        verbose_name='Cuerpo',
+    )
 
     class Meta:
         """

@@ -5,8 +5,18 @@ from django.db import models
 
 class Area(models.Model):
     # Atributos
-    nombre = models.CharField(max_length=50)
-    slug = models.SlugField(max_length=50)
+    nombre = models.CharField(
+        max_length=50,
+        verbose_name='Nombre',
+    )
+    slug = models.SlugField(
+        max_length=50,
+        verbose_name='Slug',
+        help_text='Etiqueta corta que identifica al área, y sólo puede contener letras, números, '
+                  'guiones bajos y guiones medios. Generalmente es utilizada para las direcciones '
+                  'URL. Por ejemplo, si el nombre del área es "Dirección TIC", un slug posible '
+                  'sería "ditic" o "direccion_tic".',
+    )
 
     class Meta:
         """

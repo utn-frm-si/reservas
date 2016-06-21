@@ -10,13 +10,39 @@ from ..services.recursos import (
 
 class VisorTv(models.Model):
     # Atributos
-    nombre = models.CharField(max_length=100)
-    slug = models.SlugField(max_length=50)
+    nombre = models.CharField(
+        max_length=100,
+        verbose_name='Nombre',
+    )
+    slug = models.SlugField(
+        max_length=50,
+        verbose_name='Slug',
+        help_text='Etiqueta corta que identifica al visor de TV, y sólo puede contener '
+                  'letras, números, guiones bajos y guiones medios. Generalmente es utilizada '
+                  'para las direcciones URL. Por ejemplo, si el nombre del visor de TV es '
+                  '"Departamento de Sistemas", un slug posible sería "sistemas" o '
+                  '"departamento_sistemas".',
+    )
     # Relaciones
-    area = models.ForeignKey('Area')
-    aulas = models.ManyToManyField('Aula', blank=True)
-    laboratorios = models.ManyToManyField('Laboratorio', blank=True)
-    laboratorios_informatica = models.ManyToManyField('LaboratorioInformatico', blank=True)
+    area = models.ForeignKey(
+        'Area',
+        verbose_name='Área',
+    )
+    aulas = models.ManyToManyField(
+        'Aula',
+        blank=True,
+        verbose_name='Aulas',
+    )
+    laboratorios = models.ManyToManyField(
+        'Laboratorio',
+        blank=True,
+        verbose_name='Laboratorios de Ingeniería',
+    )
+    laboratorios_informatica = models.ManyToManyField(
+        'LaboratorioInformatico',
+        blank=True,
+        verbose_name='Laboratorios de Informática',
+    )
 
     class Meta:
         """

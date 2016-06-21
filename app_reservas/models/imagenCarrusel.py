@@ -19,10 +19,22 @@ def establecer_destino_archivo_imagen(instance, filename):
 
 class ImagenCarrusel(models.Model):
     # Atributos
-    orden = models.PositiveSmallIntegerField(default=1)
-    imagen = models.ImageField(upload_to=establecer_destino_archivo_imagen)
+    orden = models.PositiveSmallIntegerField(
+        default=1,
+        verbose_name='Orden',
+        help_text='Orden de la imagen en el carrusel.',
+    )
+    imagen = models.ImageField(
+        upload_to=establecer_destino_archivo_imagen,
+        verbose_name='Imagen',
+        help_text='Archivo de imagen.',
+    )
     # Relaciones
-    carrusel = models.ForeignKey('CarruselImagenes', related_name='imagenes')
+    carrusel = models.ForeignKey(
+        'CarruselImagenes',
+        related_name='imagenes',
+        verbose_name='Carrusel',
+    )
 
     class Meta:
         """

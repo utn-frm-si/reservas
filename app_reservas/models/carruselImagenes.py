@@ -5,9 +5,23 @@ from django.db import models
 
 class CarruselImagenes(models.Model):
     # Atributos
-    nombre = models.CharField(unique=True, max_length=50)
-    slug = models.SlugField(unique=True, max_length=50)
-    ancho_maximo = models.PositiveSmallIntegerField(default=800)
+    nombre = models.CharField(
+        unique=True,
+        max_length=50,
+        verbose_name='Nombre',
+    )
+    slug = models.SlugField(
+        unique=True,
+        max_length=50,
+        verbose_name='Slug',
+        help_text='Etiqueta corta que identifica al carrusel, y sólo puede contener letras, '
+                  'números, guiones bajos y guiones medios.'
+    )
+    ancho_maximo = models.PositiveSmallIntegerField(
+        default=800,
+        verbose_name='Ancho máximo',
+        help_text='Ancho máximo del carrusel, medido en píxeles (px).'
+    )
 
     class Meta:
         """
