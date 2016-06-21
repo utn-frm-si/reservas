@@ -21,14 +21,36 @@ def establecer_destino_archivo_ubicacion(instance, filename):
 
 class Aula(Recurso):
     # Atributos
-    numero = models.PositiveSmallIntegerField()
-    nombre = models.CharField(max_length=50, blank=True)
-    capacidad = models.PositiveSmallIntegerField()
-    archivo_ubicacion = models.FileField(upload_to=establecer_destino_archivo_ubicacion,
-                                         blank=True)
+    numero = models.PositiveSmallIntegerField(
+        verbose_name='Número',
+        help_text='Número del aula. En caso de que no corresponda, introducir "0".',
+    )
+    nombre = models.CharField(
+        max_length=50,
+        blank=True,
+        verbose_name='Nombre',
+        help_text='Nombre del aula, en caso de que posea. En caso de que no corresponda, dejar el '
+                  'campo vacío. Por ejemplo, "Aula de dibujo".',
+    )
+    capacidad = models.PositiveSmallIntegerField(
+        verbose_name='Capacidad',
+        help_text='Capacidad del aula. En caso de que no corresponda, introducir "0".',
+    )
+    archivo_ubicacion = models.FileField(
+        upload_to=establecer_destino_archivo_ubicacion,
+        blank=True,
+        verbose_name='Archivo de ubicación',
+        help_text='Archivo que indica la ubicación del aula dentro de la facultad.',
+    )
     # Relaciones
-    areas = models.ManyToManyField('Area')
-    nivel = models.ForeignKey('Nivel')
+    areas = models.ManyToManyField(
+        'Area',
+        verbose_name='Áreas a cargo',
+    )
+    nivel = models.ForeignKey(
+        'Nivel',
+        verbose_name='Nivel',
+    )
 
     class Meta:
         """

@@ -22,13 +22,32 @@ def establecer_destino_archivo_ubicacion(instance, filename):
 
 class LaboratorioInformatico(Recurso):
     # Atributos
-    nombre = models.CharField(max_length=50)
-    alias = models.CharField(max_length=10)
-    capacidad = models.PositiveSmallIntegerField()
-    archivo_ubicacion = models.FileField(upload_to=establecer_destino_archivo_ubicacion,
-                                         blank=True)
+    nombre = models.CharField(
+        max_length=50,
+        verbose_name='Nombre',
+    )
+    alias = models.CharField(
+        max_length=10,
+        verbose_name='Alias',
+        help_text='Alias del laboratorio. Por lo general es una abreviatura del mismo, y se '
+                  'utiliza en las direcciones URL. Por ejemplo, el alias del "Laboratorio '
+                  'Informático Microsoft" es "LIM".',
+    )
+    capacidad = models.PositiveSmallIntegerField(
+        verbose_name='Capacidad',
+        help_text='Capacidad del laboratorio. En caso de que no corresponda, introducir "0".',
+    )
+    archivo_ubicacion = models.FileField(
+        upload_to=establecer_destino_archivo_ubicacion,
+        blank=True,
+        verbose_name='Archivo de ubicación',
+        help_text='Archivo que indica la ubicación del laboratorio dentro de la facultad.',
+    )
     # Relaciones
-    nivel = models.ForeignKey('Nivel')
+    nivel = models.ForeignKey(
+        'Nivel',
+        verbose_name='Nivel',
+    )
 
     class Meta:
         """

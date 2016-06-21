@@ -5,8 +5,16 @@ from django.db import models
 
 class Cuerpo(models.Model):
     # Atributos
-    nombre = models.CharField(max_length=50, blank=True)
-    numero = models.PositiveSmallIntegerField()
+    nombre = models.CharField(
+        max_length=50,
+        blank=True,
+        verbose_name='Nombre',
+        help_text='Nombre del cuerpo, en caso de que posea. En caso de que no corresponda, dejar '
+                  'el campo vacío. Por ejemplo, "Edificio central".',
+    )
+    numero = models.PositiveSmallIntegerField(
+        verbose_name='Número',
+    )
 
     class Meta:
         """
