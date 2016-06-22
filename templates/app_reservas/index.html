@@ -1,16 +1,5 @@
-{% extends 'app_reservas/base.html' %}
+{% extends 'app_reservas/base_carrusel.html' %}
 {% load static %}
-
-{% block static_css %}
-    <link rel="stylesheet" href='{% static 'slick-carousel/slick/slick.css' %}'>
-    <link rel="stylesheet" href='{% static 'slick-carousel/slick/slick-theme.css' %}'>
-{% endblock %}
-
-
-{% block static_js_body %}
-    <script src='{% static 'slick-carousel/slick/slick.min.js' %}'></script>
-{% endblock %}
-
 
 {% block title %}
     Gestión de recursos
@@ -23,7 +12,7 @@
 
     {% if carrusel_imagenes %}
         <div style="width: 90%; max-width: {{ carrusel.ancho_maximo}}px; margin: 0 auto; padding: 30px 0;">
-            <div class="carrusel-index">
+            <div class="carrusel">
                 {% for imagen in carrusel_imagenes %}
                     <div>
                         <img src="{{ imagen.get_url }}" alt="Imagen {{ forloop.counter }}"
@@ -40,22 +29,3 @@
     </p>
 
 {% endblock contenido %}
-
-
-{% block scripts %}
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $('.carrusel-index').slick(
-                {
-                    dots: true,
-                    infinite: true,
-                    speed: 800,
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                    autoplay: true,
-                    autoplaySpeed: 4000,
-                }
-            );
-        });
-    </script>
-{% endblock %}

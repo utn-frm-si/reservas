@@ -89,6 +89,17 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>
+                            <a href="{% url 'ali_index' %}">
+                                Página principal
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'solicitud_ali_reclamos_sugerencias' %}">
+                                Reclamos y sugerencias
+                            </a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li>
                             <a href="{% url 'laboratorio_informatico_listado' %}">
                                 Laboratorios informáticos
                             </a>
@@ -106,8 +117,6 @@
                                 </a>
                             </li>
                         {% endfor %}
-                        <li role="separator" class="divider"></li>
-                        <li><a href="{% url 'solicitud_ali_reclamos_sugerencias' %}">Reclamos y sugerencias</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">

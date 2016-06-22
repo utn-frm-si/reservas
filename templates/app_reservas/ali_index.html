@@ -1,0 +1,69 @@
+{% extends 'app_reservas/base_carrusel.html' %}
+{% load static %}
+
+{% block title %}
+    Administración de Laboratorios Informáticos
+{% endblock title %}
+
+
+{% block contenido %}
+
+    <div class="page-header" style="text-align: center;">
+        <h1>Administración de Laboratorios Informáticos</h1>
+    </div>
+
+    {% if carrusel_imagenes %}
+        <div style="width: 90%; max-width: {{ carrusel.ancho_maximo}}px; margin: 0 auto; padding: 30px 0;">
+            <div class="carrusel">
+                {% for imagen in carrusel_imagenes %}
+                    <div>
+                        <img src="{{ imagen.get_url }}" alt="Imagen {{ forloop.counter }}"
+                             class="img-rounded" width="100%">
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="col-sm-10 col-sm-offset-1">
+        <div class="list-group col-sm-4">
+            <a href="#" class="list-group-item active" data-toggle="collapse" data-target="#lista-recursos-ali">
+                Listado de recursos
+                <span class="glyphicon glyphicon-menu-hamburger pull-right"></span>
+            </a>
+            <div id="lista-recursos-ali" class="collapse in">
+                <a href="{% url 'laboratorio_informatico_listado' %}" class="list-group-item">
+                    <span class="badge">{{ cantidad_laboratorios_informatica }}</span>
+                    Laboratorios informáticos
+                </a>
+                <a href="{% url 'ali_videoconferencias_detalle' %}" class="list-group-item">
+                    Videoconferencias
+                </a>
+                {% for tipo in tipos_recurso_ali %}
+                    <a href="{% url 'tipo_recurso_ali_detalle' tipo.slug %}" class="list-group-item">
+                        <span class="badge">{{ tipo.recursoali_set.count }}</span>
+                        {{ tipo.nombre_plural }}
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="col-sm-5 col-sm-offset-1">
+            <strong>Horarios de atención</strong>:
+            <ul>
+                <li>Lunes a viernes, de 8 a 23:30 horas.</li>
+                <li>Sábados, de 8 a 18 horas.</li>
+            </ul>
+
+            <strong>Contacto</strong>:
+            <ul>
+                <li>Telefónicamente, al interno 126.</li>
+                <li>Mediante correo electrónico, a la dirección <a href="mailto:ali@frm.utn.edu.ar">ali@frm.utn.edu.ar</a>.</li>
+            </ul>
+
+            <strong>Ubicación</strong>:
+            Cuerpo 01, primer piso, frente a Bedelía de Sistemas.
+        </div>
+    </div>
+
+{% endblock contenido %}

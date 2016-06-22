@@ -1,4 +1,7 @@
-from .ali import AliVideoconferenciasDetailView
+from .ali import (
+    AliTemplateView,
+    AliVideoconferenciasDetailView,
+)
 from .area import AreaDetailView
 from .aula import AulaDetailView
 from .cuerpo import CuerpoDetailView
