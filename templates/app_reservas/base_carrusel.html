@@ -1,0 +1,31 @@
+{% extends 'app_reservas/base.html' %}
+{% load static %}
+
+{% block static_css %}
+    <link rel="stylesheet" href='{% static 'slick-carousel/slick/slick.css' %}'>
+    <link rel="stylesheet" href='{% static 'slick-carousel/slick/slick-theme.css' %}'>
+{% endblock %}
+
+
+{% block static_js_body %}
+    <script src='{% static 'slick-carousel/slick/slick.min.js' %}'></script>
+{% endblock %}
+
+
+{% block scripts %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.carrusel').slick(
+                {
+                    dots: true,
+                    infinite: true,
+                    speed: 800,
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    autoplay: true,
+                    autoplaySpeed: 4000,
+                }
+            );
+        });
+    </script>
+{% endblock %}
