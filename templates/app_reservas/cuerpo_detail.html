@@ -7,10 +7,9 @@
 
 
 {% block contenido %}
-    <h1 style="text-align: center;">{{ cuerpo }}</h1>
-
-    <br />
-    <br />
+    <div class="page-header">
+        <h1>{{ cuerpo }}</h1>
+    </div>
 
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
         {% for nivel in cuerpo.get_niveles %}

@@ -7,8 +7,10 @@
 
 
 {% block contenido %}
-    <h1 style="text-align: center;">{{ aula.get_nombre_corto }}</h1>
-    <h3 style="text-align: center;">{{ aula.nivel }}</h3>
+    <div class="page-header">
+        <h1>{{ aula.get_nombre_corto }}</h1>
+        <h3>{{ aula.nivel }}</h3>
+    </div>
 
     <div id="calendar" class="calendar"></div>
 {% endblock contenido %}

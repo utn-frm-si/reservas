@@ -2,6 +2,8 @@
 {% load static %}
 
 {% block static_css %}
+    {{ block.super }}
+
     <link rel='stylesheet' href='{% static 'fullcalendar/dist/fullcalendar.min.css' %}' />
     <link rel='stylesheet' href='{% static 'fullcalendar-scheduler/dist/scheduler.min.css' %}' />
     <link rel="stylesheet" href='{% static 'bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css' %}' />
@@ -138,12 +140,17 @@
 
     <script>
         $(document).ready(function() {
-            var primer_dia_anio_actual = new Date(new Date().getFullYear(),
-                                                  0,
-                                                  1);
-            var ultimo_dia_anio_siguiente = new Date(new Date().getFullYear() + 1,
-                                                     11,
-                                                     31);
+            var anio_actual = new Date().getFullYear();
+            var primer_dia_anio_actual = new Date(
+                anio_actual,
+                0,
+                1
+            );
+            var ultimo_dia_anio_siguiente = new Date(
+                anio_actual + 1,
+                11,
+                31
+            );
 
             $('.fc-datepickerButton-button').datepicker({
                 format: 'dd/mm/yyyy',

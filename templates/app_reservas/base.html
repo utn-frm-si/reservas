@@ -22,7 +22,9 @@
     <!-- Pace.js theme -->
     <link rel="stylesheet" href='{% static 'PACE/themes/blue/pace-theme-flash.css' %}'>
 
-    {% block static_css %}{% endblock %}
+    {% block static_css %}
+        <link rel="stylesheet" href='{% static 'apps/reservas/css/base.css' %}'>
+    {% endblock %}
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>

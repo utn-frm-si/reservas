@@ -5,11 +5,11 @@
     {{ tipo_recurso.nombre_plural }}
 {% endblock title %}
 
-{% block contenido %}
-    <h1 style="text-align: center;">{{ tipo_recurso.nombre_plural }}</h1>
 
-    <br/>
-    <br/>
+{% block contenido %}
+    <div class="page-header">
+        <h1>{{ tipo_recurso.nombre_plural }}</h1>
+    </div>
 
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
         <div class="panel panel-default">
