@@ -2,14 +2,16 @@
 {% load static %}
 
 {% block static_css %}
+    {{ block.super }}
+
     <link rel="stylesheet" href='{% static 'slick-carousel/slick/slick.css' %}'>
     <link rel="stylesheet" href='{% static 'slick-carousel/slick/slick-theme.css' %}'>
-{% endblock %}
+{% endblock static_css %}
 
 
 {% block static_js_body %}
     <script src='{% static 'slick-carousel/slick/slick.min.js' %}'></script>
-{% endblock %}
+{% endblock static_js_body %}
 
 
 {% block scripts %}
@@ -28,4 +30,4 @@
             );
         });
     </script>
-{% endblock %}
+{% endblock scripts %}

@@ -7,11 +7,10 @@
 
 
 {% block contenido %}
-    <h1 style="text-align: center;">{{ nivel.get_nombre_corto }}</h1>
-    <h3 style="text-align: center;">{{ nivel.cuerpo }}</h3>
-
-    <br/>
-    <br/>
+    <div class="page-header">
+        <h1>{{ nivel.get_nombre_corto }}</h1>
+        <h3>{{ nivel.cuerpo }}</h3>
+    </div>
 
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
         {% for tipo_recurso in nivel.get_recursos %}
