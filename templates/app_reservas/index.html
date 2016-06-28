@@ -7,10 +7,6 @@
 
 
 {% block contenido %}
-    <div class="page-header">
-        <h1>Gestión de recursos</h1>
-    </div>
-
     {% if carrusel_imagenes %}
         <div style="width: 90%; max-width: {{ carrusel.ancho_maximo}}px; margin: 0 auto; padding: 30px 0;">
             <div class="carrusel">
@@ -22,10 +18,14 @@
                 {% endfor %}
             </div>
         </div>
-    {% endif %}
+    {% else %}
+        <div class="page-header">
+            <h1>Gestión de recursos</h1>
+        </div>
 
-    <p class="text-center">
-        ¡Bienvenido! En este sitio podrá consultar las reservas de aulas pertenecientes a la Facultad Regional Mendoza,
-        Universidad Tecnológica Nacional.
-    </p>
+        <p class="text-center">
+            ¡Bienvenido! En este sitio podrá consultar las reservas de aulas pertenecientes a la Facultad Regional Mendoza,
+            Universidad Tecnológica Nacional.
+        </p>
+    {% endif %}
 {% endblock contenido %}
