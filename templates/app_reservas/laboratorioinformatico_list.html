@@ -57,24 +57,24 @@
                                         <td class="text-center">
                                             <a role="button"
                                                class="btn btn-xs btn-info"
-                                               data-toggle="tooltip"
-                                               data-placement="bottom"
-                                               title="Ver"
                                                href="{% url 'laboratorio_informatico_detalle' laboratorio.alias %}">
                                                 <span class="glyphicon glyphicon-eye-open"
                                                       aria-hidden="true">
+                                                </span>
+                                                <span class="hidden-xs">
+                                                    &nbsp;Detalles
                                                 </span>
                                             </a>
                                             {% if laboratorio.archivo_ubicacion %}
                                                 <a role="button"
                                                    class="btn btn-xs btn-success"
-                                                   data-toggle="tooltip"
-                                                   data-placement="bottom"
-                                                   title="Ubicación"
                                                    target='_blank'
                                                    href="{{ laboratorio.archivo_ubicacion.url }}">
                                                     <span class="glyphicon glyphicon-map-marker"
                                                           aria-hidden="true">
+                                                    </span>
+                                                    <span class="hidden-xs">
+                                                        &nbsp;Ubicación
                                                     </span>
                                                 </a>
                                             {% endif %}
@@ -96,17 +96,6 @@
 
     <div id="calendar" class="calendar"></div>
 {% endblock contenido %}
-
-
-{% block scripts %}
-    {{ block.super }}
-
-    <script>
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        });
-    </script>
-{% endblock scripts %}
 
 
 {% block fullcalendar_resources %}
