@@ -1,5 +1,64 @@
+/* Cuerpo de página */
+body {
+    /* Margen inferior, para dar lugar al pie de página */
+    margin-bottom: 100px;
+}
+
 /* Cabecera de página */
 .page-header {
     /* Alineación horizontal: Centrado */
     text-align: center;
+}
+
+/* Pie de página */
+.navbar-fixed-bottom {
+    /* Altura */
+    height: 100px;
+    /* Color del texto: Blanco */
+    color: white;
+}
+
+/* Columna izquierda del pie de página */
+#footer-left-column {
+    /* Posicionamiento flotante: Izquierda */
+    float: left;
+}
+
+/* Columna derecha del pie de página */
+#footer-right-column {
+    /* Posicionamiento flotante: Derecha */
+    float: right;
+}
+
+/* Contenido derecho del pie de página */
+#footer-right-content {
+    /* Márgenes */
+    margin: 15px;
+    /* Alineación horizontal: Derecha */
+    text-align: right;
+}
+
+/* Contenedor de imagen izquierda del pie de página */
+#footer-left-image {
+    /* Posicionamiento flotante: Izquierda */
+    float: left;
+}
+
+/* Contenedor de imagen derecha del pie de página */
+#footer-right-image {
+    /* Posicionamiento flotante: Derecha */
+    float: right;
+}
+
+/* Contenedor de imagen en pie de página */
+.footer-image {
+    /* Márgenes */
+    margin: 10px;
+}
+
+/* Imagen en pie de página */
+.footer-image img {
+    /* Dimensiones */
+    height: 80px;
+    width: auto;
 }

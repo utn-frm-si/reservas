@@ -10,15 +10,29 @@
 {% endblock head_meta %}
 
 
-{% block header %}
-{% endblock header %}
-
-
 {% block static_css %}
     {{ block.super }}
 
     <link rel="stylesheet" href='{% static 'apps/reservas/css/tv.css' %}'>
 {% endblock static_css %}
+
+
+{% block header %}
+{% endblock header %}
+
+
+{% block footer_left %}
+    <div id="footer-left-image" class="footer-image">
+        <img src='{% static 'apps/reservas/images/qrcode.png'%}'></img>
+    </div>
+    <div id="footer-left-content">
+        <p>
+            Visitá nuestro sitio web:
+            <br />
+            <a href="http://gt.frm.utn.edu.ar/reservas/">http://gt.frm.utn.edu.ar/reservas/</a>
+        </p>
+    </div>
+{% endblock footer_left %}
 
 
 {% block fullcalendar_header %}
