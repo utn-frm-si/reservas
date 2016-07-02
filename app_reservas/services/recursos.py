@@ -87,7 +87,6 @@ def get_recursos_asociados_por_cuerpo(instancia):
         Lista de diccionarios, uno por cada cuerpo que presenta al menos una instancia relacionada.
     """
     lista_elementos = []
-    recursos_por_cuerpo = []
 
     # Obtiene los recursos asociados a la instancia.
     recursos = get_recursos_asociados(instancia)
@@ -100,15 +99,16 @@ def get_recursos_asociados_por_cuerpo(instancia):
     cuerpos = list({elemento.nivel.cuerpo for elemento in lista_elementos})
     cuerpos.sort(key=lambda cuerpo: cuerpo.numero)
 
-    # Itera entre los cuerpos.
-    for cuerpo in cuerpos:
-        # Añade los recursos asociados del cuerpo actual.
-        recursos_por_cuerpo.append(
-            {
-                'cuerpo': cuerpo,
-                'elementos': [elemento for elemento in lista_elementos
-                              if elemento.nivel.cuerpo == cuerpo],
-            }
-        )
+    # Crea una lista con los recursos asociados a cada cuerpo.
+    recursos_por_cuerpo = [
+        {
+            'cuerpo': cuerpo,
+            'elementos': [
+                elemento
+                for elemento in lista_elementos
+                if elemento.nivel.cuerpo == cuerpo
+            ],
+        } for cuerpo in cuerpos
+    ]
 
     return recursos_por_cuerpo
