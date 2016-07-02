@@ -46,15 +46,22 @@ def generar_lista_eventos(calendar_id, limite_anio_siguiente=True):
     eventos = obtener_eventos(calendar_id, limite_anio_siguiente)
 
     for evento in eventos:
-        titulo = evento.get('summary', u'Evento sin título')
-        inicio = evento['start'].get('dateTime', evento['start'].get('date'))
-        fin = evento['end'].get('dateTime', evento['end'].get('date'))
-        inicio = parser.parse(inicio)
-        fin = parser.parse(fin)
+        inicio = parser.parse(
+            evento['start'].get(
+                'dateTime',
+                evento['start'].get('date')
+            )
+        ),
+        fin = parse.parse(
+            evento['end'].get(
+                'dateTime',
+                evento['end'].get('date')
+            )
+        ),
 
         lista_eventos.append(
             {
-                'titulo': titulo,
+                'titulo': evento.get('summary', u'Evento sin título'),
                 'inicio': inicio,
                 'fin': fin,
                 'inicio_str': inicio.strftime("%Y-%m-%dT%H:%M:%S"),
