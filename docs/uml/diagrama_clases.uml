@@ -37,6 +37,16 @@ package app_reservas <<Frame>> {
         + get_nombre_corto(): str
     }
 
+    class CarruselImagenes {
+        ' Atributos
+        + int id
+        + str nombre
+        + str slug
+        + int ancho_maximo
+        ' Métodos
+        + get_imagenes(): ImagenCarrusel[]
+    }
+
     class Cuerpo {
         ' Atributos
         + int id
@@ -47,7 +57,16 @@ package app_reservas <<Frame>> {
         + get_niveles(): Nivel[]
     }
 
-    class LaboratorioElectronica {
+    class ImagenCarrusel {
+        ' Atributos
+        + int id
+        + int orden
+        + ImageField imagen
+        ' Métodos
+        + get_url(): str
+    }
+
+    class Laboratorio {
         ' Atributos
         + int id
         + str nombre
@@ -78,16 +97,36 @@ package app_reservas <<Frame>> {
         ' Métodos
         + get_nombre_corto(): str
         + get_aulas(): Aula[]
+        + get_laboratorios(): Laboratorio[]
         + get_laboratorios_informatica(): LaboratorioInformatico[]
+        + get_recursos(): {tipo_recurso: Recurso[]}[]
     }
 
-    class ProyectorMultimedia {
+    class RecursoAli {
         ' Atributos
         + int id
         + str identificador
         ' Métodos
         + get_identificador_url(): str
         + get_nombre_corto(): str
+    }
+
+    class TipoLaboratorio {
+        ' Atributos
+        + int id
+        + str nombre
+        + str slug
+    }
+
+    class TipoRecursoAli {
+        ' Atributos
+        + int id
+        + str nombre
+        + str nombre_plural
+        + str slug
+        + str prefijo
+        + bool is_sufijo
+        + bool is_visible_navbar
     }
 
     class VisorTv {
@@ -98,7 +137,7 @@ package app_reservas <<Frame>> {
         ' Métodos
         + get_nombre_corto(): str
         + get_aulas(): Aula[]
-        + get_laboratorios_electronica(): LaboratorioElectronica[]
+        + get_laboratorios(): Laboratorio[]
         + get_laboratorios_informatica(): LaboratorioInformatico[]
         + get_recursos(): {tipo_recurso: Recurso[]}[]
         + get_recursos_por_cuerpo(): {Cuerpo: Recurso[]}[]
@@ -107,26 +146,32 @@ package app_reservas <<Frame>> {
 
     ' Relaciones
 
-    Aula "n" --> "m" Area: areas
+    Aula "n" -left-> "m" Area: areas
     Aula "n" --> "1" Nivel: nivel
 
-    LaboratorioElectronica "n" --> "1" Nivel: nivel
+    ImagenCarrusel "n" --> "1" CarruselImagenes: carrusel
+
+    Laboratorio "n" --> "1" Nivel: nivel
+    Laboratorio "n" --> "1" TipoLaboratorio: tipo
+
     LaboratorioInformatico "n" --> "1" Nivel: nivel
 
     Nivel "n" --> "1" Cuerpo: cuerpo
 
+    RecursoAli "n" --> "1" TipoRecursoAli: tipo
+
     VisorTv "n" --> "1" Area: area
-    VisorTv "n" -> "0..m" Aula: aulas
-    VisorTv "n" -> "0..m" LaboratorioElectronica: laboratorios_electronica
-    VisorTv "n" -> "0..m" LaboratorioInformatico: laboratorios_informatica
+    VisorTv "n" --> "0..m" Aula: aulas
+    VisorTv "n" --> "0..m" Laboratorio: laboratorios
+    VisorTv "n" --> "0..m" LaboratorioInformatico: laboratorios_informatica
 
 
     ' Herencias
 
     Recurso <|-- Aula
-    Recurso <|-- LaboratorioElectronica
+    Recurso <|-- Laboratorio
     Recurso <|-- LaboratorioInformatico
-    Recurso <|-- ProyectorMultimedia
+    Recurso <|-- RecursoAli
 }
 
 @enduml
