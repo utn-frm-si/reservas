@@ -48,6 +48,32 @@
 
 </div> <!-- /container-fluid -->
 
+{% block footer %}
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container-fluid">
+            <div id="footer-left-column" class="hidden-xs col-sm-6 col-md-6 col-lg-6">
+                {% block footer_left %}{% endblock footer_left %}
+            </div>
+            <div id="footer-right-column" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                {% block footer_right %}
+                    <div id="footer-right-image" class="footer-image">
+                        <img src='{% static 'apps/reservas/images/gtlogo-80px.png'%}'></img>
+                    </div>
+                    <div id="footer-right-content">
+                        <p>
+                            Gestión Tecnológica &#8212; DiTIC
+                            <br />
+                            Facultad Regional Mendoza
+                            <br />
+                            Universidad Tecnológica Nacional
+                        </p>
+                    </div>
+                {% endblock footer_right %}
+            </div>
+        </div>
+    </nav>
+{% endblock footer %}
+
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
