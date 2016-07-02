@@ -62,3 +62,11 @@ body {
     width: 50px;
     height: auto;
 }
+
+/* Contenedor del carrusel de imágenes */
+.carrusel-contenedor {
+    /* Ancho */
+    width: 90%;
+    /* Alineación: Centrado */
+    margin: 0 auto;
+}

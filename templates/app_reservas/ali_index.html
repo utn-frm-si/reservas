@@ -12,7 +12,7 @@
     </div>
 
     {% if carrusel_imagenes %}
-        <div style="width: 90%; max-width: {{ carrusel.ancho_maximo}}px; margin: 0 auto; padding: 30px 0;">
+        <div class="carrusel-contenedor" style="max-width: {{ carrusel.ancho_maximo }}px;">
             <div class="carrusel">
                 {% for imagen in carrusel_imagenes %}
                     <div>
