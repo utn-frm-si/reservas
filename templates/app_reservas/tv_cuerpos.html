@@ -6,6 +6,13 @@
 {% endblock title %}
 
 
+{% block static_css %}
+    {{ block.super }}
+
+    <link rel="stylesheet" href='{% static 'apps/reservas/css/tv_cuerpos.css' %}'>
+{% endblock static_css %}
+
+
 {% block contenido %}
     <div id="cuerpos">
         {% for cuerpo in cuerpos %}
@@ -17,6 +24,22 @@
         {% endfor %}
     </div>
 {% endblock contenido %}
+
+
+{% block footer_right %}
+    <div id="footer-right-image" class="footer-image">
+        <img src='{% static 'apps/reservas/images/gtlogo-80px.png'%}'></img>
+    </div>
+    <div id="footer-right-content">
+        <p>
+            Gestión Tecnológica, DiTIC
+            <br />
+            Facultad Regional Mendoza
+            <br />
+            Universidad Tecnológica Nacional
+        </p>
+    </div>
+{% endblock footer_right %}
 
 
 {% block scripts %}

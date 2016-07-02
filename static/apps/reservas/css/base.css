@@ -1,7 +1,7 @@
 /* Cuerpo de página */
 body {
     /* Margen inferior, para dar lugar al pie de página */
-    margin-bottom: 100px;
+    margin-bottom: 70px;
 }
 
 /* Cabecera de página */
@@ -13,7 +13,7 @@ body {
 /* Pie de página */
 .navbar-fixed-bottom {
     /* Altura */
-    height: 100px;
+    height: 70px;
     /* Color del texto: Blanco */
     color: white;
 }
@@ -33,7 +33,7 @@ body {
 /* Contenido derecho del pie de página */
 #footer-right-content {
     /* Márgenes */
-    margin: 15px;
+    margin: 12px;
     /* Alineación horizontal: Derecha */
     text-align: right;
 }
@@ -59,6 +59,6 @@ body {
 /* Imagen en pie de página */
 .footer-image img {
     /* Dimensiones */
-    height: 80px;
-    width: auto;
+    width: 50px;
+    height: auto;
 }
