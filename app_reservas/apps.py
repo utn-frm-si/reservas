@@ -7,5 +7,6 @@ class ReservasConfig(AppConfig):
     name = 'app_reservas'
     verbose_name = 'Reservas'
 
-    def ready(self):
-        from .signals import recurso
+    # Importa todas las tareas de Celery existentes, para hacer uso de las
+    # mismas dentro de toda la aplicación.
+    from . import tasks

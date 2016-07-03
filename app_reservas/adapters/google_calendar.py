@@ -51,13 +51,13 @@ def generar_lista_eventos(calendar_id, limite_anio_siguiente=True):
                 'dateTime',
                 evento['start'].get('date')
             )
-        ),
-        fin = parse.parse(
+        )
+        fin = parser.parse(
             evento['end'].get(
                 'dateTime',
                 evento['end'].get('date')
             )
-        ),
+        )
 
         lista_eventos.append(
             {

@@ -40,6 +40,14 @@ class Recurso(models.Model):
         """
         return '{0!s}'.format(self.get_nombre_corto())
 
+    # Método sobreescrito para el guardado de una instancia.
+    def save(self, *args, **kwargs):
+        # Guarda la instancia actual.
+        super(Recurso, self).save(*args, **kwargs)
+        # Encola la tarea de Celery para la obtención de los eventos de la instancia.
+        from ..tasks import obtener_eventos_recurso_especifico
+        obtener_eventos_recurso_especifico.delay(self)
+
     def get_nombre_corto(self):
         """
         Retorna el nombre corto de la instancia.
