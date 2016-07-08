@@ -9,10 +9,58 @@
 {% block contenido %}
     <div class="page-header">
         <h1>{{ aula.get_nombre_corto }}</h1>
-        <h3>{{ aula.nivel }}</h3>
     </div>
 
-    <div id="calendar" class="calendar"></div>
+    <div class="col-sm-offset-3 col-sm-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    Información
+                </h3>
+            </div>
+            <table class="table table-bordered">
+                {% if aula.capacidad %}
+                    <tr>
+                        <th scope="row">Capacidad</th>
+                        <td class="text-center">{{ aula.capacidad }}</td>
+                    </tr>
+                {% endif %}
+                <tr>
+                    <th scope="row">Áreas a cargo</th>
+                    <td class="text-center">
+                        {% for area in aula.areas.all %}
+                            {{ area }}
+                            {% if not forloop.last %}
+                                &#8212;
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Ubicación</th>
+                    <td class="text-center">{{ aula.nivel }}</td>
+                </tr>
+                {% if aula.archivo_ubicacion %}
+                    <tr>
+                        <th scope="row">Mapa</th>
+                        <td class="text-center">
+                            <a role="button"
+                               class="btn btn-xs btn-success"
+                               target="_blank"
+                               href="{{ aula.archivo_ubicacion.url }}">
+                                <span class="glyphicon glyphicon-map-marker"
+                                      aria-hidden="true">
+                                </span>
+                                &nbsp;Visualizar
+                            </a>
+                        </td>
+                    </tr>
+                {% endif %}
+            </table>
+        </div>
+    </div>
+
+    <div id="calendar" class="calendar col-sm-12"></div>
 {% endblock contenido %}
 
 
